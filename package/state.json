@@ -1,0 +1,8 @@
+{
+  "plan_slug": "<kebab-case>|null",
+  "current_role": "Planner|Researcher|Coder|Reviewer",
+  "state": "init|in_progress|handoff|blocked|done",
+  "branch": "<git-branch>|null",
+  "msg": "<<= 12 lines: handoff/blocker note>",
+  "last_updated": "ISO-8601 timestamp"
+}
