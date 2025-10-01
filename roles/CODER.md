@@ -50,7 +50,8 @@ Repo first-invoke (once per repo)
 Allowed statuses: todo | in_progress | blocked | done.
 
 2. Use the Planner’s branch (do not create a new one)
-   • Default feature branch: `feat/F###-<feature>`; optional task branches for risky/parallel work: `feat/F###-<feature>--T##-<task>`.
+   • Planner creates a task branch for the active task: `feat/F###-<feature>--T##-<task>`. Commit to that branch.
+   • PM performs merges (task → feature; feature → default). Do not merge.
 3. Verify local commands (by reference)
    • You can run: dev, test, lint, typecheck (see ../../COMMANDS.md).
 4. Confirm import rules

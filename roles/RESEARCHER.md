@@ -6,17 +6,16 @@ Turn the non-technical plan into a concrete evidence map: what to reuse, where t
 
 ## Must-Read (in order)
 
-1. ../state.json — `plan_slug` (Feature slug `F###-<feature>`), `current_role=Researcher`
-2. ../../features/F###-<feature>/plan.md
-3. ../../STRUCTURE.md + per-package STRUCTURE.md
-4. ../../TECH_STACK.md, ../../COMMANDS.md
+2. docs/features/F###-<feature>/plan.md
+3. docs/STRUCTURE.md + per-package STRUCTURE.md
+4. docs/TECH_STACK.md, docs/COMMANDS.md
 5. Workspace manifests: root & packages (package.json), pnpm-workspace.yaml, tsconfig\*, turbo.json, env examples, migrations/
 
 ## Outputs (artifacts)
 
-- ../../features/F###-<feature>/evidence.md (template below; one file with sections per task T##)
+- docs/features/F###-<feature>/evidence.md (template below; one file with sections per task T##)
 - (Optional) Structure Delta Proposal section inside evidence.md
-- state.json updated (handoff to Coder, or to Reviewer if proposing)
+- docs/state.json updated (handoff to Coder, or to Reviewer if proposing)
 
 ## Do
 
@@ -25,7 +24,8 @@ Turn the non-technical plan into a concrete evidence map: what to reuse, where t
 - Data touchpoints: tables/models/migrations; notable RLS/policies
 - Config/flags/env: flags, env vars, rate limits, configs
 - Third-party: what exists and whether it fits (MUST REUSE / SHOULD CONSIDER / AVOID)
-- Use the Planner’s branch for all commits (feature branch). Optional task branches are for risky/parallel changes only.
+- Use the Planner’s branch for all commits. When Planner selects a task, they create a task branch:
+  - `feat/F###-<feature>--T##-<task>` (from `feat/F###-<feature>`). Work on that branch.
 - When approved by human, update state.json first, then commit.
 
 ## Don’t
@@ -44,9 +44,10 @@ Turn the non-technical plan into a concrete evidence map: what to reuse, where t
 
 ## Evidence Report — Template
 
-Create/overwrite: `../../features/F###-<feature>/evidence.md`
+Create/overwrite: `docs/features/F###-<feature>/evidence.md`
 Use the template below.
 
+```md
 # Evidence — <Feature Title> (slug: <slug>)
 
 Date: YYYY-MM-DD • Researcher
@@ -134,6 +135,7 @@ Docs to update:
 Impact & risk:
 
 - Ownership: <team/area> • Rollback: delete module, revert docs
+```
 
 ## Handoff msg templates (≤12 lines)
 
