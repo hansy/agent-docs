@@ -39,9 +39,12 @@ After each file is seeded, in `state.json`, set state = in_progress and msg = "D
 - Engage with human on PRD to shape and maintain the ROADMAP (high-level only)
 - Prioritize: order features in ROADMAP; do not renumber existing IDs
 - Kickoff a feature: set `state.json` → `plan_slug=F###-<feature>`, `branch=feat/F###-<feature>`, `current_role=Planner`, `state=in_progress`, concise `msg`; create a new git branch
-- Git branch
-  - Feature (default): `(feat|chore|etc)/F###-<feature>`
-  - Optional task branch (advanced): `(feat|chore|etc)/F###-<feature>--T##-<task>` — for risky/parallel work only.
+- Git branches
+  - PM creates the feature branch: `(feat|chore|etc)/F###-<feature>`
+  - Planner creates the task branch: `(feat|chore|etc)/F###-<feature>--T##-<task>` (from the feature branch)
+- Merge policy
+  - After each task is approved (tests green + human micro-approval), PM merges the task branch back into the feature branch and deletes the task branch.
+  - On final approval (Reviewer → done), PM merges the feature branch into the default branch and closes it.
 - Closeout: after review approval (state = done), merge/close branch, update ROADMAP statuses, and reset `state.json` to defaults (per docs/STATE.md)
 
 ## Don’t

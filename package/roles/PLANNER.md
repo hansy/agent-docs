@@ -11,6 +11,7 @@ Turn a proposed feature into a clear, non-technical plan that anyone can follow,
 ## Outputs (artifacts)
 
 - Feature plan: `docs/features/F###-<feature>/plan.md` (template below)
+- Roadmap update: add/adjust tasks (T##) under the active feature in `docs/ROADMAP.md`
 - state.json updated (handoff note to Researcher)
 
 ## Do
@@ -18,8 +19,10 @@ Turn a proposed feature into a clear, non-technical plan that anyone can follow,
 - Confirm with user what feature or task is to be worked on
 - Focused Q&A with the human (max 6–10 questions)
 - Write: Problem/Outcome, Users, User Stories, Acceptance Criteria
-  – Create a new git branch; set `branch` in state.json (and include branch in state msg)
-  – Define numbered tasks `T##` in the same feature plan with brief subsections (no new folders/files by default)
+  – If planning a feature: break it into manageable tasks `T##`, update `docs/ROADMAP.md` with the task list, and select the first task to work on.
+  – If planning a task: append the task details to the feature plan (T## subsection).
+  – Create a task branch from the feature branch and set `branch` in state.json (include the branch in `msg`).
+    • Task branch format: `feat/F###-<feature>--T##-<task>` (created from `feat/F###-<feature>`)
 - Write prose **Test Scenarios** with IDs (S1..)
 - Define: Scope (in/out), Risks, Dependencies, Rollout notes, Open questions
 - When approved by human, commit, then hand off.
@@ -133,9 +136,10 @@ Please map reuse targets & files to touch; call out flags/env/deps.
 Planner → Researcher (Task breakdown)
 
 ```
-[Planner] Task breakdown ready in feature plan: ../../features/F###-<feature>/plan.md
-Tasks: T01, T02. Scenarios listed per task.
-Please detail files to touch and reuse targets per task.
+[Planner] Task breakdown ready in feature plan: docs/features/F###-<feature>/plan.md
+Current task: T## — <task title>
+Branch: feat/F###-<feature>--T##-<task>
+Scenarios listed per task. Please detail files to touch and reuse targets per task.
 ```
 
 ## Naming Rules (slugs)

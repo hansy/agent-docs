@@ -10,19 +10,18 @@ Final gate before merge. Focus on:
 
 ## Must-Read (in order)
 
-1. `../state.json` — confirm `plan_slug`, `current_role=Reviewer`, and the current `branch`
-2. Feature plan: `../../features/F###-<feature>/plan.md` — ACs + scenario IDs, tasks T##
-3. Evidence: `../../features/F###-<feature>/evidence.md` — reuse targets, files-to-touch, proposals
-4. `../../features/F###-<feature>/coding-notes.md`
-5. Diffs (feature branch vs default) via commands in `../../COMMANDS.md`
-6. `../../STRUCTURE.md` (+ per-package STRUCTURE.md)
-7. `../../TECH_STACK.md`, `../../COMMANDS.md`, `.env.example` (if touched)
+1. Feature plan: `docs/features/F###-<feature>/plan.md` — ACs + scenario IDs, tasks T##
+2. Evidence: `docs/features/F###-<feature>/evidence.md` — reuse targets, files-to-touch, proposals
+3. `docs/features/F###-<feature>/coding-notes.md`
+4. Diffs (feature branch vs default) via commands in `docs/COMMANDS.md`
+5. `docs/STRUCTURE.md` (+ per-package STRUCTURE.md)
+6. `docs/TECH_STACK.md`, `docs/COMMANDS.md`, `.env.example` (if touched)
 
 ## Outputs (artifacts)
 
-- `../../features/F###-<feature>/review.md` — concise pass/fail with required fixes & paths
+- `docs/features/F###-<feature>/review.md` — concise pass/fail with required fixes & paths
 - Doc-only diffs if needed (STRUCTURE/README/TECH_STACK/COMMANDS/.env.example)
-- `../state.json` updated (approved → `done`, or changes → `Coder`); keep `branch` unchanged
+- `docs/state.json` updated (approved → `done`, or changes → `Coder`); keep `branch` unchanged
 
 ---
 
@@ -35,11 +34,13 @@ Final gate before merge. Focus on:
    - Dependencies: no unnecessary deps; versions and TECH_STACK updated if changed.
    - Secrets: none committed; `.env.example` placeholders only.
 3. **Architecture Integrity (pillar #2)**
-  - Imports respect module boundaries; file placement matches `STRUCTURE.md`.
-  - Reuse per Evidence (no re-implementing existing symbols).
-  - Any structural change is backed by an **approved Structure Delta**.
-  - Public surfaces documented (package `STRUCTURE.md`/`README.md`).
-  - Tasks: confirm tasks T## are represented as sections in plan/evidence; paths and imports respect STRUCTURE rules.
+
+- Imports respect module boundaries; file placement matches `STRUCTURE.md`.
+- Reuse per Evidence (no re-implementing existing symbols).
+- Any structural change is backed by an **approved Structure Delta**.
+- Public surfaces documented (package `STRUCTURE.md`/`README.md`).
+- Tasks: confirm tasks T## are represented as sections in plan/evidence; paths and imports respect STRUCTURE rules.
+
 4. **Tests vs Acceptance Criteria (pillar #3)**
    - Each AC maps to at least one passing test with a **Scenario ID (Sx)**.
    - Coverage includes **happy, boundary, and negative** cases where applicable.
@@ -59,7 +60,7 @@ Final gate before merge. Focus on:
 
 ### B) Architecture Integrity
 
-- [ ] Imports & placement follow `../../STRUCTURE.md`
+- [ ] Imports & placement follow `docs/STRUCTURE.md`
 - [ ] Reuse targets from Evidence honored (no duplication)
 - [ ] Structural changes match an approved Structure Delta
 - [ ] Public surfaces documented (`STRUCTURE.md`/`README.md`)
@@ -115,9 +116,9 @@ Docs synced (STRUCTURE/TECH_STACK as noted). State set to done.
 
 ## Review — Template
 
-Path: `../../features/F###-<feature>/review.md`
+Path: `docs/features/F###-<feature>/review.md`
 
-```
+```md
 # Review — <F###-feature>
 
 Date: YYYY-MM-DD • Reviewer: <name>
