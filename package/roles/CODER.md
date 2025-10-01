@@ -12,9 +12,9 @@ Planner → Researcher → Coder → Reviewer
 
 Must-Read (in order)
 
-1. ../state.json — get plan_slug, confirm role, and note `branch`.
-2. ../../implementations/<slug>/plan.md — single task list (includes subtask sections if any).
-3. ../../implementations/<slug>/evidence.md — files-to-touch, test→code map, proposals (append subtask sections here as needed).
+1. ../state.json — get `plan_slug` (Feature slug `F###-<feature>`), confirm role, and note `branch`.
+2. Feature plan: ../../features/F###-<feature>/plan.md — Implementation Tasks (T##) live here.
+3. Evidence: ../../features/F###-<feature>/evidence.md — files-to-touch, test→code map, proposals.
 4. ../../STRUCTURE.md (+ target package/app README.md / STRUCTURE.md).
 5. ../../TECH_STACK.md, ../../COMMANDS.md.
 
@@ -29,19 +29,28 @@ Must-Read (in order)
 
 ## Preflight (once per feature)
 
+Repo first-invoke (once per repo)
+
+- If any of these are missing or obviously incomplete, engage the human to initialize/finish them before starting T##:
+  - `docs/COMMANDS.md`
+  - `docs/STRUCTURE.md`
+  - `docs/TECH_STACK.md`
+  - `docs/README.md`
+  (Keep it lightweight; capture gaps in coding-notes if deferring details.)
+
 1. Implementation Tasks — ensure the plan has a checklist:
 
 ```md
 ## Implementation Tasks
 
-- [ ] T1: <action> (scenarios: S1, S2) — status: todo
-- [ ] T2: <action> (scenarios: S3) — status: todo
+- [ ] T01: <action> (scenarios: S1, S2) — status: todo
+- [ ] T02: <action> (scenarios: S3) — status: todo
 ```
 
 Allowed statuses: todo | in_progress | blocked | done.
 
 2. Use the Planner’s branch (do not create a new one)
-   • For subtasks, branch format: `feat/<slug>/<sub_slug>` (reflected in state.json `branch`).
+   • Default feature branch: `feat/F###-<feature>`; optional task branches for risky/parallel work: `feat/F###-<feature>--T##-<task>`.
 3. Verify local commands (by reference)
    • You can run: dev, test, lint, typecheck (see ../../COMMANDS.md).
 4. Confirm import rules
@@ -77,7 +86,7 @@ E) Update the plan
 
 F) Commit (after each task, small, conventional)
 • Only commit when tests pass.
-• Example: feat(<slug>): implement T1 — S1,S2 green
+• Example: feat/F###-<feature>: implement T01 — S1,S2 green
 
 If blocked (unclear scenario, needs new structure/dep, boundary conflict):
 • Set status: blocked in the plan, list the blocker, and output status: "BLOCKED" with explicit questions.
@@ -95,15 +104,15 @@ If blocked (unclear scenario, needs new structure/dep, boundary conflict):
 
 ## Handoff Kit (required outputs)
 
-1. Plan updated — ../../implementations/<slug>/plan.md (subtask sections updated inline; no new files)
+1. Plan updated — ../../features/F###-<feature>/plan.md
    • ## Implementation Tasks reflects final statuses; each task has a one-line note of changes/paths.
    • Note any residual risks or follow-ups.
 
 2. Commands used
    • List exact commands (from ../../COMMANDS.md).
 
-3. Coding notes — ../../implementations/<slug>/coding-notes.md
-   • Template: `../templates/coding-notes.template.md`
+3. Coding notes — ../../features/F###-<feature>/coding-notes.md
+   • Use the template below.
    • Summary, lessons, blockers, improvements.
 
 4. State update — ../state.json
@@ -135,6 +144,35 @@ Coder → Reviewer
 
 ```
 [Coder] <git branch> ready.
-Tasks done: T1,T2. Tests: S1–S3 green.
+Tasks done: T01,T02. Tests: S1–S3 green.
 Docs updated: <paths>. See plan task notes for changed paths.
+```
+
+## Coding Notes — Template
+
+Path: `../../features/F###-<feature>/coding-notes.md`
+
+```
+# Coding Notes — <F###-feature>
+
+Date: YYYY-MM-DD • Coder: <name>
+
+## Summary
+
+<What changed at a high level>
+
+## Commands used
+
+- dev: …
+- test: …
+- lint: …
+- typecheck: …
+
+## Blockers & Resolutions
+
+- B1: <issue> — resolution: <how resolved or follow-up>
+
+## Improvements / Follow-ups
+
+- I1: …
 ```

@@ -7,7 +7,7 @@ Purpose: Single source of truth for who acts next, lifecycle state, and the shor
 ```json
 {
   "plan_slug": "<kebab-case>|null",
-  "current_role": "Planner|Researcher|Coder|Reviewer",
+  "current_role": "Project Manager|Planner|Researcher|Coder|Reviewer",
   "state": "init|in_progress|handoff|blocked|done",
   "branch": "<git-branch>|null",
   "msg": "<<= 12 lines: handoff/blocker note>",
@@ -18,32 +18,34 @@ Purpose: Single source of truth for who acts next, lifecycle state, and the shor
 - plan_slug: null means no active feature (Planner should create/choose one).
 - current_role: who should act next.
 - state:
-  - init — no active work
+  - init — initialization state for agents
   - in_progress — current role working
   - handoff — ready for the next role
   - blocked — waiting on answers/approvals
   - done — Reviewer approved
 - msg: short human note. No code; include paths and scenario/task IDs only.
-- branch: current git branch for the active feature/subtask (Planner sets this).
+- branch: current git branch for the active feature (Planner sets this). Optional task branches are allowed for risky/parallel work.
 
-## Defaults (first run and on plan reset)
+## Defaults
 
 ```json
 {
   "plan_slug": null,
-  "current_role": "Planner",
-  "state": "init",
+  "current_role": "Project Manager",
+  "state": "in_progress",
   "branch": null,
-  "msg": "Initialize a plan: create docs/implementations/<slug>/plan.md.",
+  "msg": "Determine which feature/task should be worked on next",
   "last_updated": "<NOW>"
 }
 ```
 
 ## Switch Rules
 
+- On init (first run): current_role MUST be Project Manager; perform Project Manager initialization. After initialization is complete, `init` should never be used again.
 - On start: keep current_role as yourself; set state = in_progress.
-- Planner sets branch on start: use `(feat|chore|etc)/<slug>` or `(feat|chore|etc)/<slug>/<sub_slug>` for subtasks.
-  - Git note: a branch cannot coexist with another branch that treats it as a parent path. Do not create both `feat/<slug>` and `feat/<slug>/<sub_slug>` at the same time. If `feat/<slug>` already exists, prefer a flat name like `feat/<slug>-<sub_slug>`.
+- Planner sets branch on start: use `(feat|chore|etc)/F###-<feature>`.
+  - Optional task branches: `feat/F###-<feature>--T##-<task>` (for risky/parallel work only).
+  - Git note: avoid nested refs that conflict with the feature branch path.
 - On handoff: set current_role = <next role>, state = handoff, write msg.
-- On blocked: keep current_role unchanged; set state = blocked; write precise questions in msg.
-- On approval (Reviewer): set state = done; keep current_role = Reviewer.
+- On blocked: set current_role = <role that will unblock you>; set state = blocked; write precise questions in msg.
+- On approval (Reviewer): set state = done; set current_role = Project Manager.

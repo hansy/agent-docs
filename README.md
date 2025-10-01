@@ -4,11 +4,9 @@ Opinionated, role-driven documentation you can pull into any project under `docs
 
 ## What You Get (in consumer repo)
 
-- `docs/agents/AGENTS.md` — entrypoint and Quickstart
-- `docs/agents/STATE.md` and `docs/agents/state.json` — lifecycle and handoff state
-- `docs/agents/roles/` — role guides for Planner, Researcher, Coder, Reviewer
-- `docs/agents/templates/` — plan/evidence/coding-notes/review templates
-- `docs/agents/*.template.md` — project-level templates for COMMANDS, STRUCTURE, TECH_STACK
+- `docs/AGENTS.md` — entrypoint and Quickstart
+- `docs/STATE.md` and `docs/state.json` — lifecycle and handoff state
+- `docs/roles/` — role guides (Project Manager, Planner, Researcher, Coder, Reviewer) with embedded templates
 
 ## Add To Your Project (once)
 
@@ -19,44 +17,75 @@ git subtree add --prefix=docs/agents https://github.com/hansy/agent-docs.git mai
 ## Pull Updates (periodically)
 
 Direct with URL:
+
 ```bash
 git subtree pull --prefix=docs/agents https://github.com/hansy/agent-docs.git main:package --squash
 ```
 
 With a remote alias:
+
 ```bash
 git remote add agent-docs https://github.com/hansy/agent-docs.git
 git subtree pull --prefix=docs/agents agent-docs main:package --squash
 ```
 
 Pin to a tag (when available):
+
 ```bash
 git subtree pull --prefix=docs/agents agent-docs vX.Y.Z:package --squash
 ```
 
 Tips:
+
 - Commit local changes before pulling to simplify conflicts.
 - Resolve conflicts inside `docs/agents/` then re-run the pull if needed.
 
-## First-Time Setup In Consumer Repo
+## Sprint Flow
 
-1) Copy project templates (adjust to your stack):
-- `cp docs/agents/COMMANDS.template.md docs/COMMANDS.md`
-- `cp docs/agents/STRUCTURE.template.md docs/STRUCTURE.md`
-- `cp docs/agents/TECH_STACK.template.md docs/TECH_STACK.md`
+This outlines the end-to-end feature sprint. Agents use their role guides; this section gives the big picture.
 
-2) Create a feature plan (replace <slug>):
-- `mkdir -p docs/implementations/<slug>`
-- `cp docs/agents/templates/plan.template.md docs/implementations/<slug>/plan.md`
-- Optional:
-  - `cp docs/agents/templates/evidence.template.md docs/implementations/<slug>/evidence.md`
-  - `cp docs/agents/templates/coding-notes.template.md docs/implementations/<slug>/coding-notes.md`
-  - `cp docs/agents/templates/review.template.md docs/implementations/<slug>/review.md`
+1. Intake & Prioritization — Project Manager
 
-3) Open `docs/agents/AGENTS.md` and follow the role flow.
+- Capture features in `docs/ROADMAP.md` with Feature IDs `F###` and Task IDs `T##`.
+- Choose `plan_slug = F###-<feature>` and base branch `feat/F###-<feature>`; set `state.json` to `current_role=Planner`, `state=in_progress`.
+
+2. Planning — Planner
+
+- Short Q&A; write the feature plan: Problem/Outcome, Users, User Stories, ACs, Scenarios.
+- Define numbered tasks `T##` with ACs and Scenarios (S1…); add an “Implementation Tasks” checklist.
+- Artifact: `docs/features/F###-<feature>/plan.md`.
+- Gate: Human spec approval; then set `current_role=Researcher`, `state=handoff` (state.json).
+
+3. Evidence & Mapping — Researcher
+
+- Map reuse targets, files to touch, data/flags/env, third‑party; draft or refine Implementation Tasks per `T##`.
+- Artifact: `docs/features/F###-<feature>/evidence.md` (sections per task).
+- Gate: Human mapping approval; then set `current_role=Coder`, `state=handoff`.
+
+4. TDD Implementation — Coder (per task T##)
+
+- For each task: mark in progress in the feature plan → write failing tests (with Scenario IDs) → implement minimal code → green.
+- Summarize changes; on human micro‑approval, commit on the feature branch.
+- Update the task status + one‑line note of changed paths.
+
+5. Review — Reviewer
+
+- Three pillars: Code Review, Architecture Integrity, Tests vs ACs. Approve or request changes.
+- Artifact: `docs/features/F###-<feature>/review.md` (doc-only syncs as needed).
+- Set `state=done` on approval, else bounce back to Coder with `state=handoff`.
+
+6. Closeout — Project Manager
+
+- Merge, close branch, update roadmap statuses, and reset `docs/state.json` to defaults (see `docs/STATE.md`).
+
+Conventions
+
+- Folders: `docs/features/F###-<feature>/{plan.md,evidence.md,coding-notes.md,review.md}`.
+- Branches: default `feat/F###-<feature>`; optional task branch `feat/F###-<feature>--T##-<task>` (for risky/parallel work only).
+- IDs: Features `F###`; tasks `T##`. Keep IDs stable; reorder by moving lines in `ROADMAP.md`.
 
 ## Design Notes
 
 - Reuse-first and small-diff discipline across roles.
-- Subtasks are documented inline in the main plan/evidence (no extra folders).
+- Tasks are documented inline in the feature plan/evidence (no extra folders by default).
 - Project-specific docs remain yours; we ship templates to copy, not impose structure.

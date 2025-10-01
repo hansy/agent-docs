@@ -6,15 +6,15 @@ Turn the non-technical plan into a concrete evidence map: what to reuse, where t
 
 ## Must-Read (in order)
 
-1. ../state.json — `plan_slug`, `current_role=Researcher`
-2. ../../implementations/<slug>/plan.md
+1. ../state.json — `plan_slug` (Feature slug `F###-<feature>`), `current_role=Researcher`
+2. ../../features/F###-<feature>/plan.md
 3. ../../STRUCTURE.md + per-package STRUCTURE.md
 4. ../../TECH_STACK.md, ../../COMMANDS.md
 5. Workspace manifests: root & packages (package.json), pnpm-workspace.yaml, tsconfig\*, turbo.json, env examples, migrations/
 
 ## Outputs (artifacts)
 
-- ../../implementations/<slug>/evidence.md (template below; append subtask sections within the same file)
+- ../../features/F###-<feature>/evidence.md (template below; one file with sections per task T##)
 - (Optional) Structure Delta Proposal section inside evidence.md
 - state.json updated (handoff to Coder, or to Reviewer if proposing)
 
@@ -25,9 +25,7 @@ Turn the non-technical plan into a concrete evidence map: what to reuse, where t
 - Data touchpoints: tables/models/migrations; notable RLS/policies
 - Config/flags/env: flags, env vars, rate limits, configs
 - Third-party: what exists and whether it fits (MUST REUSE / SHOULD CONSIDER / AVOID)
-- Use the Planner’s branch for all commits.
-  - For subtasks: use `feat/<slug>/<sub_slug>` and add a subsection to the same evidence.md; do not create new folders/files for subtasks.
-    - Git note: Do not create `feat/<slug>` and `feat/<slug>/<sub_slug>` concurrently; if `feat/<slug>` already exists, prefer a flat name like `feat/<slug>-<sub_slug>`.
+- Use the Planner’s branch for all commits (feature branch). Optional task branches are for risky/parallel changes only.
 - When approved by human, update state.json first, then commit.
 
 ## Don’t
@@ -46,8 +44,8 @@ Turn the non-technical plan into a concrete evidence map: what to reuse, where t
 
 ## Evidence Report — Template
 
-Create/overwrite: `../../implementations/<slug>/evidence.md`
-Template source: `../templates/evidence.template.md`
+Create/overwrite: `../../features/F###-<feature>/evidence.md`
+Use the template below.
 
 # Evidence — <Feature Title> (slug: <slug>)
 
@@ -142,11 +140,11 @@ Impact & risk:
 Researcher → Coder
 
 ```
-[Researcher] Evidence ready: ../../implementations/<slug>/evidence.md
+[Researcher] Evidence ready: ../../features/F###-<feature>/evidence.md
 Reuse: packages/core/foo.ts#bar(), packages/api/validate.ts#...
 Files to touch (expected): …
 No new deps/structure proposed.
-Start with T1 (S1,S2). Boundaries per ../../STRUCTURE.md.
+Start with T01 (S1,S2). Boundaries per ../../STRUCTURE.md.
 ```
 
 Researcher → Reviewer (proposal)

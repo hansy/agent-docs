@@ -11,19 +11,18 @@ Final gate before merge. Focus on:
 ## Must-Read (in order)
 
 1. `../state.json` — confirm `plan_slug`, `current_role=Reviewer`, and the current `branch`
-2. `../../implementations/<slug>/plan.md` — ACs + scenario IDs (includes subtask sections inline)
-3. `../../implementations/<slug>/evidence.md` — reuse targets, files-to-touch, proposals (subtasks appended inline)
-4. `../../implementations/<slug>/coding-notes.md`
+2. Feature plan: `../../features/F###-<feature>/plan.md` — ACs + scenario IDs, tasks T##
+3. Evidence: `../../features/F###-<feature>/evidence.md` — reuse targets, files-to-touch, proposals
+4. `../../features/F###-<feature>/coding-notes.md`
 5. Diffs (feature branch vs default) via commands in `../../COMMANDS.md`
 6. `../../STRUCTURE.md` (+ per-package STRUCTURE.md)
 7. `../../TECH_STACK.md`, `../../COMMANDS.md`, `.env.example` (if touched)
 
 ## Outputs (artifacts)
 
-- `../../implementations/<slug>/review.md` — concise pass/fail with required fixes & paths
+- `../../features/F###-<feature>/review.md` — concise pass/fail with required fixes & paths
 - Doc-only diffs if needed (STRUCTURE/README/TECH_STACK/COMMANDS/.env.example)
 - `../state.json` updated (approved → `done`, or changes → `Coder`); keep `branch` unchanged
- - Template: `../templates/review.template.md`
 
 ---
 
@@ -40,7 +39,7 @@ Final gate before merge. Focus on:
   - Reuse per Evidence (no re-implementing existing symbols).
   - Any structural change is backed by an **approved Structure Delta**.
   - Public surfaces documented (package `STRUCTURE.md`/`README.md`).
-  - Subtask docs: confirm subtask details live inline in plan/evidence (no extra folders/files created for subtasks).
+  - Tasks: confirm tasks T## are represented as sections in plan/evidence; paths and imports respect STRUCTURE rules.
 4. **Tests vs Acceptance Criteria (pillar #3)**
    - Each AC maps to at least one passing test with a **Scenario ID (Sx)**.
    - Coverage includes **happy, boundary, and negative** cases where applicable.
@@ -112,4 +111,34 @@ Reviewer → (done)
 ```
 [Reviewer] Approved. Code clean, boundaries respected, ACs covered (S1–S4).
 Docs synced (STRUCTURE/TECH_STACK as noted). State set to done.
+```
+
+## Review — Template
+
+Path: `../../features/F###-<feature>/review.md`
+
+```
+# Review — <F###-feature>
+
+Date: YYYY-MM-DD • Reviewer: <name>
+
+## Decision
+
+- [ ] Approved
+- [ ] Changes requested (see list)
+
+## Required changes (if any)
+
+1. … — path: …
+2. … — path: …
+
+## Notes
+
+- Coverage vs ACs: S1,S2,S3 …
+- Boundaries respected: yes/no (details)
+- Deps/TECH_STACK/COMMANDS: synced/not needed
+
+## State update
+
+- Set in `docs/agents/state.json`: `current_role`, `state`, `msg`
 ```
