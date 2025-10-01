@@ -6,27 +6,20 @@ Turn a proposed feature into a clear, non-technical plan that anyone can follow,
 
 ## Must-Read (in order)
 
-1. ../state.json — confirm/choose `plan_slug`, `current_role=Planner`; set `branch`
-2. Any prior context the human provides (tickets, notes)
+1. /docs/ROADMAP.md
 
 ## Outputs (artifacts)
 
-- Feature plan: `../../implementations/<slug>/plan.md` (template below)
+- Feature plan: `docs/features/F###-<feature>/plan.md` (template below)
 - state.json updated (handoff note to Researcher)
-  - Always set `branch` to the current git branch
-- Git branch
-  - Feature: `(feat|chore|etc)/<slug>`
-  - Subtask: `(feat|chore|etc)/<slug>/<sub_slug>` (no extra files; document subtasks inside the main plan)
-  - Git note: You cannot have both `feat/<slug>` and `feat/<slug>/<sub_slug>` as branches at the same time (ref namespace conflict). Choose one of:
-    - Nested only: create `feat/<slug>/<sub_slug>` without a `feat/<slug>` branch; or
-    - Flat sibling: `feat/<slug>-<sub_slug>` if `feat/<slug>` already exists.
 
 ## Do
 
+- Confirm with user what feature or task is to be worked on
 - Focused Q&A with the human (max 6–10 questions)
 - Write: Problem/Outcome, Users, User Stories, Acceptance Criteria
   – Create a new git branch; set `branch` in state.json (and include branch in state msg)
-  – If breaking into subtasks, create one branch per subtask and add a subsection to the main plan.md (no new folders/files)
+  – Define numbered tasks `T##` in the same feature plan with brief subsections (no new folders/files by default)
 - Write prose **Test Scenarios** with IDs (S1..)
 - Define: Scope (in/out), Risks, Dependencies, Rollout notes, Open questions
 - When approved by human, commit, then hand off.
@@ -61,11 +54,11 @@ Turn a proposed feature into a clear, non-technical plan that anyone can follow,
 
 ## Implementation Plan — Template
 
-Create/overwrite: `../../implementations/<slug>/plan.md`
-Template source: `../templates/plan.template.md`
-For subtasks: append sections to the same `plan.md` (e.g., "Subtask — <sub_slug>")
+Create/overwrite: `../../features/F###-<feature>/plan.md`
+Use the template below. For unusually large tasks, optionally create `T##-plan.md` inside the same feature folder.
 
-# <Feature Title> (slug: <kebab-case>)
+```md
+# <Feature Title> (slug: F###-<kebab-case>)
 
 Status: draft | approved
 Owner: <name/role> Date: YYYY-MM-DD
@@ -124,29 +117,29 @@ Out: <explicit non-goals>
 ## Next Step
 
 Hand off to **Researcher**.
+```
 
 ## Handoff msg templates (≤12 lines)
 
 Planner → Researcher
 
 ```
-[Planner] Plan ready: ../../implementations/<slug>/plan.md
+[Planner] Plan ready: ../../features/F###-<feature>/plan.md
 User stories & AC agreed. Scenarios: S1,S2,S3.
 Open questions: Q1, Q2.
 Please map reuse targets & files to touch; call out flags/env/deps.
 ```
 
-Planner → Researcher (Subtask)
+Planner → Researcher (Task breakdown)
 
 ```
-[Planner] Subtask section ready in: ../../implementations/<slug>/plan.md
-Branch: feat/<slug>/<sub_slug>
-Scenarios: S1,S2. Dependencies align with parent feature.
-Please detail files to touch and composer/validator hooks, if any.
+[Planner] Task breakdown ready in feature plan: ../../features/F###-<feature>/plan.md
+Tasks: T01, T02. Scenarios listed per task.
+Please detail files to touch and reuse targets per task.
 ```
 
 ## Naming Rules (slugs)
 
-- `<slug>`: kebab-case short name of the feature (e.g., `composer-formats`).
-- `<sub_slug>`: kebab-case short name of the subtask (e.g., `tabata-sandwich`). Used in branch names and plan sections.
+- Feature: `F###-<feature>` (e.g., `F001-create-frontend`)
+- Tasks: `T##` identifiers (e.g., `T01`) used inside plan/evidence sections; no separate slugs by default.
 - Keep slugs ≤ 5 words; avoid punctuation; prefer nouns/concise verbs.

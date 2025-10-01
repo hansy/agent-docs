@@ -1,8 +1,8 @@
 {
-  "plan_slug": "<kebab-case>|null",
-  "current_role": "Planner|Researcher|Coder|Reviewer",
-  "state": "init|in_progress|handoff|blocked|done",
-  "branch": "<git-branch>|null",
-  "msg": "<<= 12 lines: handoff/blocker note>",
-  "last_updated": "ISO-8601 timestamp"
+  "plan_slug": null,
+  "current_role": "Project Manager",
+  "state": "init",
+  "branch": null,
+  "msg": "Initialize project docs: create docs/ROADMAP.md, docs/COMMANDS.md, docs/STRUCTURE.md, docs/TECH_STACK.md.",
+  "last_updated": "<NOW>"
 }
