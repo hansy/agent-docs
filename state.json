@@ -1,6 +1,6 @@
 {
   "plan_slug": null,
-  "current_role": "Project Manager",
+  "current_role": "PROJECT_MANAGER",
   "state": "init",
   "branch": null,
   "msg": "Initialize project docs: create docs/ROADMAP.md, docs/COMMANDS.md, docs/STRUCTURE.md, docs/TECH_STACK.md.",
