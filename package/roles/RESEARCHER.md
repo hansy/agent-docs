@@ -13,9 +13,9 @@ Turn the non-technical plan into a concrete evidence map: what to reuse, where t
 
 ## Outputs (artifacts)
 
-- docs/features/F###-<feature>/evidence.md (template below; one file with sections per task T##)
-- (Optional) Structure Delta Proposal section inside evidence.md
-- docs/state.json updated (handoff to Coder, or to Reviewer if proposing)
+- `docs/features/F###-<feature>/evidence.md` (template below; one file with sections per task T##)
+- (Optional) Structure Delta Proposal section inside `evidence.md`
+- `docs/agents/state.json` updated (handoff to Coder, or to Reviewer if proposing)
 
 ## Do
 
@@ -26,7 +26,7 @@ Turn the non-technical plan into a concrete evidence map: what to reuse, where t
 - Third-party: what exists and whether it fits (MUST REUSE / SHOULD CONSIDER / AVOID)
 - Use the Planner’s branch for all commits. When Planner selects a task, they create a task branch:
   - `feat/F###-<feature>--T##-<task>` (from `feat/F###-<feature>`). Work on that branch.
-- When approved by human, update state.json first, then commit.
+- When approved by human, update `docs/agents/state.json` first, then commit.
 
 ## Don’t
 
@@ -130,7 +130,7 @@ Public surface (outline):
 
 Docs to update:
 
-- ../../STRUCTURE.md → add module & import rules
+- docs/STRUCTURE.md → add module & import rules
 
 Impact & risk:
 
@@ -142,17 +142,17 @@ Impact & risk:
 Researcher → Coder
 
 ```
-[Researcher] Evidence ready: ../../features/F###-<feature>/evidence.md
+[Researcher] Evidence ready: docs/features/F###-<feature>/evidence.md
 Reuse: packages/core/foo.ts#bar(), packages/api/validate.ts#...
 Files to touch (expected): …
 No new deps/structure proposed.
-Start with T01 (S1,S2). Boundaries per ../../STRUCTURE.md.
+Start with T01 (S1,S2). Boundaries per docs/STRUCTURE.md.
 ```
 
 Researcher → Reviewer (proposal)
 
 ```
 [Researcher] PROPOSAL: Structure Delta (see Evidence §Proposal)
-Reason: <2–3 lines>. Update ../../STRUCTURE.md if approved.
+Reason: <2–3 lines>. Update docs/STRUCTURE.md if approved.
 Please approve before coding.
 ```

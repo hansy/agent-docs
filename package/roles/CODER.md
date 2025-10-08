@@ -12,11 +12,11 @@ Planner → Researcher → Coder → Reviewer
 
 Must-Read (in order)
 
-1. ../state.json — get `plan_slug` (Feature slug `F###-<feature>`), confirm role, and note `branch`.
-2. Feature plan: ../../features/F###-<feature>/plan.md — Implementation Tasks (T##) live here.
-3. Evidence: ../../features/F###-<feature>/evidence.md — files-to-touch, test→code map, proposals.
-4. ../../STRUCTURE.md (+ target package/app README.md / STRUCTURE.md).
-5. ../../TECH_STACK.md, ../../COMMANDS.md.
+1. docs/agents/state.json — get `plan_slug` (Feature slug `F###-<feature>`), confirm role, and note `branch`.
+2. Feature plan: docs/features/F###-<feature>/plan.md — Implementation Tasks (T##) live here.
+3. Evidence: docs/features/F###-<feature>/evidence.md — files-to-touch, test→code map, proposals.
+4. docs/STRUCTURE.md (+ target package/app README.md / STRUCTURE.md).
+5. docs/TECH_STACK.md, docs/COMMANDS.md.
 
 ### Hard Guardrails
 
@@ -53,9 +53,9 @@ Allowed statuses: todo | in_progress | blocked | done.
    • Planner creates a task branch for the active task: `feat/F###-<feature>--T##-<task>`. Commit to that branch.
    • PM performs merges (task → feature; feature → default). Do not merge.
 3. Verify local commands (by reference)
-   • You can run: dev, test, lint, typecheck (see ../../COMMANDS.md).
+   • You can run: dev, test, lint, typecheck (see `docs/COMMANDS.md`).
 4. Confirm import rules
-   • Skim ../../STRUCTURE.md and package boundaries.
+   • Skim `docs/STRUCTURE.md` and package boundaries.
 
 ⸻
 
@@ -77,7 +77,7 @@ C) Implement the smallest change
 • Avoid new dependencies unless already proposed/approved; otherwise request approval.
 
 D) Verify locally
-• Run tests, lints, and types (commands from ../../COMMANDS.md).
+• Run tests, lints, and types (commands from `docs/COMMANDS.md`).
 • Tests MUST pass before every commit. Fix until green; do not commit red.
 • Prefer running the narrowest relevant tests first, then the package suite before committing.
 
@@ -98,25 +98,25 @@ If blocked (unclear scenario, needs new structure/dep, boundary conflict):
 
 • Public API docs: TSdoc/JSDoc for each exported function/type (purpose, params, returns, errors).
 • Package docs: If you add/alter a public surface, update that package’s README.md (Exports) and STRUCTURE.md (one-liners). Do not change top-level structure unless approved.
-• Commands/Tech: If scripts/deps change, update ../../COMMANDS.md and add a one-liner to ../../TECH_STACK.md (justify in commit body).
+• Commands/Tech: If scripts/deps change, update `docs/COMMANDS.md` and add a one-liner to `docs/TECH_STACK.md` (justify in commit body).
 • .env.example: Add new vars with safe placeholders and brief comments.
 
 ⸻
 
 ## Handoff Kit (required outputs)
 
-1. Plan updated — ../../features/F###-<feature>/plan.md
+1. Plan updated — `docs/features/F###-<feature>/plan.md`
    • ## Implementation Tasks reflects final statuses; each task has a one-line note of changes/paths.
    • Note any residual risks or follow-ups.
 
 2. Commands used
-   • List exact commands (from ../../COMMANDS.md).
+   • List exact commands (from `docs/COMMANDS.md`).
 
-3. Coding notes — ../../features/F###-<feature>/coding-notes.md
+3. Coding notes — `docs/features/F###-<feature>/coding-notes.md`
    • Use the template below.
    • Summary, lessons, blockers, improvements.
 
-4. State update — ../state.json
+4. State update — `docs/agents/state.json`
    • Set next role and state appropriately (e.g., current_role=Reviewer, state=handoff).
    • After human confirmation, commit state update and docs.
 
@@ -151,7 +151,7 @@ Docs updated: <paths>. See plan task notes for changed paths.
 
 ## Coding Notes — Template
 
-Path: `../../features/F###-<feature>/coding-notes.md`
+Path: `docs/features/F###-<feature>/coding-notes.md`
 
 ```
 # Coding Notes — <F###-feature>

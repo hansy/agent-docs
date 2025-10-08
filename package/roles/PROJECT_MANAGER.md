@@ -12,10 +12,10 @@ If `state.json` is at `state=init`, perform **Initialization Task**, otherwise p
 
 The following files will need to be replaced and updated based on the current project's requirements:
 
-- /docs/COMMANDS.md
-- /docs/TECH_STACK.md
-- /docs/STRUCTURE.md
-- /docs/ROADMAP.md
+- docs/COMMANDS.md
+- docs/TECH_STACK.md
+- docs/STRUCTURE.md
+- docs/ROADMAP.md
 
 Engage with the user for each one, asking any relevant questions to help seed these files.
 
@@ -30,7 +30,7 @@ After each file is seeded, in `state.json`, set state = in_progress and msg = "D
 ## Outputs (artifacts)
 
 - `docs/ROADMAP.md` — numbered features (F###) and tasks (T##), with status/owners
-- state updates in `../state.json` (start feature, handoff to Planner; closeout → reset)
+- state updates in `docs/agents/state.json` (start feature, handoff to Planner; closeout → reset)
 - Lightweight coordination notes in `state.msg` (≤12 lines)
 
 ## Do
@@ -45,7 +45,7 @@ After each file is seeded, in `state.json`, set state = in_progress and msg = "D
 - Merge policy
   - After each task is approved (tests green + human micro-approval), PM merges the task branch back into the feature branch and deletes the task branch.
   - On final approval (Reviewer → done), PM merges the feature branch into the default branch and closes it.
-- Closeout: after review approval (state = done), merge/close branch, update ROADMAP statuses, and reset `state.json` to defaults (per docs/STATE.md)
+- Closeout: after review approval (state = done), merge/close branch, update ROADMAP statuses, and reset `state.json` to defaults (per docs/agents/STATE.md)
 
 ## Don’t
 

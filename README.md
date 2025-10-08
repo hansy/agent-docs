@@ -4,9 +4,11 @@ Opinionated, role-driven documentation you can pull into any project under `docs
 
 ## What You Get (in consumer repo)
 
-- `docs/AGENTS.md` — entrypoint and Quickstart
-- `docs/STATE.md` and `docs/state.json` — lifecycle and handoff state
-- `docs/roles/` — role guides (Project Manager, Planner, Researcher, Coder, Reviewer) with embedded templates
+- `docs/COMMANDS.md`, `docs/TECH_STACK.md`, `docs/STRUCTURE.md`, `docs/ROADMAP.md`, `docs/PRD.md`
+- `docs/features/` — you create feature artifacts here (templates live in role guides)
+- `docs/agents/AGENTS.md` — entrypoint and Quickstart
+- `docs/agents/STATE.md` and `docs/agents/state.json` — lifecycle and handoff state
+- `docs/agents/roles/` — role guides (Project Manager, Planner, Researcher, Coder, Reviewer) with embedded templates
 
 ## Add To Your Project (once)
 
@@ -78,7 +80,7 @@ This outlines the end-to-end feature sprint. Agents use their role guides; this 
 
 6. Closeout — Project Manager
 
-- Merge, close branch, update roadmap statuses, and reset `docs/state.json` to defaults (see `docs/STATE.md`).
+- Merge, close branch, update roadmap statuses, and reset `docs/agents/state.json` to defaults (see `docs/agents/STATE.md`).
 
 Conventions
 

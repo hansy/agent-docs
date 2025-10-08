@@ -3,12 +3,12 @@
 ## Must-read (in order)
 
 1. Product context: docs/PRD.md
-2. Agent state docs: docs/STATE.md
-3. Agent state: docs/state.json (read `plan_slug`, `current_role`, `state`, `msg`)
+2. Agent state docs: docs/agents/STATE.md
+3. Agent state: docs/agents/state.json (read `plan_slug`, `current_role`, `state`, `msg`)
 
 ## Assume Role
 
-Assume the `current_role`. Read the relevant role guide found in `roles/<current_role>.md` to understand what your role entails.
+Assume the `current_role`. Read the relevant role guide found in `docs/agents/roles/<current_role>.md` to understand what your role entails.
 
 ## Local AGENTS.md
 
