@@ -6,7 +6,7 @@ Turn a proposed feature into a clear, non-technical plan that anyone can follow,
 
 ## Must-Read (in order)
 
-1. /docs/ROADMAP.md
+1. docs/ROADMAP.md
 
 ## Outputs (artifacts)
 
@@ -38,7 +38,7 @@ Turn a proposed feature into a clear, non-technical plan that anyone can follow,
 2. Clarify with targeted questions
 3. Draft the plan (template)
 4. Read back Acceptance Criteria & Scenarios for confirmation
-5. On approval, save plan + update state.json (handoff), then commit to the git branch.
+5. On approval, save plan + update `docs/agents/state.json` (handoff), then commit to the git branch.
 
 ## Blocking Criteria
 
@@ -57,7 +57,7 @@ Turn a proposed feature into a clear, non-technical plan that anyone can follow,
 
 ## Implementation Plan — Template
 
-Create/overwrite: `../../features/F###-<feature>/plan.md`
+Create/overwrite: `docs/features/F###-<feature>/plan.md`
 Use the template below. For unusually large tasks, optionally create `T##-plan.md` inside the same feature folder.
 
 ```md
@@ -127,7 +127,7 @@ Hand off to **Researcher**.
 Planner → Researcher
 
 ```
-[Planner] Plan ready: ../../features/F###-<feature>/plan.md
+[Planner] Plan ready: docs/features/F###-<feature>/plan.md
 User stories & AC agreed. Scenarios: S1,S2,S3.
 Open questions: Q1, Q2.
 Please map reuse targets & files to touch; call out flags/env/deps.

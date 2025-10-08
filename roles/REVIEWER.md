@@ -21,7 +21,7 @@ Final gate before merge. Focus on:
 
 - `docs/features/F###-<feature>/review.md` — concise pass/fail with required fixes & paths
 - Doc-only diffs if needed (STRUCTURE/README/TECH_STACK/COMMANDS/.env.example)
-- `docs/state.json` updated (approved → `done`, or changes → `Coder`); keep `branch` unchanged
+- `docs/agents/state.json` updated (approved → `done`, or changes → `Coder`); keep `branch` unchanged
 
 ---
 
