@@ -5,8 +5,8 @@ Opinionated, role-driven documentation you can pull into any project under `docs
 ## Maintain this package
 
 1. Work directly on the `main` branch.
-2. Update files under `package/` (and this README when needed).
-3. Commit and push: `git add package README.md && git commit -m "docs: ..."` then `git push origin main`.
+2. Update the docs in this repository (AGENTS.md, roles/, scripts/, etc.) plus this README when needed.
+3. Commit and push: `git add . && git commit -m "docs: ..."` then `git push origin main`.
 
 ## What You Get (in consumer repo)
 
@@ -15,7 +15,7 @@ Opinionated, role-driven documentation you can pull into any project under `docs
 - `docs/agents/AGENTS.md` — entrypoint and Quickstart
 - `docs/agents/STATE.md` and `docs/agents/state.json` — lifecycle and handoff state
 - `docs/agents/roles/` — role guides (Project Manager, Planner, Researcher, Coder, Reviewer) with embedded templates
-- `docs/agents/package/scripts/move-agent-docs.sh` — helper to relocate templates into your root `docs/` (it moves itself to `docs/agents/scripts/` after the first run)
+- `docs/agents/scripts/move-agent-docs.sh` — helper to relocate templates into your root `docs/`
 
 ## Use in your repo
 
@@ -31,10 +31,9 @@ git subtree add --prefix=docs/agents https://github.com/hansy/agent-docs.git mai
 3. Move the templated docs into `docs/` while keeping the runtime state and role guides under `docs/agents/`:
 
 ```bash
-bash docs/agents/package/scripts/move-agent-docs.sh
+bash docs/agents/scripts/move-agent-docs.sh
 ```
 
-   - On first run the script moves itself into `docs/agents/scripts/` for future reuse.
    - The script skips files that already exist in `docs/`; reconcile those manually.
 4. Commit the imported docs in your repository.
 
@@ -53,10 +52,7 @@ git subtree pull --prefix=docs/agents https://github.com/hansy/agent-docs.git ma
 3. Re-run the mover script to refresh `docs/` (use whichever path exists in your repo):
 
 ```bash
-# first import created docs/agents/scripts/move-agent-docs.sh
 bash docs/agents/scripts/move-agent-docs.sh
-# if the package folder reappears after pulling, either path works
-# bash docs/agents/package/scripts/move-agent-docs.sh
 ```
 
 4. Resolve any `skip:` messages (files you have customized) and commit the result.
