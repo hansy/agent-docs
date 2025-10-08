@@ -2,6 +2,19 @@
 
 Opinionated, role-driven documentation you can pull into any project under `docs/agents` via `git subtree`. This repo is the source of truth; consumer projects import only the `package/` folder, so this README is not imported.
 
+## Maintain this package
+
+1. Work on the `main` branch. Make and test documentation updates inside `package/`.
+2. Commit your changes:  
+   `git add package`  
+   `git commit -m "docs: ..."`
+3. Push `main`: `git push origin main`.
+4. Regenerate the published subtree branch:  
+   `git subtree split --prefix=package --branch package`
+5. Push the refreshed branch: `git push origin package`.
+
+Run the split command again whenever you publish new docs so the `package` branch keeps matching `package/` on `main`.
+
 ## What You Get (in consumer repo)
 
 - `docs/COMMANDS.md`, `docs/TECH_STACK.md`, `docs/STRUCTURE.md`, `docs/ROADMAP.md`, `docs/PRD.md`
@@ -9,40 +22,59 @@ Opinionated, role-driven documentation you can pull into any project under `docs
 - `docs/agents/AGENTS.md` — entrypoint and Quickstart
 - `docs/agents/STATE.md` and `docs/agents/state.json` — lifecycle and handoff state
 - `docs/agents/roles/` — role guides (Project Manager, Planner, Researcher, Coder, Reviewer) with embedded templates
+- `docs/agents/scripts/move-agent-docs.sh` — helper to relocate templates into your root `docs/`
 
-## Add To Your Project (once)
+## Use in your repo
+
+### First-time import
+
+1. Start from a clean working tree (commit or stash local changes).
+2. Add the subtree:
 
 ```bash
 git subtree add --prefix=docs/agents https://github.com/hansy/agent-docs.git package --squash
 ```
 
-The `package` branch mirrors the `package/` directory on `main` via `git subtree split`, so the branch root is ready to graft into your docs; release tags will be cut on this branch so you can reference them directly.
+3. Move the top-level docs into `docs/` while keeping the runtime state and role guides under `docs/agents/`:
 
-## Pull Updates (periodically)
+```bash
+bash docs/agents/scripts/move-agent-docs.sh
+```
 
-Direct with URL:
+   - The script skips files that already exist in `docs/`; reconcile those manually.
+4. Commit the imported docs in your repository.
+
+### Pull updates later
+
+1. Ensure your working tree is clean (commit, `git stash`, or `git reset --keep` as needed).
+2. Pull the latest docs:
 
 ```bash
 git subtree pull --prefix=docs/agents https://github.com/hansy/agent-docs.git package --squash
 ```
 
-With a remote alias:
+   - Or configure a remote once:  
+     `git remote add agent-docs https://github.com/hansy/agent-docs.git`  
+     then run `git subtree pull --prefix=docs/agents agent-docs package --squash`.
+3. Re-run the mover script to refresh `docs/`:
 
 ```bash
-git remote add agent-docs https://github.com/hansy/agent-docs.git
-git subtree pull --prefix=docs/agents agent-docs package --squash
+bash docs/agents/scripts/move-agent-docs.sh
 ```
+
+4. Resolve any `skip:` messages (files you have customized) and commit the result.
+
+These steps avoid the `fatal: working tree has modifications. Cannot add.` error—subtree commands require a clean working tree.
+
+The `package` branch mirrors the `package/` directory on `main` via `git subtree split`, so the branch root is ready to graft into your docs; release tags will be cut on this branch so you can reference them directly.
+
+## Pull Updates (periodically)
 
 Pin to a tag (when available):
 
 ```bash
 git subtree pull --prefix=docs/agents agent-docs vX.Y.Z --squash
 ```
-
-Tips:
-
-- Commit local changes before pulling to simplify conflicts.
-- Resolve conflicts inside `docs/agents/` then re-run the pull if needed.
 
 ## Sprint Flow
 
