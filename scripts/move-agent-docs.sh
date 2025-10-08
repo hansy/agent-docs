@@ -9,7 +9,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 AGENTS_DIR="$(dirname "${SCRIPT_DIR}")"
 DOCS_DIR="$(dirname "${AGENTS_DIR}")"
 
-KEEP=("README.md" "AGENTS.md" "STATE.md" "state.json" "roles" "scripts")
+KEEP=("README.md" "STATE.md" "state.json" "roles" "scripts")
 
 contains() {
   local match="$1"
