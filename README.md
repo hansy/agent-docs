@@ -1,19 +1,12 @@
 # Agent Docs (Subtree Package)
 
-Opinionated, role-driven documentation you can pull into any project under `docs/agents` via `git subtree`. This repo is the source of truth; consumer projects import only the `package/` folder, so this README is not imported.
+Opinionated, role-driven documentation you can pull into any project under `docs/agents` via `git subtree`. This repo is the source of truth; you can import everything from the `main` branch; the README comes along for context.
 
 ## Maintain this package
 
-1. Work on the `main` branch. Make and test documentation updates inside `package/`.
-2. Commit your changes:  
-   `git add package`  
-   `git commit -m "docs: ..."`
-3. Push `main`: `git push origin main`.
-4. Regenerate the published subtree branch:  
-   `git subtree split --prefix=package --branch package`
-5. Push the refreshed branch: `git push origin package`.
-
-Run the split command again whenever you publish new docs so the `package` branch keeps matching `package/` on `main`.
+1. Work directly on the `main` branch.
+2. Update files under `package/` (and this README when needed).
+3. Commit and push: `git add package README.md && git commit -m "docs: ..."` then `git push origin main`.
 
 ## What You Get (in consumer repo)
 
@@ -22,7 +15,7 @@ Run the split command again whenever you publish new docs so the `package` branc
 - `docs/agents/AGENTS.md` — entrypoint and Quickstart
 - `docs/agents/STATE.md` and `docs/agents/state.json` — lifecycle and handoff state
 - `docs/agents/roles/` — role guides (Project Manager, Planner, Researcher, Coder, Reviewer) with embedded templates
-- `docs/agents/scripts/move-agent-docs.sh` — helper to relocate templates into your root `docs/`
+- `docs/agents/package/scripts/move-agent-docs.sh` — helper to relocate templates into your root `docs/` (it moves itself to `docs/agents/scripts/` after the first run)
 
 ## Use in your repo
 
@@ -32,15 +25,16 @@ Run the split command again whenever you publish new docs so the `package` branc
 2. Add the subtree:
 
 ```bash
-git subtree add --prefix=docs/agents https://github.com/hansy/agent-docs.git package --squash
+git subtree add --prefix=docs/agents https://github.com/hansy/agent-docs.git main --squash
 ```
 
-3. Move the top-level docs into `docs/` while keeping the runtime state and role guides under `docs/agents/`:
+3. Move the templated docs into `docs/` while keeping the runtime state and role guides under `docs/agents/`:
 
 ```bash
-bash docs/agents/scripts/move-agent-docs.sh
+bash docs/agents/package/scripts/move-agent-docs.sh
 ```
 
+   - On first run the script moves itself into `docs/agents/scripts/` for future reuse.
    - The script skips files that already exist in `docs/`; reconcile those manually.
 4. Commit the imported docs in your repository.
 
@@ -50,23 +44,24 @@ bash docs/agents/scripts/move-agent-docs.sh
 2. Pull the latest docs:
 
 ```bash
-git subtree pull --prefix=docs/agents https://github.com/hansy/agent-docs.git package --squash
+git subtree pull --prefix=docs/agents https://github.com/hansy/agent-docs.git main --squash
 ```
 
    - Or configure a remote once:  
      `git remote add agent-docs https://github.com/hansy/agent-docs.git`  
-     then run `git subtree pull --prefix=docs/agents agent-docs package --squash`.
-3. Re-run the mover script to refresh `docs/`:
+     then run `git subtree pull --prefix=docs/agents agent-docs main --squash`.
+3. Re-run the mover script to refresh `docs/` (use whichever path exists in your repo):
 
 ```bash
+# first import created docs/agents/scripts/move-agent-docs.sh
 bash docs/agents/scripts/move-agent-docs.sh
+# if the package folder reappears after pulling, either path works
+# bash docs/agents/package/scripts/move-agent-docs.sh
 ```
 
 4. Resolve any `skip:` messages (files you have customized) and commit the result.
 
 These steps avoid the `fatal: working tree has modifications. Cannot add.` error—subtree commands require a clean working tree.
-
-The `package` branch mirrors the `package/` directory on `main` via `git subtree split`, so the branch root is ready to graft into your docs; release tags will be cut on this branch so you can reference them directly.
 
 ## Pull Updates (periodically)
 
