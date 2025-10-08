@@ -11,28 +11,30 @@ Opinionated, role-driven documentation you can pull into any project under `docs
 ## Add To Your Project (once)
 
 ```bash
-git subtree add --prefix=docs/agents https://github.com/hansy/agent-docs.git main:package --squash
+git subtree add --prefix=docs/agents https://github.com/hansy/agent-docs.git package --squash
 ```
+
+The `package` branch mirrors the `package/` directory on `main` via `git subtree split`, so the branch root is ready to graft into your docs; release tags will be cut on this branch so you can reference them directly.
 
 ## Pull Updates (periodically)
 
 Direct with URL:
 
 ```bash
-git subtree pull --prefix=docs/agents https://github.com/hansy/agent-docs.git main:package --squash
+git subtree pull --prefix=docs/agents https://github.com/hansy/agent-docs.git package --squash
 ```
 
 With a remote alias:
 
 ```bash
 git remote add agent-docs https://github.com/hansy/agent-docs.git
-git subtree pull --prefix=docs/agents agent-docs main:package --squash
+git subtree pull --prefix=docs/agents agent-docs package --squash
 ```
 
 Pin to a tag (when available):
 
 ```bash
-git subtree pull --prefix=docs/agents agent-docs vX.Y.Z:package --squash
+git subtree pull --prefix=docs/agents agent-docs vX.Y.Z --squash
 ```
 
 Tips:
