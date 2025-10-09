@@ -63,6 +63,13 @@ Allowed statuses: todo | in_progress | blocked | done.
 
 For each unchecked task in Implementation Tasks:
 
+0) Plan & approval
+• Draft a concise step-by-step implementation plan (tests, code changes, files) tailored to the active task.
+• Share the plan with the human and request explicit approval before proceeding.
+• Do not start Step A until the human replies with an approval (e.g., “Approved”).
+• After approval, record the approved plan under `## Task Plan (approved)` in `docs/features/F###-<feature>/coding-notes.md`.
+• If scope changes mid-task, pause, update the plan, seek renewed approval, and refresh the coding notes before resuming.
+
 A) Mark in progress
 • Edit the plan: set status: in_progress for Tn.
 
@@ -113,7 +120,7 @@ If blocked (unclear scenario, needs new structure/dep, boundary conflict):
    • List exact commands (from `docs/COMMANDS.md`).
 
 3. Coding notes — `docs/features/F###-<feature>/coding-notes.md`
-   • Use the template below.
+   • Use the template below and capture the approved plan before coding.
    • Summary, lessons, blockers, improvements.
 
 4. State update — `docs/agents/state.json`
@@ -157,6 +164,11 @@ Path: `docs/features/F###-<feature>/coding-notes.md`
 # Coding Notes — <F###-feature>
 
 Date: YYYY-MM-DD • Coder: <name>
+
+## Task Plan (approved)
+
+- Step 1: …
+- Step 2: …
 
 ## Summary
 
