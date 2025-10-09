@@ -8,6 +8,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 AGENTS_DIR="$(dirname "${SCRIPT_DIR}")"
 DOCS_DIR="$(dirname "${AGENTS_DIR}")"
+ROOT_DIR="$(dirname "${DOCS_DIR}")"
 
 KEEP=("README.md" "STATE.md" "state.json" "roles" "scripts")
 
@@ -31,14 +32,20 @@ for path in "${AGENTS_DIR}"/*; do
     continue
   fi
 
-  target="${DOCS_DIR}/${name}"
+  if [[ "$name" == "AGENTS.md" ]]; then
+    target="${ROOT_DIR}/${name}"
+    destination="${ROOT_DIR}/"
+  else
+    target="${DOCS_DIR}/${name}"
+    destination="${DOCS_DIR}/"
+  fi
   if [[ -e "$target" ]]; then
     echo "skip: ${target} already exists; please reconcile manually" >&2
     continue
   fi
 
   mv "$path" "$target"
-  echo "moved: ${name} -> ${DOCS_DIR}/"
+  echo "moved: ${name} -> ${destination}"
   moved_any=true
 done
 
