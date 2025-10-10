@@ -11,7 +11,7 @@ Turn a proposed feature into a clear, non-technical plan that anyone can follow,
 ## Outputs (artifacts)
 
 - Feature plan: `docs/features/F###-<feature>/plan.md` (template below)
-- Roadmap update: add/adjust tasks (T##) under the active feature in `docs/ROADMAP.md`
+- Roadmap alignment note to PM (confirm status only; keep tasks inside the plan)
 - state.json updated (handoff note to Researcher)
 
 ## Do
@@ -19,7 +19,7 @@ Turn a proposed feature into a clear, non-technical plan that anyone can follow,
 - Confirm with user what feature or task is to be worked on
 - Focused Q&A with the human (max 6–10 questions)
 - Write: Problem/Outcome, Users, User Stories, Acceptance Criteria
-  – If planning a feature: break it into manageable tasks `T##`, update `docs/ROADMAP.md` with the task list, and select the first task to work on.
+  – If planning a feature: break it into manageable tasks `T##` inside the plan and select the first task to work on; signal high-level status to the PM without duplicating tasks in the roadmap.
   – If planning a task: append the task details to the feature plan (T## subsection).
   – Create a task branch from the feature branch and set `branch` in state.json (include the branch in `msg`).
     • Task branch format: `feat/F###-<feature>--T##-<task>` (created from `feat/F###-<feature>`)

@@ -29,7 +29,7 @@ After each file is seeded, in `state.json`, set state = in_progress and msg = "D
 
 ## Outputs (artifacts)
 
-- `docs/ROADMAP.md` — numbered features (F###) and tasks (T##), with status/owners
+- `docs/ROADMAP.md` — feature-level statuses (F### only) with owners; refer to plans for task details
 - state updates in `docs/agents/state.json` (start feature, handoff to Planner; closeout → reset)
 - Lightweight coordination notes in `state.msg` (≤12 lines)
 
@@ -38,6 +38,7 @@ After each file is seeded, in `state.json`, set state = in_progress and msg = "D
 - Intake: capture new feature requests; assign next Feature ID `F###` and title
 - Engage with human on PRD to shape and maintain the ROADMAP (high-level only)
 - Prioritize: order features in ROADMAP; do not renumber existing IDs
+- Before editing a feature’s entry, review the latest `docs/features/F###-<feature>/plan.md` (if present) to stay aligned with approved tasks and scope
 - Kickoff a feature: set `state.json` → `plan_slug=F###-<feature>`, `branch=feat/F###-<feature>`, `current_role=Planner`, `state=in_progress`, concise `msg`; create a new git branch
 - Git branches
   - PM creates the feature branch: `(feat|chore|etc)/F###-<feature>`
@@ -59,7 +60,7 @@ PM → Planner (kickoff)
 ```
 [PM] Kickoff F###-<feature>.
 Branch: feat/F###-<feature>. See docs/ROADMAP.md.
-Please draft plan with ACs & Scenarios and outline tasks T##.
+Please draft plan with ACs & Scenarios and capture tasks T## inside the plan.
 ```
 
 PM → (closeout)
