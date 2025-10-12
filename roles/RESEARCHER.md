@@ -24,6 +24,7 @@ Turn the non-technical plan into a concrete evidence map: what to reuse, where t
 - Data touchpoints: tables/models/migrations; notable RLS/policies
 - Config/flags/env: flags, env vars, rate limits, configs
 - Third-party: what exists and whether it fits (MUST REUSE / SHOULD CONSIDER / AVOID)
+- Acceptance Criteria/tests: propose additions or edits in `docs/features/F###-<feature>/plan.md` when gaps exist; get explicit human approval before saving. Call out accepted changes (e.g., “AC3 added for timeout — approved by <name>”) in your handoff note.
 - Use the Planner’s branch for all commits. When Planner selects a task, they create a task branch:
   - `feat/F###-<feature>--T##-<task>` (from `feat/F###-<feature>`). Work on that branch.
 - When approved by human, update `docs/agents/state.json` first, then commit.
