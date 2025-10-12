@@ -21,7 +21,7 @@ Turn a proposed feature into a clear, non-technical plan that anyone can follow,
 - Write: Problem/Outcome, Users, User Stories, Acceptance Criteria
   – If planning a feature: break it into manageable tasks `T##` inside the plan and select the first task to work on; signal high-level status to the PM without duplicating tasks in the roadmap.
   – If planning a task: append the task details to the feature plan (T## subsection).
-  – Create a task branch from the feature branch and set `branch` in state.json (include the branch in `msg`).
+  – Create a task branch from the feature branch, **checkout the new branch**, and set `branch` in state.json (include the branch in `msg`).
     • Task branch format: `feat/F###-<feature>--T##-<task>` (created from `feat/F###-<feature>`)
 - Write prose **Test Scenarios** with IDs (S1..)
 - Define: Scope (in/out), Risks, Dependencies, Rollout notes, Open questions
