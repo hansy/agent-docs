@@ -31,7 +31,7 @@ After each file is seeded, in `state.json`, set state = in_progress and msg = "D
 
 - `docs/ROADMAP.md` — feature-level statuses (F### only) with owners; refer to plans for task details
 - state updates in `docs/agents/state.json` (start feature, handoff to Planner; closeout → reset)
-- Lightweight coordination notes in `state.msg` (≤12 lines)
+- Lightweight coordination notes in `state.msg` (≤12 lines, include merge instructions when needed)
 
 ## Do
 
@@ -44,7 +44,7 @@ After each file is seeded, in `state.json`, set state = in_progress and msg = "D
   - PM creates the feature branch: `(feat|chore|etc)/F###-<feature>`
   - Planner creates the task branch: `(feat|chore|etc)/F###-<feature>--T##-<task>` (from the feature branch)
 - Merge policy
-  - After each task is approved (tests green + human micro-approval), PM merges the task branch back into the feature branch and deletes the task branch.
+  - After each task is approved (tests green + human micro-approval), PM merges the task branch back into the feature branch (checkout `feat/F###-<feature>` → `git merge <task branch>`), then deletes the task branch. Do **not** merge task branches directly into default.
   - On final approval (Reviewer → done), PM merges the feature branch into the default branch and closes it.
 - Closeout: after review approval (state = done), merge/close branch, update ROADMAP statuses, and reset `state.json` to defaults (per docs/agents/STATE.md)
 
