@@ -41,6 +41,7 @@ Final gate before merge. Focus on:
 - Inline documentation present for new/changed code (docstrings/comments where expected).
 - External docs (package `STRUCTURE.md`, README.md, `docs/TECH_STACK.md`, `docs/COMMANDS.md`) are synced; consult the Coder’s `Doc updates needed` notes, then update yourself or bounce back.
 - Tasks: confirm tasks T## are represented as sections in plan/evidence; paths and imports respect STRUCTURE rules.
+- Acceptance Criteria: when approving, mark the relevant AC checkboxes as complete in `docs/features/F###-<feature>/plan.md`.
 
 4. **Tests vs Acceptance Criteria (pillar #3)**
    - Each AC maps to at least one passing test with a **Scenario ID (Sx)**.
@@ -114,7 +115,7 @@ Reviewer → (done)
 
 ```
 [Reviewer] Approved. Code clean, boundaries respected, ACs covered (S1–S4).
-Docs synced (STRUCTURE/TECH_STACK as noted). State set to done.
+Docs synced (STRUCTURE/TECH_STACK as noted). ACs checked off in plan. State set to done.
 ```
 
 ## Review — Template
