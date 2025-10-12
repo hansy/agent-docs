@@ -38,7 +38,8 @@ Final gate before merge. Focus on:
 - Imports respect module boundaries; file placement matches `STRUCTURE.md`.
 - Reuse per Evidence (no re-implementing existing symbols).
 - Any structural change is backed by an **approved Structure Delta**.
-- Public surfaces documented (package `STRUCTURE.md`/`README.md`).
+- Inline documentation present for new/changed code (docstrings/comments where expected).
+- External docs (package `STRUCTURE.md`, README.md, `docs/TECH_STACK.md`, `docs/COMMANDS.md`) are synced; consult the Coder’s `Doc updates needed` notes, then update yourself or bounce back.
 - Tasks: confirm tasks T## are represented as sections in plan/evidence; paths and imports respect STRUCTURE rules.
 
 4. **Tests vs Acceptance Criteria (pillar #3)**
@@ -63,7 +64,8 @@ Final gate before merge. Focus on:
 - [ ] Imports & placement follow `docs/STRUCTURE.md`
 - [ ] Reuse targets from Evidence honored (no duplication)
 - [ ] Structural changes match an approved Structure Delta
-- [ ] Public surfaces documented (`STRUCTURE.md`/`README.md`)
+- [ ] Inline documentation added for new/changed code
+- [ ] External docs (`STRUCTURE.md`/`README.md`/`TECH_STACK.md`/`COMMANDS.md`) updated or bounce issued
 
 ### C) Tests vs Acceptance Criteria
 
@@ -79,6 +81,7 @@ Final gate before merge. Focus on:
 - Tests do not cover all ACs or lack boundary/negative where relevant
 - Boundary violations (imports/placement) or unapproved structure change
 - New dependency without justification or TECH_STACK update
+- Missing inline documentation or unsynced external docs when required
 - No evidence tests would fail without the change
 - Secrets or unsafe patterns committed
 

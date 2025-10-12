@@ -103,10 +103,9 @@ If blocked (unclear scenario, needs new structure/dep, boundary conflict):
 
 ## Documentation Standards (what to update)
 
-• Public API docs: TSdoc/JSDoc for each exported function/type (purpose, params, returns, errors).
-• Package docs: If you add/alter a public surface, update that package’s README.md (Exports) and STRUCTURE.md (one-liners). Do not change top-level structure unless approved.
-• Commands/Tech: If scripts/deps change, update `docs/COMMANDS.md` and add a one-liner to `docs/TECH_STACK.md` (justify in commit body).
-• .env.example: Add new vars with safe placeholders and brief comments.
+• Inline docs: add or refresh docstrings/comments for every new or modified function, class, and complex block — exported and internal. Capture intent, side effects, and scenario IDs when useful.
+• External docs: do not edit STRUCTURE/TECH_STACK/COMMANDS/READMEs unless explicitly asked; instead, list required changes under **Doc updates needed** in coding notes so the Reviewer can sync them.
+• Environment files: if new env vars are introduced, add masked entries to `.env.example` or flag them in coding notes when unsure.
 
 ⸻
 
@@ -143,7 +142,7 @@ If blocked (unclear scenario, needs new structure/dep, boundary conflict):
 • Each task followed: failing tests → code → green.
 • Scenario IDs in test names and commit message.
 • No forbidden imports or stray files; no unapproved new structure.
-• Public surfaces documented (TSdoc / README / STRUCTURE).
+• Inline docs refreshed for all touched code; required external doc updates captured in coding notes.
 • Commands listed; no secrets printed or committed.
 
 ## Handoff msg templates (≤12 lines)
@@ -153,7 +152,7 @@ Coder → Reviewer
 ```
 [Coder] <git branch> ready.
 Tasks done: T01,T02. Tests: S1–S3 green.
-Docs updated: <paths>. See plan task notes for changed paths.
+Doc updates needed: <refs or “none”>. See plan task notes for changed paths.
 ```
 
 ## Coding Notes — Template
@@ -173,6 +172,10 @@ Date: YYYY-MM-DD • Coder: <name>
 ## Summary
 
 <What changed at a high level>
+
+## Doc updates needed
+
+- STRUCTURE.md — <reason> (write “none” if not needed)
 
 ## Commands used
 
