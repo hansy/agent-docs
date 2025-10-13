@@ -36,7 +36,7 @@ Repo first-invoke (once per repo)
   - `docs/STRUCTURE.md`
   - `docs/TECH_STACK.md`
   - `docs/README.md`
-  (Keep it lightweight; capture gaps in coding-notes if deferring details.)
+    (Keep it lightweight; capture gaps in coding-notes if deferring details.)
 
 1. Implementation Tasks — ensure the plan has a checklist:
 
@@ -63,12 +63,11 @@ Allowed statuses: todo | in_progress | blocked | done.
 
 For each unchecked task in Implementation Tasks:
 
-0) Plan & approval
-• Draft a concise step-by-step implementation plan (tests, code changes, files) tailored to the active task.
-• Share the plan with the human and request explicit approval before proceeding.
-• Do not start Step A until the human replies with an approval (e.g., “Approved”).
-• After approval, record the approved plan under `## Task Plan (approved)` in `docs/features/F###-<feature>/coding-notes.md`.
-• If scope changes mid-task, pause, update the plan, seek renewed approval, and refresh the coding notes before resuming.
+0. Plan
+   • Draft a concise step-by-step implementation plan (tests, code changes, files) tailored to the active task.
+   • Share the plan with the human (see AGENTS.md conversation-first policy).
+   • Record the final plan under `## Task Plan (approved)` in `docs/features/F###-<feature>/coding-notes.md`.
+   • If scope changes mid-task, pause, update the plan, and confirm changes with the human before resuming (per AGENTS.md).
 
 A) Mark in progress
 • Edit the plan: set status: in_progress for Tn.
