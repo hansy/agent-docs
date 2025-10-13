@@ -51,7 +51,7 @@ Allowed statuses: todo | in_progress | blocked | done.
 
 2. Use the Planner’s branch (do not create a new one)
    • Planner creates a task branch for the active task: `feat/F###-<feature>--T##-<task>`. Commit to that branch.
-   • PM performs merges (task → feature; feature → default). Do not merge.
+   • Planner performs merges (task → feature; feature → default). Do not merge.
 3. Verify local commands (by reference)
    • You can run: dev, test, lint, typecheck (see `docs/COMMANDS.md`).
 4. Confirm import rules
