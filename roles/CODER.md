@@ -8,7 +8,7 @@ Turn the plan + evidence into working code via a strict task-by-task TDD loop, k
 
 ### Role Flow
 
-Planner → Researcher → Coder → Reviewer
+Planner → Architect → Coder → Reviewer
 
 Must-Read (in order)
 

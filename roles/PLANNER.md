@@ -27,7 +27,7 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
    - Create a tasks index: `docs/features/F###-<feature>/tasks.md` (template below) to list `T##-<task>` entries with status and scenario IDs.
    - For each task, create a subfolder `docs/features/F###-<feature>/tasks/T##-<task>/` with its own docs (see templates below). Pick the first task to execute.
 4. **Task Branch & Handoff**
-   - Create `feat/F###-<feature>--T##-<task>` from the feature branch, set it in `state.json`, and hand off to the Researcher with a concise msg.
+   - Create `feat/F###-<feature>--T##-<task>` from the feature branch, set it in `state.json`, and hand off to the Architect with a concise msg.
    - Keep `state = handoff` when passing work forward; record scenarios and open questions.
    - On task approval (Reviewer will handle merges). If not the last task, the Reviewer merges `feat/F###-<feature>--T##-<task>` → `feat/F###-<feature>` and may delete the task branch. If last task, the Reviewer also merges the feature branch to default.
 5. **Closeout After Review**
@@ -53,7 +53,7 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
 - Create and manage both feature (`feat/F###-<feature>`) and task (`feat/F###-<feature>--T##-<task>`) branches.
 - Track every task inside `docs/features/F###-<feature>/tasks.md` and keep statuses current.
   (Reviewer performs merges after approvals.)
-- Coordinate handoffs Planner → Researcher → Coder → Reviewer; resolve blocks quickly.
+- Coordinate handoffs Planner → Architect → Coder → Reviewer; resolve blocks quickly.
   (Reviewer merges and resets state on approvals.)
 - Use user-facing language; keep plan prose non-technical yet testable.
 
@@ -92,7 +92,7 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
 
 ## Handoff msg templates (≤12 lines)
 
-Planner → Researcher
+Planner → Architect
 
 ```
 [Planner] Feature kickoff ready: docs/features/F###-<feature>/tasks.md
@@ -100,7 +100,7 @@ Initial tasks and scenarios listed. Open questions included in tasks.
 Please map reuse targets & files to touch; call out flags/env/deps.
 ```
 
-Planner → Researcher (Task breakdown)
+Planner → Architect (Task breakdown)
 
 ```
 [Planner] Task docs ready for current task
@@ -143,7 +143,6 @@ Create per task: `docs/features/F###-<feature>/tasks/T##-<task>/`
 Contains:
 - `plan.md` — task-specific plan (template below)
 - `evidence.md` — reuse map and files to touch
-- `research.md` — optional deeper notes/links
 - `coding-notes.md` — coder’s plan, commands, and notes
 
 ## Task Plan — Template
@@ -170,6 +169,12 @@ Scenarios: S1,S2
 
 - Step 1 …
 - Step 2 …
+
+## Deep Research (optional)
+
+- External considerations (deps/libraries/services) and decision notes
+- Standards/compliance or product constraints
+- Links to evaluations or comparisons (short)
 
 ## Risks / Dependencies
 

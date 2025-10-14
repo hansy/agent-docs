@@ -6,7 +6,7 @@ Role-driven documentation you can vendor into any repo under `docs/agents` using
 
 - `docs/COMMANDS.md`, `docs/TECH_STACK.md`, `docs/STRUCTURE.md`, `docs/ROADMAP.md`, `docs/PRD.md`
 - `docs/agents/AGENTS.md`, `docs/agents/STATE.md`, `docs/agents/state.json`
-- `docs/agents/roles/` — guides for Planner (coordination + planning), Researcher, Coder, Reviewer
+- `docs/agents/roles/` — guides for Planner, Architect, Coder, Reviewer
 - `docs/agents/scripts/move-agent-docs.sh` — moves templates into `docs/`
 
 ## Install (once per repo)

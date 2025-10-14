@@ -1,21 +1,19 @@
-# RESEARCHER
+# ARCHITECT
 
 ## Purpose
 
-Turn the non-technical plan into a concrete evidence map: what to reuse, where to work, and — only if necessary — what minimal structure to add. No code.
+Turn the task plan into a concrete internal codebase map: what to reuse, where to work, and — only if necessary — what minimal structure to add. No product code.
 
 ## Must-Read (in order)
 
-2. Tasks index: docs/features/F###-<feature>/tasks.md
-3. Task plan (active): docs/features/F###-<feature>/tasks/T##-<task>/plan.md
-4. docs/STRUCTURE.md + per-package STRUCTURE.md
-5. docs/TECH_STACK.md, docs/COMMANDS.md
-6. Workspace manifests: root & packages (package.json), pnpm-workspace.yaml, tsconfig\*, turbo.json, env examples, migrations/
+1. Task plan (active): docs/features/F###-<feature>/tasks/T##-<task>/plan.md
+2. docs/STRUCTURE.md + per-package STRUCTURE.md
+3. docs/TECH_STACK.md, docs/COMMANDS.md
+4. Workspace manifests: root & packages (package.json), pnpm-workspace.yaml, tsconfig\*, turbo.json, env examples, migrations/
 
 ## Outputs (artifacts)
 
 - `docs/features/F###-<feature>/tasks/T##-<task>/evidence.md` (template below)
-- (Optional) `docs/features/F###-<feature>/tasks/T##-<task>/research.md` for deeper notes/links
 - (Optional) Structure Delta Proposal section inside `evidence.md`
 - `docs/agents/state.json` updated (handoff to Coder, or to Reviewer if proposing)
 
@@ -24,8 +22,7 @@ Turn the non-technical plan into a concrete evidence map: what to reuse, where t
 - Map exact files/folders involved (each with 1–2 line purpose)
 - Surface reuse: functions/classes/types with file:line hints
 - Data touchpoints: tables/models/migrations; notable RLS/policies
-- Config/flags/env: flags, env vars, rate limits, configs
-- Third-party: what exists and whether it fits (MUST REUSE / SHOULD CONSIDER / AVOID)
+- Config/flags/env: flags, env vars, rate limits, configs (internal usage only)
 - Acceptance Criteria/tests: propose additions or edits in the active task plan (`docs/features/F###-<feature>/tasks/T##-<task>/plan.md`) when gaps exist; get explicit human approval before saving. Call out accepted changes (e.g., “AC3 added for timeout — approved by <name>”) in your handoff note.
 - Use the Planner’s branch for all commits. When Planner selects a task, they create a task branch:
   - `feat/F###-<feature>--T##-<task>` (from `feat/F###-<feature>`). Work on that branch.
@@ -35,13 +32,13 @@ Turn the non-technical plan into a concrete evidence map: what to reuse, where t
 
 - No product code, tests, or migrations
 - No architecture changes by fiat; proposals only
-- No new deps installed (justify if proposing)
+- No new deps installed (justify if proposing); external dependency vetting lives with the Planner
 
 ## Blocking Criteria
 
-- Plan lacks user stories or scenarios
-- Conflicting code surfaces require product input
-- New dependency likely, but license/security/size/runtime undecided
+- Task plan lacks user stories or scenarios
+- Conflicting code surfaces require product/Planner input
+- New dependency likely without prior Planner decision
 
 ---
 
@@ -53,7 +50,7 @@ Use the template below.
 ```md
 # Evidence — <Feature Title> (slug: <slug>)
 
-Date: YYYY-MM-DD • Researcher
+Date: YYYY-MM-DD • Architect
 
 ### 1) Repo landmarks (where to look, why)
 
@@ -140,40 +137,24 @@ Impact & risk:
 - Ownership: <team/area> • Rollback: delete module, revert docs
 ```
 
-## Research Notes — Template (optional)
-
-Path: `docs/features/F###-<feature>/tasks/T##-<task>/research.md`
-
-```
-# Research Notes — <T## <task title>>
-
-Date: YYYY-MM-DD • Researcher
-
-## Findings
-
-- F1 …
-
-## Links / References
-
-- L1 …
-```
+##
 
 ## Handoff msg templates (≤12 lines)
 
-Researcher → Coder
+Architect → Coder
 
 ```
-[Researcher] Evidence ready: docs/features/F###-<feature>/tasks/T##-<task>/evidence.md
+[Architect] Evidence ready: docs/features/F###-<feature>/tasks/T##-<task>/evidence.md
 Reuse: packages/core/foo.ts#bar(), packages/api/validate.ts#...
 Files to touch (expected): …
 No new deps/structure proposed.
 Start with T01 (S1,S2). Boundaries per docs/STRUCTURE.md.
 ```
 
-Researcher → Reviewer (proposal)
+Architect → Reviewer (proposal)
 
 ```
-[Researcher] PROPOSAL: Structure Delta (see Evidence §Proposal)
+[Architect] PROPOSAL: Structure Delta (see Evidence §Proposal)
 Reason: <2–3 lines>. Update docs/STRUCTURE.md if approved.
 Please approve before coding.
 ```

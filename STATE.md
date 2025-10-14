@@ -7,7 +7,7 @@ Purpose: Single source of truth for who acts next, lifecycle state, and the shor
 ```json
 {
   "plan_slug": "<kebab-case>|null",
-  "current_role": "PLANNER|RESEARCHER|CODER|REVIEWER",
+  "current_role": "PLANNER|ARCHITECT|CODER|REVIEWER",
   "state": "init|in_progress|handoff|blocked|done",
   "branch": "<git-branch>|null",
   "msg": "<<= 12 lines: handoff/blocker note>",
