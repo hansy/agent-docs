@@ -24,12 +24,12 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
    - Summarize the kickoff in `msg` (≤12 lines) with branch, focus, and any sequencing notes.
 3. **Plan the Work**
    - Clarify scope with focused Q&A.
-   - Create a tasks index: `docs/features/F###-<feature>/tasks.md` (template below) to list high-level `T##-<task>` entries with status and scenario IDs.
+   - Create a tasks index: `docs/features/F###-<feature>/tasks.md` (template below) to list high-level `T##-<task>`.
    - Determine if outside research is needed; if so, create `docs/features/F###-<feature>/research.md` (brief, outcome-focused) with the human.
-   - Create only the first task folder now: `docs/features/F###-<feature>/tasks/T01-<task>/` with its docs (see templates below). Subsequent task folders are bootstrapped by the Reviewer after approvals.
+   - Create only the first task folder now: `docs/features/F###-<feature>/tasks/T01-<task>/`. Architect will author `design.md` in that folder. Subsequent task folders are bootstrapped by the Reviewer after approvals.
 4. **Task Branch & Handoff**
    - Create the first task branch `feat/F###-<feature>--T01-<task>` from the feature branch, set it in `state.json`, and hand off to the Architect with a concise msg.
-   - Keep `state = handoff` when passing work forward; record scenarios and open questions.
+   - Keep `state = handoff` when passing work forward; record key notes and open questions.
    - Subsequent task selection/bootstrapping (branch + folder) is owned by the Reviewer after each approval.
    - On task approval (Reviewer will handle merges). If not the last task, the Reviewer merges `feat/F###-<feature>--T##-<task>` → `feat/F###-<feature>` and may delete the task branch. If last task, the Reviewer also merges the feature branch to default.
 5. **Closeout After Review**
@@ -70,9 +70,9 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
 
 1. Restate the ask in one sentence.
 2. Clarify with targeted questions (keep it lean).
-3. Draft the task breakdown and the first task plan (see Task Plan template below).
-4. Read back Acceptance Criteria & Scenarios for confirmation.
-5. On approval, save the plan, update `docs/agents/state.json` (handoff), then commit to the branch.
+3. Draft the task breakdown and outline the first task.
+4. Read back the task outline for confirmation (Architect will author ACs + Test Plan in design.md).
+5. On approval, update `docs/agents/state.json` (handoff), then commit to the branch.
 
 ## Blocking Criteria
 
@@ -84,7 +84,7 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
 ## Success Bar
 
 - Non-engineers understand the plan.
-- Tester can derive failing tests from scenarios without guessing.
+- Architect can derive ACs and a Test Plan without guessing.
 - Human confirms the plan captures the intent.
 
 ---
@@ -97,21 +97,21 @@ Planner → Architect
 
 ```
 [Planner] Feature kickoff ready: docs/features/F###-<feature>/tasks.md
-Initial tasks and scenarios listed. Open questions included in tasks.
+Initial tasks listed (optional: note key user flows). Open questions included in tasks.
 Please map reuse targets & files to touch; call out flags/env/deps.
 Author ACs and Test Plan in design.md for the active task.
 ```
 
-Planner → Architect (Task breakdown)
+Planner → Architect (Task kickoff)
 
 ```
 [Planner] Task docs ready for current task
 Task: T## — <task title>
 Paths:
   - Feature tasks index: docs/features/F###-<feature>/tasks.md
-  - Task plan: docs/features/F###-<feature>/tasks/T##-<task>/plan.md
+  - Design (to author): docs/features/F###-<feature>/tasks/T##-<task>/design.md
 Branch: feat/F###-<feature>--T##-<task>
-Scenarios listed in task plan. Please detail files to touch and reuse targets per task.
+Please detail files to touch and reuse targets; author ACs + Test Plan in design.md.
 ```
 
 ## Naming Rules (slugs)
@@ -129,10 +129,10 @@ Path: `docs/features/F###-<feature>/tasks.md`
 ```md
 # Tasks — <F###-feature>
 
-Status options: todo | in_progress | blocked | done
+Legend: [x] done • [>] in progress • [ ] pending
 
-- [ ] T01 — <task title> (scenarios: S1,S2) — status: todo — owner: <role/name>
-- [ ] T02 — <task title> (scenarios: S3) — status: todo — owner: <role/name>
+- [ ] T01 — <task title> - <brief task summary>
+- [ ] T02 — <task title> - <brief task summary>
 
 Notes:
 
@@ -145,43 +145,7 @@ Create per task: `docs/features/F###-<feature>/tasks/T##-<task>/`
 
 Contains:
 
-- `plan.md` — task-specific plan (template below)
 - `design.md` — architect’s design (touchpoints, ACs, Test Plan)
 - `coding-notes.md` — coder’s plan, commands, and notes
 
-## Task Plan — Template
-
-Path: `docs/features/F###-<feature>/tasks/T##-<task>/plan.md`
-
-```md
-# Task Plan — <T## <task title>>
-
-Status: draft | approved
-Owner: <name/role> Date: YYYY-MM-DD
-Scenarios: S1,S2
-
-## Objective
-
-<what this task achieves in 2–4 lines>
-
-
-
-## Steps
-
-- Step 1 …
-- Step 2 …
-
-## Deep Research (optional)
-
-- External considerations (deps/libraries/services) and decision notes
-- Standards/compliance or product constraints
-- Links to evaluations or comparisons (short)
-
-## Risks / Dependencies
-
-- R1 …
-
-## Open Questions
-
-- Q1 …
-```
+<!-- No plan.md — Architect will author design.md for each task. -->

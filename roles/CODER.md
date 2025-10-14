@@ -13,11 +13,10 @@ Planner → Architect → Coder → Reviewer
 Must-Read (in order)
 
 1. docs/agents/state.json — get `plan_slug` (Feature slug `F###-<feature>`), confirm role, and note `branch`.
-2. Tasks index: docs/features/F###-<feature>/tasks.md — task list and statuses
-3. Task plan: docs/features/F###-<feature>/tasks/T##-<task>/plan.md
-4. Design: docs/features/F###-<feature>/tasks/T##-<task>/design.md — touchpoints, ACs, Test Plan, proposals.
-5. docs/STRUCTURE.md (+ target package/app README.md / STRUCTURE.md).
-6. docs/TECH_STACK.md, docs/COMMANDS.md.
+2. Tasks index: docs/features/F###-<feature>/tasks.md — task list
+3. Design: docs/features/F###-<feature>/tasks/T##-<task>/design.md — touchpoints, ACs, Test Plan, proposals.
+4. docs/STRUCTURE.md (+ target package/app README.md / STRUCTURE.md).
+5. docs/TECH_STACK.md, docs/COMMANDS.md.
 
 ### Hard Guardrails
 
@@ -39,7 +38,7 @@ Repo first-invoke (once per repo)
   - `docs/README.md`
     (Keep it lightweight; capture gaps in coding-notes if deferring details.)
 
-1. Tasks index — ensure `docs/features/F###-<feature>/tasks.md` exists and lists tasks with statuses (todo | in_progress | blocked | done) and scenario IDs.
+1. Tasks index — ensure `docs/features/F###-<feature>/tasks.md` exists
 
 2. Use the active task branch (`feat/F###-<feature>--T##-<task>`).
 
@@ -57,14 +56,14 @@ For each unchecked task in `docs/features/F###-<feature>/tasks.md`:
 0. Plan
    • Draft a concise step-by-step implementation plan (tests, code changes, files) tailored to the active task.
    • Share the plan with the human (see AGENTS.md conversation-first policy).
-   • Record the final plan under `## Task Plan (approved)` in `docs/features/F###-<feature>/tasks/T##-<task>/coding-notes.md`.
+   • Record the final plan in `docs/features/F###-<feature>/tasks/T##-<task>/coding-notes.md` under a “Plan (approved)” section.
    • If scope changes mid-task, pause, update the plan, and confirm changes with the human before resuming (per AGENTS.md).
 
 A) Mark in progress
-• Update `docs/features/F###-<feature>/tasks.md`: set status in_progress for Tn.
+• Update `docs/features/F###-<feature>/tasks.md`: set the `[>]` marker for the active T##.
 
 B) Failing tests first
-• Write or activate failing tests per the Architect’s Test Plan in `design.md` for the task’s scenarios.
+• Write or activate failing tests per the ACs and Test Plan in `design.md`.
 • Include scenario IDs in test names (e.g., it('[S1] ...', ...)).
 • Include at least one boundary and one negative case where relevant.
 • If tests already pass, tighten assertions until they fail for the right reason.
@@ -78,11 +77,7 @@ D) Verify locally
 • Tests MUST pass before every commit. Fix until green; do not commit red.
 • Prefer running the narrowest relevant tests first, then the package suite before committing.
 
-E) Update tasks
-• In `tasks.md`, check off Tn; set status: done.
-• Add a one-liner: what changed & where (paths only, no diffs).
-
-F) Commit (after each task, small, conventional)
+E) Commit (after each task, small, conventional)
 • Only commit when tests pass.
 • Example: feat/F###-<feature>: implement T01 — S1,S2 green
 
@@ -101,18 +96,14 @@ If blocked (unclear scenario, needs new structure/dep, boundary conflict):
 
 ## Handoff Kit (required outputs)
 
-1. Tasks updated — `docs/features/F###-<feature>/tasks.md`
-   • Status for T## is done; one-line note of changes/paths.
-   • Note any residual risks or follow-ups in coding notes.
-
-2. Commands used
+1. Commands used
    • List exact commands (from `docs/COMMANDS.md`).
 
-3. Coding notes — `docs/features/F###-<feature>/tasks/T##-<task>/coding-notes.md`
+2. Coding notes — `docs/features/F###-<feature>/tasks/T##-<task>/coding-notes.md`
    • Use the template below and capture the approved plan before coding.
    • Summary, lessons, blockers, improvements.
 
-4. State update — `docs/agents/state.json`
+3. State update — `docs/agents/state.json`
    • Set next role and state appropriately (e.g., current_role=Reviewer, state=handoff).
    • After human confirmation, commit state update and docs.
 
@@ -154,7 +145,7 @@ Path: `docs/features/F###-<feature>/tasks/T##-<task>/coding-notes.md`
 
 Date: YYYY-MM-DD • Coder: <name>
 
-## Task Plan (approved)
+## Plan (approved)
 
 - Step 1: …
 - Step 2: …

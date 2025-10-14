@@ -2,11 +2,11 @@
 
 ## Purpose
 
-Turn the task plan into a concrete internal codebase map: what to reuse, where to work, and — only if necessary — what minimal structure to add. No product code.
+Turn the task into a concrete internal codebase map: what to reuse, where to work, and — only if necessary — what minimal structure to add. No product code.
 
 ## Must-Read (in order)
 
-1. Task plan (active): docs/features/F###-<feature>/tasks/T##-<task>/plan.md
+1. Tasks index entry: docs/features/F###-<feature>/tasks.md (active T##)
 2. docs/STRUCTURE.md + per-package STRUCTURE.md
 3. docs/TECH_STACK.md, docs/COMMANDS.md
 4. Workspace manifests: root & packages (package.json), pnpm-workspace.yaml, tsconfig\*, turbo.json, env examples, migrations/
@@ -35,7 +35,7 @@ Turn the task plan into a concrete internal codebase map: what to reuse, where t
 
 ## Blocking Criteria
 
-- Task plan lacks user stories or scenarios
+- Tasks index lacks sufficient user story context to define ACs/Test Plan
 - Conflicting code surfaces require product/Planner input
 - New dependency likely without prior Planner decision
 
@@ -98,7 +98,7 @@ Date: YYYY-MM-DD • Architect
 
 - apps/web/app/api/settle/route.ts — POST handler uses core
 - packages/core/payout.ts — reuse only
-- **tests**/api/settle.test.ts — Tester places failing tests here
+- **tests**/api/settle.test.ts — Coder places failing tests here (fail-first)
 
 ### 10) Acceptance Criteria & Test Plan
 

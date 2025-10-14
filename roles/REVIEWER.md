@@ -12,7 +12,6 @@ Final gate before merge. Focus on:
 
 1. Tasks index: `docs/features/F###-<feature>/tasks.md` — T## list and statuses
 2. Task docs (active):
-   - Plan: `docs/features/F###-<feature>/tasks/T##-<task>/plan.md`
    - Design: `docs/features/F###-<feature>/tasks/T##-<task>/design.md`
    - Coding notes: `docs/features/F###-<feature>/tasks/T##-<task>/coding-notes.md`
 3. Diffs (feature branch vs default) via commands in `docs/COMMANDS.md`
@@ -23,6 +22,7 @@ Final gate before merge. Focus on:
 
 - `docs/features/F###-<feature>/tasks/T##-<task>/review.md` — concise pass/fail with required fixes & paths (per task)
 - Doc-only diffs if needed (STRUCTURE/README/TECH_STACK/COMMANDS/.env.example)
+- Update tasks index: mark `T##` done in `docs/features/F###-<feature>/tasks.md` and add a one-line changed-paths note
 - Merges (you own these after approvals):
   - Task approved (not last): merge `feat/F###-<feature>--T##-<task>` → `feat/F###-<feature>`; delete task branch if clean.
   - Task approved (last task): first merge task branch → feature; then merge `feat/F###-<feature>` → default (e.g., `main`); delete merged branches if clean.
@@ -49,21 +49,21 @@ Final gate before merge. Focus on:
 - Inline documentation present for new/changed code (docstrings/comments where expected).
 - External docs (package `STRUCTURE.md`, README.md, `docs/TECH_STACK.md`, `docs/COMMANDS.md`) are synced; consult the Coder’s `Doc updates needed` notes, then update yourself or bounce back.
 - Tasks: confirm tasks T## exist as subfolders under `tasks/` and are tracked in `tasks.md`; paths and imports respect STRUCTURE rules.
-- Acceptance Criteria: when approving, mark the relevant AC checkboxes as complete in the task plan.
+- Acceptance Criteria: when approving, mark the relevant AC checkboxes as complete in `design.md`.
 
 4. **Tests vs Acceptance Criteria (pillar #3)**
    - Each AC in `design.md` maps to at least one passing test with a **Scenario ID (Sx)**.
    - Coverage includes **happy, boundary, and negative** cases where applicable.
    - Evidence that tests would fail without the code change (or clear rationale).
 5. **Decision** — Approve or request changes.
-   - Task-level approval (more tasks remain): update artifacts and merge task → feature; select the next task by numeric order, create `docs/features/F###-<feature>/tasks/T##-<task>/` (if missing) and branch `feat/F###-<feature>--T##-<task>`, then hand off to Architect (state=handoff) and commit.
+   - Task-level approval (more tasks remain): update artifacts, mark `T##` done in `tasks.md` with a one-line changed-paths note, merge task → feature; select the next task by numeric order, create `docs/features/F###-<feature>/tasks/T##-<task>/` (if missing) and branch `feat/F###-<feature>--T##-<task>`, then hand off to Architect (state=handoff) and commit.
    - Feature-level approval (no tasks remain): update artifacts, perform final merges to default, update `docs/ROADMAP.md`, reset `docs/agents/state.json` to defaults (current_role=PLANNER), then commit.
 
 ---
 
 ## Task vs Feature Approval
 
-- Approving an individual task (T##) marks that task done in `tasks.md`, you merge the task branch into the feature branch, then select the next task by number, bootstrap its branch/folder, and hand off to the Architect (state=handoff).
+- Approving an individual task (T##) marks that task done in `tasks.md` (include the one-line changed-paths note). You then merge the task branch into the feature branch, select the next task by number, bootstrap its branch/folder, and hand off to the Architect (state=handoff).
 - Approving the feature requires all tasks in `tasks.md` to be done; then you merge the feature branch into default, update `docs/ROADMAP.md`, and reset `docs/agents/state.json` to defaults (next role is Planner).
 
 ---
@@ -135,9 +135,9 @@ Reviewer → Architect (next task)
 Branch: feat/F###-<feature>--T##-<task> (from feat/F###-<feature>)
 Paths:
   - Feature tasks index: docs/features/F###-<feature>/tasks.md
-  - Task plan: docs/features/F###-<feature>/tasks/T##-<task>/plan.md
+  - Design (to author): docs/features/F###-<feature>/tasks/T##-<task>/design.md
 State: handoff → Architect.
-Notes: prior task merged; ACs covered per review.
+Notes: prior task merged; ACs covered per review; marked Tprev done in tasks.md with changed-paths note.
 ```
 
 Reviewer → (feature done)
