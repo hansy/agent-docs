@@ -13,7 +13,7 @@ Final gate before merge. Focus on:
 1. Tasks index: `docs/features/F###-<feature>/tasks.md` — T## list and statuses
 2. Task docs (active):
    - Plan: `docs/features/F###-<feature>/tasks/T##-<task>/plan.md`
-   - Evidence: `docs/features/F###-<feature>/tasks/T##-<task>/evidence.md`
+   - Design: `docs/features/F###-<feature>/tasks/T##-<task>/design.md`
    - Coding notes: `docs/features/F###-<feature>/tasks/T##-<task>/coding-notes.md`
 3. Diffs (feature branch vs default) via commands in `docs/COMMANDS.md`
 4. `docs/STRUCTURE.md` (+ per-package STRUCTURE.md)
@@ -35,7 +35,7 @@ Final gate before merge. Focus on:
 
 ## Review Flow
 
-1. **Prep** — read plan/evidence, open diffs, skim STRUCTURE rules.
+1. **Prep** — read plan/design, open diffs, skim STRUCTURE rules.
 2. **Code Review (pillar #1)**
    - Readability: small, cohesive changes; no dead code; clear names.
    - Safety: input validation, error handling, timeouts where relevant.
@@ -44,7 +44,7 @@ Final gate before merge. Focus on:
 3. **Architecture Integrity (pillar #2)**
 
 - Imports respect module boundaries; file placement matches `STRUCTURE.md`.
-- Reuse per Evidence (no re-implementing existing symbols).
+- Reuse per Design (no re-implementing existing symbols).
 - Any structural change is backed by an **approved Structure Delta**.
 - Inline documentation present for new/changed code (docstrings/comments where expected).
 - External docs (package `STRUCTURE.md`, README.md, `docs/TECH_STACK.md`, `docs/COMMANDS.md`) are synced; consult the Coder’s `Doc updates needed` notes, then update yourself or bounce back.
@@ -52,7 +52,7 @@ Final gate before merge. Focus on:
 - Acceptance Criteria: when approving, mark the relevant AC checkboxes as complete in the task plan.
 
 4. **Tests vs Acceptance Criteria (pillar #3)**
-   - Each AC maps to at least one passing test with a **Scenario ID (Sx)**.
+   - Each AC in `design.md` maps to at least one passing test with a **Scenario ID (Sx)**.
    - Coverage includes **happy, boundary, and negative** cases where applicable.
    - Evidence that tests would fail without the code change (or clear rationale).
 5. **Decision** — Approve or request changes.
@@ -80,7 +80,7 @@ Final gate before merge. Focus on:
 ### B) Architecture Integrity
 
 - [ ] Imports & placement follow `docs/STRUCTURE.md`
-- [ ] Reuse targets from Evidence honored (no duplication)
+- [ ] Reuse targets from Design honored (no duplication)
 - [ ] Structural changes match an approved Structure Delta
 - [ ] Inline documentation added for new/changed code
 - [ ] External docs (`STRUCTURE.md`/`README.md`/`TECH_STACK.md`/`COMMANDS.md`) updated or bounce issued
@@ -100,7 +100,7 @@ Final gate before merge. Focus on:
 - Boundary violations (imports/placement) or unapproved structure change
 - New dependency without justification or TECH_STACK update
 - Missing inline documentation or unsynced external docs when required
-- No evidence tests would fail without the change
+- No demonstration tests would fail without the change
 - Secrets or unsafe patterns committed
 
 ---

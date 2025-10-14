@@ -99,6 +99,7 @@ Planner → Architect
 [Planner] Feature kickoff ready: docs/features/F###-<feature>/tasks.md
 Initial tasks and scenarios listed. Open questions included in tasks.
 Please map reuse targets & files to touch; call out flags/env/deps.
+Author ACs and Test Plan in design.md for the active task.
 ```
 
 Planner → Architect (Task breakdown)
@@ -145,7 +146,7 @@ Create per task: `docs/features/F###-<feature>/tasks/T##-<task>/`
 Contains:
 
 - `plan.md` — task-specific plan (template below)
-- `evidence.md` — reuse map and files to touch
+- `design.md` — architect’s design (touchpoints, ACs, Test Plan)
 - `coding-notes.md` — coder’s plan, commands, and notes
 
 ## Task Plan — Template
@@ -163,10 +164,7 @@ Scenarios: S1,S2
 
 <what this task achieves in 2–4 lines>
 
-## Acceptance Criteria
 
-- [ ] AC1 … (maps to S1)
-- [ ] AC2 … (maps to S2)
 
 ## Steps
 

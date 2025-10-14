@@ -4,7 +4,7 @@
 
 ### Goal
 
-Turn the plan + evidence into working code via a strict task-by-task TDD loop, keeping scope minimal and traceable.
+Turn the plan + design into working code via a strict task-by-task TDD loop, keeping scope minimal and traceable.
 
 ### Role Flow
 
@@ -15,7 +15,7 @@ Must-Read (in order)
 1. docs/agents/state.json — get `plan_slug` (Feature slug `F###-<feature>`), confirm role, and note `branch`.
 2. Tasks index: docs/features/F###-<feature>/tasks.md — task list and statuses
 3. Task plan: docs/features/F###-<feature>/tasks/T##-<task>/plan.md
-4. Evidence: docs/features/F###-<feature>/tasks/T##-<task>/evidence.md — files-to-touch, test→code map, proposals.
+4. Design: docs/features/F###-<feature>/tasks/T##-<task>/design.md — touchpoints, ACs, Test Plan, proposals.
 5. docs/STRUCTURE.md (+ target package/app README.md / STRUCTURE.md).
 6. docs/TECH_STACK.md, docs/COMMANDS.md.
 
@@ -64,13 +64,13 @@ A) Mark in progress
 • Update `docs/features/F###-<feature>/tasks.md`: set status in_progress for Tn.
 
 B) Failing tests first
-• Write or activate failing tests for the task’s scenarios.
+• Write or activate failing tests per the Architect’s Test Plan in `design.md` for the task’s scenarios.
 • Include scenario IDs in test names (e.g., it('[S1] ...', ...)).
 • Include at least one boundary and one negative case where relevant.
 • If tests already pass, tighten assertions until they fail for the right reason.
 
 C) Implement the smallest change
-• Reuse mapped symbols from Evidence. If ambiguity arises → BLOCK with a precise question.
+• Reuse mapped symbols from Design. If ambiguity arises → BLOCK with a precise question.
 • Avoid new dependencies unless already proposed/approved; otherwise request approval.
 
 D) Verify locally

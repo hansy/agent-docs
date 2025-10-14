@@ -13,8 +13,8 @@ Turn the task plan into a concrete internal codebase map: what to reuse, where t
 
 ## Outputs (artifacts)
 
-- `docs/features/F###-<feature>/tasks/T##-<task>/evidence.md` (template below)
-- (Optional) Structure Delta Proposal section inside `evidence.md`
+- `docs/features/F###-<feature>/tasks/T##-<task>/design.md` (template below; source of truth for ACs & Test Plan)
+- (Optional) Structure Delta Proposal section inside `design.md`
 - `docs/agents/state.json` updated (handoff to Coder, or to Reviewer if proposing)
 
 ## Do
@@ -23,7 +23,7 @@ Turn the task plan into a concrete internal codebase map: what to reuse, where t
 - Surface reuse: functions/classes/types with file:line hints
 - Data touchpoints: tables/models/migrations; notable RLS/policies
 - Config/flags/env: flags, env vars, rate limits, configs (internal usage only)
-- Acceptance Criteria/tests: propose additions or edits in the active task plan (`docs/features/F###-<feature>/tasks/T##-<task>/plan.md`) when gaps exist; get explicit human approval before saving. Call out accepted changes (e.g., “AC3 added for timeout — approved by <name>”) in your handoff note.
+- Author Acceptance Criteria and the Test Plan in `design.md`; get explicit human approval before saving. Call out accepted changes (e.g., “AC3 added for timeout — approved by <name>”) in your handoff note.
 - `feat/F###-<feature>--T##-<task>` (from `feat/F###-<feature>`). Work on that branch.
 - When approved by human, update `docs/agents/state.json` first, then commit.
 
@@ -41,17 +41,17 @@ Turn the task plan into a concrete internal codebase map: what to reuse, where t
 
 ---
 
-## Evidence Report — Template
+## Design — Template
 
-Create/overwrite: `docs/features/F###-<feature>/tasks/T##-<task>/evidence.md`
+Create/overwrite: `docs/features/F###-<feature>/tasks/T##-<task>/design.md`
 Use the template below.
 
 ```md
-# Evidence — <Feature Title> (slug: <slug>)
+# Design — <Feature Title> (slug: <slug>)
 
 Date: YYYY-MM-DD • Architect
 
-### 1) Repo landmarks (where to look, why)
+### 1) Overview & Repo landmarks
 
 - apps/web/app/(route) — serves <flow>; likely entry for S1
 - packages/core/payout.ts — pure domain; candidate: computePayout()
@@ -100,13 +100,23 @@ Date: YYYY-MM-DD • Architect
 - packages/core/payout.ts — reuse only
 - **tests**/api/settle.test.ts — Tester places failing tests here
 
-### 10) Test → Code map
+### 10) Acceptance Criteria & Test Plan
 
-- S1 — route 200; asserts amount; calls computePayout
-- S2 — 400 via validateAmount
-- S3 — unauthorized via session guard
+Acceptance Criteria
 
-### 11) Open questions
+- [ ] AC1 — … (maps to S1)
+- [ ] AC2 — … (maps to S2)
+
+Test Plan
+
+- S1 — type: unit|integration|e2e; location: tests/...; fixtures/mocks: ...; fail‑first proof
+- S2 — type: ...
+
+### 11) Non-functional requirements
+
+- Performance, security, a11y, observability/telemetry
+
+### 12) Open questions
 
 - Should settlement write be idempotent (user_id+event_id)?
 - Confirm max stake applies.
@@ -143,17 +153,18 @@ Impact & risk:
 Architect → Coder
 
 ```
-[Architect] Evidence ready: docs/features/F###-<feature>/tasks/T##-<task>/evidence.md
+[Architect] Design ready: docs/features/F###-<feature>/tasks/T##-<task>/design.md
 Reuse: packages/core/foo.ts#bar(), packages/api/validate.ts#...
 Files to touch (expected): …
+ACs + Test Plan included (S1,S2, boundary/negative noted).
 No new deps/structure proposed.
-Start with T01 (S1,S2). Boundaries per docs/STRUCTURE.md.
+Boundaries per docs/STRUCTURE.md.
 ```
 
 Architect → Reviewer (proposal)
 
 ```
-[Architect] PROPOSAL: Structure Delta (see Evidence §Proposal)
+[Architect] PROPOSAL: Structure Delta (see Design §Proposal)
 Reason: <2–3 lines>. Update docs/STRUCTURE.md if approved.
 Please approve before coding.
 ```
