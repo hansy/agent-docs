@@ -6,14 +6,16 @@ Turn the non-technical plan into a concrete evidence map: what to reuse, where t
 
 ## Must-Read (in order)
 
-2. docs/features/F###-<feature>/plan.md
-3. docs/STRUCTURE.md + per-package STRUCTURE.md
-4. docs/TECH_STACK.md, docs/COMMANDS.md
-5. Workspace manifests: root & packages (package.json), pnpm-workspace.yaml, tsconfig\*, turbo.json, env examples, migrations/
+2. Tasks index: docs/features/F###-<feature>/tasks.md
+3. Task plan (active): docs/features/F###-<feature>/tasks/T##-<task>/plan.md
+4. docs/STRUCTURE.md + per-package STRUCTURE.md
+5. docs/TECH_STACK.md, docs/COMMANDS.md
+6. Workspace manifests: root & packages (package.json), pnpm-workspace.yaml, tsconfig\*, turbo.json, env examples, migrations/
 
 ## Outputs (artifacts)
 
-- `docs/features/F###-<feature>/evidence.md` (template below; one file with sections per task T##)
+- `docs/features/F###-<feature>/tasks/T##-<task>/evidence.md` (template below)
+- (Optional) `docs/features/F###-<feature>/tasks/T##-<task>/research.md` for deeper notes/links
 - (Optional) Structure Delta Proposal section inside `evidence.md`
 - `docs/agents/state.json` updated (handoff to Coder, or to Reviewer if proposing)
 
@@ -24,7 +26,7 @@ Turn the non-technical plan into a concrete evidence map: what to reuse, where t
 - Data touchpoints: tables/models/migrations; notable RLS/policies
 - Config/flags/env: flags, env vars, rate limits, configs
 - Third-party: what exists and whether it fits (MUST REUSE / SHOULD CONSIDER / AVOID)
-- Acceptance Criteria/tests: propose additions or edits in `docs/features/F###-<feature>/plan.md` when gaps exist; get explicit human approval before saving. Call out accepted changes (e.g., “AC3 added for timeout — approved by <name>”) in your handoff note.
+- Acceptance Criteria/tests: propose additions or edits in the active task plan (`docs/features/F###-<feature>/tasks/T##-<task>/plan.md`) when gaps exist; get explicit human approval before saving. Call out accepted changes (e.g., “AC3 added for timeout — approved by <name>”) in your handoff note.
 - Use the Planner’s branch for all commits. When Planner selects a task, they create a task branch:
   - `feat/F###-<feature>--T##-<task>` (from `feat/F###-<feature>`). Work on that branch.
 - When approved by human, update `docs/agents/state.json` first, then commit.
@@ -45,7 +47,7 @@ Turn the non-technical plan into a concrete evidence map: what to reuse, where t
 
 ## Evidence Report — Template
 
-Create/overwrite: `docs/features/F###-<feature>/evidence.md`
+Create/overwrite: `docs/features/F###-<feature>/tasks/T##-<task>/evidence.md`
 Use the template below.
 
 ```md
@@ -138,12 +140,30 @@ Impact & risk:
 - Ownership: <team/area> • Rollback: delete module, revert docs
 ```
 
+## Research Notes — Template (optional)
+
+Path: `docs/features/F###-<feature>/tasks/T##-<task>/research.md`
+
+```
+# Research Notes — <T## <task title>>
+
+Date: YYYY-MM-DD • Researcher
+
+## Findings
+
+- F1 …
+
+## Links / References
+
+- L1 …
+```
+
 ## Handoff msg templates (≤12 lines)
 
 Researcher → Coder
 
 ```
-[Researcher] Evidence ready: docs/features/F###-<feature>/evidence.md
+[Researcher] Evidence ready: docs/features/F###-<feature>/tasks/T##-<task>/evidence.md
 Reuse: packages/core/foo.ts#bar(), packages/api/validate.ts#...
 Files to touch (expected): …
 No new deps/structure proposed.

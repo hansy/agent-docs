@@ -4,8 +4,8 @@
 
 - Feature IDs: `F###` (e.g., F001).
 - Slugs: kebab‑case. Feature slug: `F###-<feature>`.
-- Branches: default `feat/F###-<feature>`; task branches live under the feature branch when the Planner defines them in the plan.
-- Feature docs: `docs/features/F###-<feature>/{plan.md,evidence.md,coding-notes.md,review.md}` hold task lists and execution details.
+- Branches: default `feat/F###-<feature>`; task branches live under the feature branch when the Planner defines them in `tasks.md`.
+- Feature docs: `docs/features/F###-<feature>/tasks.md` (task list); per‑task docs live under `tasks/T##-<task>/{plan.md,evidence.md,coding-notes.md,review.md}`.
 - Status values: planned | in_progress | blocked | handoff | done.
 
 --
@@ -28,4 +28,4 @@ v1 candidates
 Notes
 
 - Check the box at the feature line when the Reviewer marks it done.
-- Keep this file feature-level; find task breakdowns in `docs/features/F###-<feature>/plan.md`.
+- Keep this file feature-level; find task breakdowns in `docs/features/F###-<feature>/tasks.md`.

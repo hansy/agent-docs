@@ -45,8 +45,9 @@ Purpose: Single source of truth for who acts next, lifecycle state, and the shor
 - On start: keep current_role as yourself; set state = in_progress.
 - Planner owns branching:
   - Feature branch: `(feat|chore|etc)/F###-<feature>` created at kickoff from default.
-  - Task branch (optional/risky work): `feat/F###-<feature>--T##-<task>` created from the feature branch.
+  - Task branch: `feat/F###-<feature>--T##-<task>` created from the feature branch.
   - Git note: avoid nested refs that conflict with the feature branch path.
 - On handoff: set current_role = <next role>, state = handoff, write msg.
 - On blocked: set current_role = <role that will unblock you>; set state = blocked; write precise questions in msg.
-- On approval (Reviewer): set state = done; set current_role = PLANNER. Planner verifies every Implementation Task in `docs/features/F###-<feature>/plan.md` is completed, merges branches, updates ROADMAP, and resets `state.json` to the defaults above.
+- On task approval (Reviewer): Reviewer merges the task branch into the feature branch, then set `current_role = PLANNER`, `state = handoff`; include `T##` and short notes in `msg`.
+- On feature approval (all tasks done): Reviewer merges the feature branch into default, updates `docs/ROADMAP.md`, and resets `docs/agents/state.json` to the defaults below. After reset, `current_role = PLANNER` and `state = in_progress`.

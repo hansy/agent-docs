@@ -13,10 +13,11 @@ Planner → Researcher → Coder → Reviewer
 Must-Read (in order)
 
 1. docs/agents/state.json — get `plan_slug` (Feature slug `F###-<feature>`), confirm role, and note `branch`.
-2. Feature plan: docs/features/F###-<feature>/plan.md — Implementation Tasks (T##) live here.
-3. Evidence: docs/features/F###-<feature>/evidence.md — files-to-touch, test→code map, proposals.
-4. docs/STRUCTURE.md (+ target package/app README.md / STRUCTURE.md).
-5. docs/TECH_STACK.md, docs/COMMANDS.md.
+2. Tasks index: docs/features/F###-<feature>/tasks.md — task list and statuses
+3. Task plan: docs/features/F###-<feature>/tasks/T##-<task>/plan.md
+4. Evidence: docs/features/F###-<feature>/tasks/T##-<task>/evidence.md — files-to-touch, test→code map, proposals.
+5. docs/STRUCTURE.md (+ target package/app README.md / STRUCTURE.md).
+6. docs/TECH_STACK.md, docs/COMMANDS.md.
 
 ### Hard Guardrails
 
@@ -38,20 +39,11 @@ Repo first-invoke (once per repo)
   - `docs/README.md`
     (Keep it lightweight; capture gaps in coding-notes if deferring details.)
 
-1. Implementation Tasks — ensure the plan has a checklist:
-
-```md
-## Implementation Tasks
-
-- [ ] T01: <action> (scenarios: S1, S2) — status: todo
-- [ ] T02: <action> (scenarios: S3) — status: todo
-```
-
-Allowed statuses: todo | in_progress | blocked | done.
+1. Tasks index — ensure `docs/features/F###-<feature>/tasks.md` exists and lists tasks with statuses (todo | in_progress | blocked | done) and scenario IDs.
 
 2. Use the Planner’s branch (do not create a new one)
    • Planner creates a task branch for the active task: `feat/F###-<feature>--T##-<task>`. Commit to that branch.
-   • Planner performs merges (task → feature; feature → default). Do not merge.
+   • Reviewer performs merges (task → feature; feature → default when all tasks done). Do not merge.
 3. Verify local commands (by reference)
    • You can run: dev, test, lint, typecheck (see `docs/COMMANDS.md`).
 4. Confirm import rules
@@ -61,16 +53,16 @@ Allowed statuses: todo | in_progress | blocked | done.
 
 ## The Task Loop (repeat for each task, in order)
 
-For each unchecked task in Implementation Tasks:
+For each unchecked task in `docs/features/F###-<feature>/tasks.md`:
 
 0. Plan
    • Draft a concise step-by-step implementation plan (tests, code changes, files) tailored to the active task.
    • Share the plan with the human (see AGENTS.md conversation-first policy).
-   • Record the final plan under `## Task Plan (approved)` in `docs/features/F###-<feature>/coding-notes.md`.
+   • Record the final plan under `## Task Plan (approved)` in `docs/features/F###-<feature>/tasks/T##-<task>/coding-notes.md`.
    • If scope changes mid-task, pause, update the plan, and confirm changes with the human before resuming (per AGENTS.md).
 
 A) Mark in progress
-• Edit the plan: set status: in_progress for Tn.
+• Update `docs/features/F###-<feature>/tasks.md`: set status in_progress for Tn.
 
 B) Failing tests first
 • Write or activate failing tests for the task’s scenarios.
@@ -87,8 +79,8 @@ D) Verify locally
 • Tests MUST pass before every commit. Fix until green; do not commit red.
 • Prefer running the narrowest relevant tests first, then the package suite before committing.
 
-E) Update the plan
-• Check off Tn; set status: done.
+E) Update tasks
+• In `tasks.md`, check off Tn; set status: done.
 • Add a one-liner: what changed & where (paths only, no diffs).
 
 F) Commit (after each task, small, conventional)
@@ -110,14 +102,14 @@ If blocked (unclear scenario, needs new structure/dep, boundary conflict):
 
 ## Handoff Kit (required outputs)
 
-1. Plan updated — `docs/features/F###-<feature>/plan.md`
-   • ## Implementation Tasks reflects final statuses; each task has a one-line note of changes/paths.
-   • Note any residual risks or follow-ups.
+1. Tasks updated — `docs/features/F###-<feature>/tasks.md`
+   • Status for T## is done; one-line note of changes/paths.
+   • Note any residual risks or follow-ups in coding notes.
 
 2. Commands used
    • List exact commands (from `docs/COMMANDS.md`).
 
-3. Coding notes — `docs/features/F###-<feature>/coding-notes.md`
+3. Coding notes — `docs/features/F###-<feature>/tasks/T##-<task>/coding-notes.md`
    • Use the template below and capture the approved plan before coding.
    • Summary, lessons, blockers, improvements.
 
@@ -151,12 +143,12 @@ Coder → Reviewer
 ```
 [Coder] <git branch> ready.
 Tasks done: T01,T02. Tests: S1–S3 green.
-Doc updates needed: <refs or “none”>. See plan task notes for changed paths.
+Doc updates needed: <refs or “none”>. See tasks.md and task coding-notes for changed paths.
 ```
 
 ## Coding Notes — Template
 
-Path: `docs/features/F###-<feature>/coding-notes.md`
+Path: `docs/features/F###-<feature>/tasks/T##-<task>/coding-notes.md`
 
 ```
 # Coding Notes — <F###-feature>

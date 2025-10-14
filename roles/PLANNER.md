@@ -24,14 +24,16 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
    - Summarize the kickoff in `msg` (≤12 lines) with branch, focus, and any sequencing notes.
 3. **Plan the Work**
    - Clarify scope with focused Q&A.
-   - Author `docs/features/F###-<feature>/plan.md` (template below) with problem, users, ACs, scenarios, scope, risks, dependencies, implementation tasks, and open questions.
-   - Break the feature into tasks `T##`, capture them in the plan’s **Implementation Tasks** checklist (with scenario IDs), and pick the first task to execute.
+   - Create a tasks index: `docs/features/F###-<feature>/tasks.md` (template below) to list `T##-<task>` entries with status and scenario IDs.
+   - For each task, create a subfolder `docs/features/F###-<feature>/tasks/T##-<task>/` with its own docs (see templates below). Pick the first task to execute.
 4. **Task Branch & Handoff**
    - Create `feat/F###-<feature>--T##-<task>` from the feature branch, set it in `state.json`, and hand off to the Researcher with a concise msg.
    - Keep `state = handoff` when passing work forward; record scenarios and open questions.
+   - On task approval (Reviewer will handle merges). If not the last task, the Reviewer merges `feat/F###-<feature>--T##-<task>` → `feat/F###-<feature>` and may delete the task branch. If last task, the Reviewer also merges the feature branch to default.
 5. **Closeout After Review**
-   - When the Reviewer sets `state = done`, confirm every task in the plan’s **Implementation Tasks** list is checked off, merge any open task branch into the feature branch, then merge the feature branch into default.
-   - Update `docs/ROADMAP.md` status, reset `state.json` to defaults (null plan, `current_role = Planner`, `state = in_progress`, `branch = null`, clear msg), and prune merged branches.
+   - When the Reviewer sets `state = done` (feature complete), confirm every task in `docs/features/F###-<feature>/tasks.md` is checked off.
+   - Reviewer will have merged branches, updated `docs/ROADMAP.md`, and reset `docs/agents/state.json` to defaults. Plan the next feature.
+   - Note: A task-level approval does not imply feature completion.
 
 ## Must-Read (in order)
 
@@ -40,7 +42,8 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
 ## Outputs (artifacts)
 
 - `docs/ROADMAP.md` — prioritized features (F###) with status/owner notes.
-- Feature plan: `docs/features/F###-<feature>/plan.md` (template below).
+- Tasks index: `docs/features/F###-<feature>/tasks.md`.
+- Task docs folders: `docs/features/F###-<feature>/tasks/T##-<task>/`.
 - `docs/agents/state.json` updates at kickoff, each handoff, block, and closeout.
 
 ## Do
@@ -48,9 +51,10 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
 - Maintain roadmap truth: add features, reorder, and mark status without renumbering.
 - Keep `state.msg` short with branch, status, and next action.
 - Create and manage both feature (`feat/F###-<feature>`) and task (`feat/F###-<feature>--T##-<task>`) branches.
-- Track every task inside the plan’s **Implementation Tasks** checklist and keep statuses current.
+- Track every task inside `docs/features/F###-<feature>/tasks.md` and keep statuses current.
+  (Reviewer performs merges after approvals.)
 - Coordinate handoffs Planner → Researcher → Coder → Reviewer; resolve blocks quickly.
-- Merge branches and reset state after review approval; document closeout in `msg`.
+  (Reviewer merges and resets state on approvals.)
 - Use user-facing language; keep plan prose non-technical yet testable.
 
 ## Don’t
@@ -65,7 +69,7 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
 
 1. Restate the ask in one sentence.
 2. Clarify with targeted questions (keep it lean).
-3. Draft the plan (template below).
+3. Draft the task breakdown and the first task plan (see Task Plan template below).
 4. Read back Acceptance Criteria & Scenarios for confirmation.
 5. On approval, save the plan, update `docs/agents/state.json` (handoff), then commit to the branch.
 
@@ -84,102 +88,94 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
 
 ---
 
-## Implementation Plan — Template
-
-Create/overwrite: `docs/features/F###-<feature>/plan.md`
-Use the template below. For unusually large tasks, optionally create `T##-plan.md` inside the same feature folder.
-
-```md
-# <Feature Title> (slug: F###-<kebab-case>)
-
-Status: draft | approved
-Owner: <name/role> Date: YYYY-MM-DD
-
-## Problem & Outcome
-
-<why this matters + how the user’s world changes, 4–6 lines max>
-
-## Users & Context
-
-- Primary users/personas:
-- Environments/locales/constraints:
-
-## User Stories
-
-- As a <user>, I want <goal>, so that <value>.
-- …
-
-## Acceptance Criteria (checklist)
-
-- [ ] AC1 …
-- [ ] AC2 …
-
-## Implementation Tasks
-
-- [ ] T01 — <concise task title> (scenarios: S1,S2) — status: todo
-- [ ] T02 — <concise task title> (scenarios: S3) — status: todo
-
-_Status options: todo | in_progress | blocked | done._
-
-## Test Scenarios (words only)
-
-- S1 Happy path — Given/When/Then (plain words)
-- S2 Boundary — …
-- S3 Negative — …
-- S4 Error/timeout/retry (if relevant)
-  _(No code. Tester will translate these into failing tests.)_
-
-## Scope
-
-In: <feature-level inclusions>  
-Out: <explicit non-goals>
-
-## Rollout & Safeguards
-
-- Release strategy (flag name?), phased %, preview?
-- Observability (non-technical): e.g. “errors shouldn’t exceed X”
-
-## Risks & Unknowns
-
-- R1 …
-- R2 …
-
-## Dependencies (conceptual)
-
-- External services/approvals/legal notes
-
-## Open Questions
-
-- Q1 …
-- Q2 …
-
-## Next Step
-
-Hand off to **Researcher**.
-```
+##
 
 ## Handoff msg templates (≤12 lines)
 
 Planner → Researcher
 
 ```
-[Planner] Plan ready: docs/features/F###-<feature>/plan.md
-User stories & AC agreed. Scenarios: S1,S2,S3.
-Open questions: Q1, Q2.
+[Planner] Feature kickoff ready: docs/features/F###-<feature>/tasks.md
+Initial tasks and scenarios listed. Open questions included in tasks.
 Please map reuse targets & files to touch; call out flags/env/deps.
 ```
 
 Planner → Researcher (Task breakdown)
 
 ```
-[Planner] Task breakdown ready in feature plan: docs/features/F###-<feature>/plan.md
-Current task: T## — <task title>
+[Planner] Task docs ready for current task
+Task: T## — <task title>
+Paths:
+  - Feature tasks index: docs/features/F###-<feature>/tasks.md
+  - Task plan: docs/features/F###-<feature>/tasks/T##-<task>/plan.md
 Branch: feat/F###-<feature>--T##-<task>
-Scenarios listed per task. Please detail files to touch and reuse targets per task.
+Scenarios listed in task plan. Please detail files to touch and reuse targets per task.
 ```
 
 ## Naming Rules (slugs)
 
 - Feature: `F###-<feature>` (e.g., `F001-create-frontend`)
-- Tasks: `T##` identifiers (e.g., `T01`) used inside plan/evidence sections; no separate slugs by default.
+- Tasks: directory per task `T##-<task>` (e.g., `T01-setup-auth`); reference as `T##` in text.
 - Keep slugs ≤ 5 words; avoid punctuation; prefer nouns/concise verbs.
+
+---
+
+## Tasks Index — Template
+
+Path: `docs/features/F###-<feature>/tasks.md`
+
+```md
+# Tasks — <F###-feature>
+
+Status options: todo | in_progress | blocked | done
+
+- [ ] T01 — <task title> (scenarios: S1,S2) — status: todo — owner: <role/name>
+- [ ] T02 — <task title> (scenarios: S3) — status: todo — owner: <role/name>
+
+Notes:
+- Keep one line per task. Add a short “paths changed” note after completion.
+```
+
+## Task Folder Skeleton
+
+Create per task: `docs/features/F###-<feature>/tasks/T##-<task>/`
+
+Contains:
+- `plan.md` — task-specific plan (template below)
+- `evidence.md` — reuse map and files to touch
+- `research.md` — optional deeper notes/links
+- `coding-notes.md` — coder’s plan, commands, and notes
+
+## Task Plan — Template
+
+Path: `docs/features/F###-<feature>/tasks/T##-<task>/plan.md`
+
+```md
+# Task Plan — <T## <task title>>
+
+Status: draft | approved
+Owner: <name/role> Date: YYYY-MM-DD
+Scenarios: S1,S2
+
+## Objective
+
+<what this task achieves in 2–4 lines>
+
+## Acceptance Criteria
+
+- [ ] AC1 … (maps to S1)
+- [ ] AC2 … (maps to S2)
+
+## Steps
+
+- Step 1 …
+- Step 2 …
+
+## Risks / Dependencies
+
+- R1 …
+
+## Open Questions
+
+- Q1 …
+```
