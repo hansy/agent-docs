@@ -28,8 +28,8 @@ Final gate before merge. Focus on:
   - Task approved (last task): first merge task branch → feature; then merge `feat/F###-<feature>` → default (e.g., `main`); delete merged branches if clean.
 - ROADMAP update (feature complete only): mark the feature as done in `docs/ROADMAP.md`.
 - State update in `docs/agents/state.json`:
-  - Task approved: `current_role=PLANNER`, `state=handoff`, `msg` references `T##` and paths
-  - Feature complete (all tasks done): reset to defaults (see `STATE.md#Defaults`).
+  - Task approved (more tasks remain): select next task by number order, bootstrap next task (branch + folder), then set `current_role=ARCHITECT`, `state=handoff`; include next `T##` and paths in `msg`.
+  - Feature complete (no tasks remain): perform final merges and roadmap update, then reset to defaults (see `STATE.md#Defaults`, which sets `current_role=PLANNER`).
 
 ---
 
@@ -56,15 +56,15 @@ Final gate before merge. Focus on:
    - Coverage includes **happy, boundary, and negative** cases where applicable.
    - Evidence that tests would fail without the code change (or clear rationale).
 5. **Decision** — Approve or request changes.
-   - Task-level approval: update artifacts, perform merge(s) to feature, set handoff to Planner, then commit.
-   - Feature-level approval (all tasks done): update artifacts, perform final merges to default, update `docs/ROADMAP.md`, reset `docs/agents/state.json` to defaults, then commit.
+   - Task-level approval (more tasks remain): update artifacts and merge task → feature; select the next task by numeric order, create `docs/features/F###-<feature>/tasks/T##-<task>/` (if missing) and branch `feat/F###-<feature>--T##-<task>`, then hand off to Architect (state=handoff) and commit.
+   - Feature-level approval (no tasks remain): update artifacts, perform final merges to default, update `docs/ROADMAP.md`, reset `docs/agents/state.json` to defaults (current_role=PLANNER), then commit.
 
 ---
 
 ## Task vs Feature Approval
 
-- Approving an individual task (T##) marks that task done in `tasks.md`, you merge the task branch into the feature branch, then hand off to the Planner (state=handoff) for next-task coordination.
-- Approving the feature requires all tasks in `tasks.md` to be done; then you merge the feature branch into default, update `docs/ROADMAP.md`, and reset `docs/agents/state.json` to defaults.
+- Approving an individual task (T##) marks that task done in `tasks.md`, you merge the task branch into the feature branch, then select the next task by number, bootstrap its branch/folder, and hand off to the Architect (state=handoff).
+- Approving the feature requires all tasks in `tasks.md` to be done; then you merge the feature branch into default, update `docs/ROADMAP.md`, and reset `docs/agents/state.json` to defaults (next role is Planner).
 
 ---
 
@@ -128,13 +128,16 @@ Reviewer → Coder (changes)
 Reassigning to Coder.
 ```
 
-Reviewer → Planner (task approved)
+Reviewer → Architect (next task)
 
 ```
-[Reviewer] Task approved: T## — <task title>.
-Branch merged: feat/F###-<feature>--T##-<task> → feat/F###-<feature> (task branch removed).
-ACs covered (Sx…). Docs synced as noted. Marked T## done in tasks.md.
-State: handoff → Planner (ready to queue next task).
+[Reviewer] Next task ready: T## — <task title> (by number order).
+Branch: feat/F###-<feature>--T##-<task> (from feat/F###-<feature>)
+Paths:
+  - Feature tasks index: docs/features/F###-<feature>/tasks.md
+  - Task plan: docs/features/F###-<feature>/tasks/T##-<task>/plan.md
+State: handoff → Architect.
+Notes: prior task merged; ACs covered per review.
 ```
 
 Reviewer → (feature done)

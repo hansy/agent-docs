@@ -41,9 +41,8 @@ Repo first-invoke (once per repo)
 
 1. Tasks index — ensure `docs/features/F###-<feature>/tasks.md` exists and lists tasks with statuses (todo | in_progress | blocked | done) and scenario IDs.
 
-2. Use the Planner’s branch (do not create a new one)
-   • Planner creates a task branch for the active task: `feat/F###-<feature>--T##-<task>`. Commit to that branch.
-   • Reviewer performs merges (task → feature; feature → default when all tasks done). Do not merge.
+2. Use the active task branch (`feat/F###-<feature>--T##-<task>`).
+
 3. Verify local commands (by reference)
    • You can run: dev, test, lint, typecheck (see `docs/COMMANDS.md`).
 4. Confirm import rules

@@ -24,8 +24,7 @@ Turn the task plan into a concrete internal codebase map: what to reuse, where t
 - Data touchpoints: tables/models/migrations; notable RLS/policies
 - Config/flags/env: flags, env vars, rate limits, configs (internal usage only)
 - Acceptance Criteria/tests: propose additions or edits in the active task plan (`docs/features/F###-<feature>/tasks/T##-<task>/plan.md`) when gaps exist; get explicit human approval before saving. Call out accepted changes (e.g., “AC3 added for timeout — approved by <name>”) in your handoff note.
-- Use the Planner’s branch for all commits. When Planner selects a task, they create a task branch:
-  - `feat/F###-<feature>--T##-<task>` (from `feat/F###-<feature>`). Work on that branch.
+- `feat/F###-<feature>--T##-<task>` (from `feat/F###-<feature>`). Work on that branch.
 - When approved by human, update `docs/agents/state.json` first, then commit.
 
 ## Don’t

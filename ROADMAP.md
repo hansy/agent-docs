@@ -4,7 +4,7 @@
 
 - Feature IDs: `F###` (e.g., F001).
 - Slugs: kebab‑case. Feature slug: `F###-<feature>`.
-- Branches: default `feat/F###-<feature>`; task branches live under the feature branch when the Planner defines them in `tasks.md`.
+- Branches: default `feat/F###-<feature>`; task branches live under the feature branch as defined in `tasks.md`.
 - Feature docs: `docs/features/F###-<feature>/tasks.md` (task list); per‑task docs live under `tasks/T##-<task>/{plan.md,evidence.md,coding-notes.md,review.md}`.
 - Status values: planned | in_progress | blocked | handoff | done.
 

@@ -24,11 +24,13 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
    - Summarize the kickoff in `msg` (≤12 lines) with branch, focus, and any sequencing notes.
 3. **Plan the Work**
    - Clarify scope with focused Q&A.
-   - Create a tasks index: `docs/features/F###-<feature>/tasks.md` (template below) to list `T##-<task>` entries with status and scenario IDs.
-   - For each task, create a subfolder `docs/features/F###-<feature>/tasks/T##-<task>/` with its own docs (see templates below). Pick the first task to execute.
+   - Create a tasks index: `docs/features/F###-<feature>/tasks.md` (template below) to list high-level `T##-<task>` entries with status and scenario IDs.
+   - Determine if outside research is needed; if so, create `docs/features/F###-<feature>/research.md` (brief, outcome-focused) with the human.
+   - Create only the first task folder now: `docs/features/F###-<feature>/tasks/T01-<task>/` with its docs (see templates below). Subsequent task folders are bootstrapped by the Reviewer after approvals.
 4. **Task Branch & Handoff**
-   - Create `feat/F###-<feature>--T##-<task>` from the feature branch, set it in `state.json`, and hand off to the Architect with a concise msg.
+   - Create the first task branch `feat/F###-<feature>--T01-<task>` from the feature branch, set it in `state.json`, and hand off to the Architect with a concise msg.
    - Keep `state = handoff` when passing work forward; record scenarios and open questions.
+   - Subsequent task selection/bootstrapping (branch + folder) is owned by the Reviewer after each approval.
    - On task approval (Reviewer will handle merges). If not the last task, the Reviewer merges `feat/F###-<feature>--T##-<task>` → `feat/F###-<feature>` and may delete the task branch. If last task, the Reviewer also merges the feature branch to default.
 5. **Closeout After Review**
    - When the Reviewer sets `state = done` (feature complete), confirm every task in `docs/features/F###-<feature>/tasks.md` is checked off.
@@ -42,19 +44,18 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
 ## Outputs (artifacts)
 
 - `docs/ROADMAP.md` — prioritized features (F###) with status/owner notes.
+- Feature docs root: `docs/features/F###-<feature>/` (optional: `research.md`).
 - Tasks index: `docs/features/F###-<feature>/tasks.md`.
-- Task docs folders: `docs/features/F###-<feature>/tasks/T##-<task>/`.
 - `docs/agents/state.json` updates at kickoff, each handoff, block, and closeout.
 
 ## Do
 
 - Maintain roadmap truth: add features, reorder, and mark status without renumbering.
 - Keep `state.msg` short with branch, status, and next action.
-- Create and manage both feature (`feat/F###-<feature>`) and task (`feat/F###-<feature>--T##-<task>`) branches.
+- Create the feature branch (`feat/F###-<feature>`) and the first task branch only (`feat/F###-<feature>--T01-<task>`).
 - Track every task inside `docs/features/F###-<feature>/tasks.md` and keep statuses current.
   (Reviewer performs merges after approvals.)
-- Coordinate handoffs Planner → Architect → Coder → Reviewer; resolve blocks quickly.
-  (Reviewer merges and resets state on approvals.)
+- Coordinate handoffs for kickoff (Planner → Architect).
 - Use user-facing language; keep plan prose non-technical yet testable.
 
 ## Don’t
@@ -133,6 +134,7 @@ Status options: todo | in_progress | blocked | done
 - [ ] T02 — <task title> (scenarios: S3) — status: todo — owner: <role/name>
 
 Notes:
+
 - Keep one line per task. Add a short “paths changed” note after completion.
 ```
 
@@ -141,6 +143,7 @@ Notes:
 Create per task: `docs/features/F###-<feature>/tasks/T##-<task>/`
 
 Contains:
+
 - `plan.md` — task-specific plan (template below)
 - `evidence.md` — reuse map and files to touch
 - `coding-notes.md` — coder’s plan, commands, and notes
