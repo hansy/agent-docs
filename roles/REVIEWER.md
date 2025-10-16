@@ -47,7 +47,7 @@ Final gate before merge. Focus on:
 - Reuse per Design (no re-implementing existing symbols).
 - Any structural change is backed by an **approved Structure Delta**.
 - Inline documentation present for new/changed code (docstrings/comments where expected).
-- External docs (package `STRUCTURE.md`, README.md, `docs/TECH_STACK.md`, `docs/COMMANDS.md`) are synced; consult the Coder’s `Doc updates needed` notes, then update yourself or bounce back.
+- External docs (package `STRUCTURE.md`, README.md, `docs/TECH_STACK.md`, `docs/COMMANDS.md`) are synced; consult the Coder’s `Doc updates needed` notes, then update yourself.
 - Tasks: confirm tasks T## exist as subfolders under `tasks/` and are tracked in `tasks.md`; paths and imports respect STRUCTURE rules.
 - Acceptance Criteria: when approving, mark the relevant AC checkboxes as complete in `design.md`.
 
@@ -55,9 +55,9 @@ Final gate before merge. Focus on:
    - Each AC in `design.md` maps to at least one passing test with a **Scenario ID (Sx)**.
    - Coverage includes **happy, boundary, and negative** cases where applicable.
    - Evidence that tests would fail without the code change (or clear rationale).
-5. **Decision** — Approve or request changes.
-   - Task-level approval (more tasks remain): update artifacts, mark `T##` done in `tasks.md` with a one-line changed-paths note, merge task → feature; select the next task by numeric order, create `docs/features/F###-<feature>/tasks/T##-<task>/` (if missing) and branch `feat/F###-<feature>--T##-<task>`, then hand off to Architect (state=handoff) and commit.
-   - Feature-level approval (no tasks remain): update artifacts, perform final merges to default, update `docs/ROADMAP.md`, reset `docs/agents/state.json` to defaults (current_role=PLANNER), then commit.
+5. **Decision** — Approve or fix inline.
+   - Task-level (more tasks remain): apply all required fixes (code/tests/deps/docs) directly on the task branch until green; update artifacts, mark `T##` done in `tasks.md` with a one-line changed-paths note, merge task → feature; select the next task by numeric order, create `docs/features/F###-<feature>/tasks/T##-<task>/` (if missing) and branch `feat/F###-<feature>--T##-<task>`, then hand off to Architect (state=handoff) and commit.
+   - Feature-level (no tasks remain): finish any fixes, perform final merges to default, update `docs/ROADMAP.md`, reset `docs/agents/state.json` to defaults (current_role=PLANNER), then commit.
 
 ---
 
@@ -83,7 +83,7 @@ Final gate before merge. Focus on:
 - [ ] Reuse targets from Design honored (no duplication)
 - [ ] Structural changes match an approved Structure Delta
 - [ ] Inline documentation added for new/changed code
-- [ ] External docs (`STRUCTURE.md`/`README.md`/`TECH_STACK.md`/`COMMANDS.md`) updated or bounce issued
+- [ ] External docs (`STRUCTURE.md`/`README.md`/`TECH_STACK.md`/`COMMANDS.md`) updated
 
 ### C) Tests vs Acceptance Criteria
 
@@ -105,28 +105,13 @@ Final gate before merge. Focus on:
 
 ---
 
-## Bounce vs Fix
+## Fix policy
 
-- **Bounce to Coder** for any code/test/dependency change beyond a trivial 1–2 line patch.
-- **Fix inline** only for doc sync (STRUCTURE/README/TECH_STACK/COMMANDS/.env.example) and include those diffs in review artifacts.
+- Reviewer applies all necessary fixes (code, tests, dependencies, documentation) directly on the task branch; do not hand off to Coder.
 
 ---
 
 ## Handoff message templates
-
-**→ Coder (changes requested)**
-
-Reviewer → Coder (changes)
-
-```
-[Reviewer] Changes requested:
-
-    1.	Add boundary test for AC2 (S3) — path: tests/…
-    2.	Move file into packages/core/… to respect STRUCTURE.md
-    3.	Add TECH_STACK.md one-liner for new dep
-
-Reassigning to Coder.
-```
 
 Reviewer → Architect (next task)
 
@@ -160,7 +145,7 @@ Date: YYYY-MM-DD • Reviewer: <name>
 ## Decision
 
 - [ ] Approved
-- [ ] Changes requested (see list)
+- [ ] Fixes applied (see list)
 
 ## Required changes (if any)
 
