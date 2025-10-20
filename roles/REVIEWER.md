@@ -56,7 +56,7 @@ Final gate before merge. Focus on:
    - Coverage includes **happy, boundary, and negative** cases where applicable.
    - Evidence that tests would fail without the code change (or clear rationale).
 5. **Decision** — Approve or fix inline.
-   - Task-level (more tasks remain): apply all required fixes (code/tests/deps/docs) directly on the task branch until green; update artifacts, mark `T##` done in `tasks.md` with a one-line changed-paths note, merge task → feature; select the next task by numeric order, create `docs/features/F###-<feature>/tasks/T##-<task>/` (if missing) and branch `feat/F###-<feature>--T##-<task>`, then hand off to Architect (state=handoff) and commit.
+   - Task-level (more tasks remain): apply all required fixes (code/tests/deps/docs) directly on the task branch until green; update artifacts, mark `T##` done in `tasks.md` with a one-line changed-paths note, merge task → feature; select the next task by numeric order, create `docs/features/F###-<feature>/tasks/T##-<task>/` (if missing) and branch `feat/F###-<feature>--T##-<task>`, check out the new branch, then hand off to Architect (state=handoff) and commit.
    - Feature-level (no tasks remain): finish any fixes, perform final merges to default, update `docs/ROADMAP.md`, reset `docs/agents/state.json` to defaults (current_role=PLANNER), then commit.
 
 ---
