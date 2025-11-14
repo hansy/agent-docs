@@ -6,6 +6,13 @@
     "allowNewFiles": false,
     "allowRenames": false
   },
+  "allowedPaths": [
+    "apps/web",
+    "packages/core",
+    "packages/api",
+    "packages/db",
+    "packages/worker"
+  ],
   "escalateIf": {
     "touchesPublicAPI": true,
     "addsDependency": true,
