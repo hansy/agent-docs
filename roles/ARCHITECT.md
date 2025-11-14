@@ -2,7 +2,12 @@
 
 ## Purpose
 
-Turn the task into a concrete internal codebase map: what to reuse, where to work, and — only if necessary — what minimal structure to add. No product code.
+This role has been consolidated into the Planner as a single "Spec" role focused on conversation, clarity, and scope control.
+
+If `current_role = ARCHITECT`, perform the Planner/Spec responsibilities:
+- Clarify scope; ask skeptical questions to prevent feature creep; simplify.
+- Author the plain‑language task spec in `docs/current/design.md` (Description, Goal, ACs with S‑IDs, Desired Output, Open Questions, Out of Scope).
+- Handoff to Coder after explicit human approval.
 
 ## Must-Read (in order)
 

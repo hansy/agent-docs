@@ -38,6 +38,11 @@ Escalate to Feature Mode when
 
 Assume the `current_role`. Read the relevant role guide found in `docs/agents/roles/<current_role>.md` to understand what your role entails.
 
+Role consolidation: Planner = Spec (Planner + Architect)
+
+- The Architect role is consolidated into the Planner as a single "Spec" role focused on conversation, clarity, and scope control.
+- If `current_role = ARCHITECT`, treat it as `PLANNER` and follow the Planner guide. Produce the task spec in plain language in `docs/current/design.md` (description, goal, ACs with Scenario IDs, desired output, open questions, out of scope).
+
 ## Conversation-First & Review (All Roles)
 
 - Before any changes: discuss the upcoming task in chat, ask clarifying questions, and propose your plan/approach. Wait for explicit user approval before creating/modifying files, branches, or `state.json`.
