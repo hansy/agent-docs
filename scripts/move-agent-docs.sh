@@ -49,6 +49,24 @@ for path in "${AGENTS_DIR}"/*; do
   moved_any=true
 done
 
+# Also move any nested templates under docs/agents/docs/* → docs/* (preserve structure)
+NESTED_DOCS_DIR="${AGENTS_DIR}/docs"
+if [[ -d "${NESTED_DOCS_DIR}" ]]; then
+  while IFS= read -r -d '' entry; do
+    rel="${entry#${NESTED_DOCS_DIR}/}"
+    target="${DOCS_DIR}/${rel}"
+    dest_dir="$(dirname "$target")"
+    if [[ -e "$target" ]]; then
+      echo "skip: ${target} already exists; please reconcile manually" >&2
+      continue
+    fi
+    mkdir -p "$dest_dir"
+    mv "$entry" "$target"
+    echo "moved: docs/${rel} -> ${DOCS_DIR}/"
+    moved_any=true
+  done < <(find "${NESTED_DOCS_DIR}" -mindepth 1 -print0)
+fi
+
 if [[ "$moved_any" == false ]]; then
   echo "Nothing moved; docs may already be in place." >&2
 fi
