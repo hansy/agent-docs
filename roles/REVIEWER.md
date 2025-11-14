@@ -27,7 +27,7 @@ Final gate before merge. Focus on:
   - Per‑task branches: only when risk/parallelization requires; merge task → feature, then proceed as above.
 - ROADMAP update (feature complete only): mark the feature as done in `docs/ROADMAP.md`.
 - State update in `docs/agents/state.json`:
-  - Task approved (more tasks remain): set `current_role=ARCHITECT`, `state=handoff`; in `msg`, include the next task title/slug and instruction to overwrite `docs/current/design.md` for the next task.
+  - Task approved (more tasks remain): set `current_role=PLANNER`, `state=handoff`; in `msg`, include the next task title/slug and instruction to overwrite `docs/current/design.md` for the next task.
   - Feature complete (no tasks remain): perform final merges and roadmap update, delete `docs/current/`, then reset to defaults (see `STATE.md#Defaults`).
 
 ---
@@ -55,14 +55,14 @@ Final gate before merge. Focus on:
    - Coverage includes **happy, boundary, and negative** cases where applicable.
    - Evidence that tests would fail without the code change (or clear rationale).
 5. **Decision** — Approve or fix inline.
-   - Task-level (more tasks remain): apply all required fixes (code/tests/deps/docs) directly on the branch until green; merge into the feature branch; set handoff to Architect and instruct to overwrite `docs/current/design.md` for the next task in `state.msg` (include next task title/slug).
+   - Task-level (more tasks remain): apply all required fixes (code/tests/deps/docs) directly on the branch until green; merge into the feature branch; set handoff to Planner (Spec) and instruct to overwrite `docs/current/design.md` for the next task in `state.msg` (include next task title/slug).
    - Feature-level (no tasks remain): finish any fixes, merge feature branch to default, update `docs/ROADMAP.md`, delete `docs/current/`, reset `docs/agents/state.json` to defaults.
 
 ---
 
 ## Task vs Feature Approval
 
-- Approving an individual task (T##): merge changes as appropriate; set handoff to Architect with the next task title/slug and instruction to overwrite `docs/current/design.md`.
+- Approving an individual task (T##): merge changes as appropriate; set handoff to Planner (Spec) with the next task title/slug and instruction to overwrite `docs/current/design.md`.
 - Approving the feature: merge the feature branch into default, update `docs/ROADMAP.md`, delete `docs/current/`, and reset `docs/agents/state.json` to defaults (next role is Planner).
 
 ---
@@ -112,13 +112,13 @@ Final gate before merge. Focus on:
 
 ## Handoff message templates
 
-Reviewer → Architect (next task)
+Reviewer → Planner/Spec (next task)
 
 ```
 [Reviewer] Next task ready: T## — <task title> (by numeric order)
 Branch: feat/F###-<feature>
 Path: docs/current/design.md (overwrite for next task)
-State: handoff → Architect.
+State: handoff → Planner (Spec).
 Notes: prior task merged; ACs covered per review; include changed paths in commit body.
 ```
 

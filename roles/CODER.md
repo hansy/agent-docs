@@ -8,7 +8,7 @@ Turn the plan + design into working code via a strict task-by-task TDD loop, kee
 
 ### Role Flow
 
-Planner → Architect → Coder → Reviewer
+Planner (Spec) → Coder → Reviewer
 
 Must-Read (in order)
 
@@ -37,7 +37,7 @@ Repo first-invoke (once per repo)
   - `README.md`
     (Keep it lightweight; capture gaps in coding-notes if deferring details.)
 
-1. Current task — ensure `docs/current/design.md` exists (ask Architect to author if missing)
+1. Current task — ensure `docs/current/design.md` exists (ask Spec/Planner to author if missing)
 
 2. Use the feature branch by default. Create a per‑task branch (`feat/F###-<feature>--T##-<task>`) only if risk dictates or parallel work is needed.
 

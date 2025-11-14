@@ -7,7 +7,7 @@ Purpose: Single source of truth for who acts next, lifecycle state, and the shor
 ```json
 {
   "plan_slug": "<kebab-case>|null",
-  "current_role": "PLANNER|ARCHITECT|CODER|REVIEWER",
+  "current_role": "PLANNER|CODER|REVIEWER",
   "state": "init|in_progress|handoff|blocked|done",
   "branch": "<git-branch>|null",
   "msg": "<<= 12 lines: handoff/blocker note>",
@@ -64,7 +64,7 @@ Notes:
 - On handoff: set current_role = <next role>, state = handoff, write msg.
 - On blocked: set current_role = <role that will unblock you>; set state = blocked; write precise questions in msg.
 - On task approval (Reviewer):
-  - If more tasks remain: merge or fast‑forward as appropriate to the feature branch; select next task by number order; set `current_role = ARCHITECT`, `state = handoff`; include next `T##` and paths in `msg`. Create per‑task branch only if risk dictates.
+  - If more tasks remain: merge or fast‑forward as appropriate to the feature branch; select next task by number order; set `current_role = PLANNER`, `state = handoff`; include next task title/slug and paths in `msg`. Create per‑task branch only if risk dictates.
   - If no tasks remain (feature complete): proceed to feature approval flow below.
 - On feature approval (all tasks done): Reviewer merges the feature branch into default, updates `docs/ROADMAP.md`, and resets `docs/agents/state.json` to the defaults below. After reset, `current_role = PLANNER` and `state = in_progress`.
   - Cleanup: delete the ephemeral docs folder `docs/current/`.

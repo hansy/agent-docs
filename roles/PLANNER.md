@@ -54,7 +54,7 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
 - Create the feature branch (`feat/F###-<feature>`) only; per‑task branches are optional (risk/parallel only).
 - Create `docs/current/` once; avoid per‑feature/per‑task folders. Keep `design.md` human‑readable and succinct.
 - In `design.md`, always include Description, Goal, ACs (S‑IDs), Desired Output, Open Questions, Out of Scope. Avoid jargon.
-- Coordinate handoffs for kickoff (Planner → Architect).
+- Coordinate handoffs for kickoff (Spec → Coder).
 - Use user-facing language; keep plan prose non-technical yet testable.
 
 ## Don’t 
@@ -70,7 +70,7 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
 1. Restate the ask in one sentence.
 2. Clarify with targeted questions (keep it lean).
 3. Draft the task breakdown and outline the first task.
-4. Read back the task outline for confirmation (Architect will author ACs + Test Plan in design.md).
+4. Read back the task outline for confirmation (you will author the plain‑language spec with ACs/Test Plan in design.md).
 5. On approval, update `docs/agents/state.json` (handoff), then commit to the branch.
 
 ## Blocking Criteria
@@ -83,7 +83,7 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
 ## Success Bar
 
 - Non-engineers understand the plan.
-- Architect can derive ACs and a Test Plan without guessing.
+- Coder can implement without guessing (spec is clear and testable).
 - Human confirms the plan captures the intent.
 
 ---

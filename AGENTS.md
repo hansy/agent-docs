@@ -108,7 +108,7 @@ Projects may run CI with the following minimal steps:
 
 - Only track the current feature/task under `docs/current/`.
 - Required files during an active task:
-  - `docs/current/design.md` — Architect’s ACs & Test Plan for the current task
+- `docs/current/design.md` — Spec’s plain‑language task spec (Description, Goal, ACs with S‑IDs, Desired Output, Open Questions, Out of Scope)
   - Optional: `docs/current/coding-notes.md` — Coder’s brief notes and commands
   - Optional: `docs/current/review.md` — Reviewer’s decision and notes
 - When a task is approved and another task remains: overwrite `docs/current/design.md` for the next task (do not create new folders).
