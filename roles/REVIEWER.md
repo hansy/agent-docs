@@ -71,7 +71,7 @@ Final gate before merge. Focus on:
 
 ## Task vs Feature Approval
 
-- Approving an individual task (T##): merge changes as appropriate; set handoff to Planner (Spec) with the next task title/slug and instruction to overwrite `docs/current/design.md`.
+- Approving an individual task (T##): merge changes as appropriate; set handoff to Planner with the next task title/slug and instruction to overwrite `docs/current/design.md`.
 - Approving the feature: merge the feature branch into default, update `docs/ROADMAP.md`, delete `docs/current/`, and reset `docs/agents/state.json` to defaults (next role is Planner).
 
 ---
@@ -121,13 +121,13 @@ Final gate before merge. Focus on:
 
 ## Handoff message templates
 
-Reviewer → Planner/Spec (next task)
+Reviewer → Planner (next task)
 
 ```
 [Reviewer] Next task ready: T## — <task title> (by numeric order)
 Branch: feat/F###-<feature>
 Path: docs/current/design.md (overwrite for next task)
-State: handoff → Planner (Spec).
+State: handoff → Planner.
 Notes: prior task merged; ACs covered per review; include changed paths in commit body.
 ```
 

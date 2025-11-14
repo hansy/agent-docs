@@ -8,7 +8,7 @@ Turn the plan + design into working code via a strict task-by-task TDD loop, kee
 
 ### Role Flow
 
-Planner (Spec) → Coder → Reviewer
+Planner → Coder → Reviewer
 
 Must-Read (in order)
 
@@ -37,7 +37,7 @@ Repo first-invoke (once per repo)
   - `README.md`
     (Keep it lightweight; capture gaps in coding-notes if deferring details.)
 
-1. Current task — ensure `docs/current/design.md` exists (ask Spec/Planner to author if missing)
+1. Current task — ensure `docs/current/design.md` exists (ask Planner to author if missing)
 
 2. Use the feature branch by default. Create a per‑task branch (`feat/F###-<feature>--T##-<task>`) only if risk dictates or parallel work is needed.
 
@@ -133,7 +133,7 @@ If blocked (unclear scenario, needs new structure/dep, boundary conflict):
 
 ## Git Responsibilities
 
-- Work on the Spec’s branch:
+- Work on the Planner’s branch:
   - Default: commit to `feat/F###-<feature>` with small, focused diffs.
   - Optional: create `feat/F###-<feature>--T##-<task>` only for risk/parallel work (announce in handoff).
 - Before each commit: Boundary Gate passes; `lint`/`typecheck`/`test` (commands.json) are green; no unapproved dep/migration/config changes.

@@ -1,6 +1,6 @@
-# Spec — <Task Title> (Feature: F###-<feature>)
+# Planner — <Task Title> (Feature: F###-<feature>)
 
-Date: YYYY-MM-DD • Spec
+Date: YYYY-MM-DD • Planner
 
 Description
 - In plain language, what are we changing and for whom?
@@ -22,4 +22,3 @@ Out of Scope (for now)
 Open Questions
 - Q1 — …
 - Q2 — …
-

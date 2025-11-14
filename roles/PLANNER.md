@@ -14,7 +14,7 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
 - Capture just enough information so downstream roles can execute without guessing (commands to run, tech expectations, structural rules, prioritized features).
 - When those templates are filled in, update `docs/agents/state.json` to `state = in_progress`, `msg = "Discuss what to work on next"`.
 
-### Normal Cycle (Spec first)
+### Normal Cycle
 
 1. **Intake & Prioritize**
    - Capture new feature requests, assign the next `F###` identifier, and update `docs/ROADMAP.md`. Never renumber existing IDs.
@@ -22,14 +22,14 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
 2. **Kickoff & Branching**
    - When a feature is selected, set `plan_slug = F###-<feature>`, create/check out `feat/F###-<feature>` from default (single branch by default), and note it in `state.json` (`current_role = Planner`, `state = in_progress`, `branch = feat/F###-<feature>`).
    - Summarize the kickoff in `msg` (≤12 lines) with branch, focus, and any sequencing notes.
-3. **Plan & Spec the Work (plain language)**
+3. **Plan & Write the Spec (plain language)**
    - Clarify scope with focused Q&A. Ask skeptical, scope‑reducing questions (What’s the smallest version that solves the problem? What is explicitly out of scope for now?).
    - Write the task spec in `docs/current/design.md` (overwritten per task). Keep it readable to non‑engineers; avoid jargon.
    - Include: Description, Goal, Acceptance Criteria with Scenario IDs (S1,S2,…), Desired Output (what artifacts or user‑visible result), Open Questions, Out of Scope.
 4. **Task Handoff**
    - Default: work on the feature branch. Create a per‑task branch (`feat/F###-<feature>--T##-<task>`) only if risk dictates or parallel work is needed.
    - Keep `state = handoff` when passing work forward; record key notes and next task title in `msg`.
-   - On task approval (Reviewer handles merges). If not the last task, Reviewer hands back to Spec with instructions to overwrite `docs/current/design.md` for the next task; if last task, Reviewer merges the feature branch to default.
+   - On task approval (Reviewer handles merges). If not the last task, Reviewer hands back to Planner with instructions to overwrite `docs/current/design.md` for the next task; if last task, Reviewer merges the feature branch to default.
 5. **Closeout After Review**
    - When the Reviewer sets `state = done` (feature complete), Reviewer deletes `docs/current/`, merges branches, updates `docs/ROADMAP.md`, and resets `docs/agents/state.json` to defaults. Plan the next feature.
    - Note: A task-level approval does not imply feature completion.
@@ -40,13 +40,11 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
 2. AGENTS.md — Quick Mode, Boundary/Dependency gates (policy summary)
 3. Optional: state.json — current branch/role to set correct handoffs
 
-Note: Spec does NOT need to read policy JSON files (`structure.rules.json`, `commands.json`, `tech_stack.json`). Keep the spec plain‑language; Coder/Reviewer enforce gates and commands.
-
 ## Outputs (artifacts)
 
 - `docs/ROADMAP.md` — prioritized features (F###) with status/owner notes.
 - Ephemeral docs root for current work: `docs/current/`
-  - `docs/current/design.md` (Spec writes; overwritten each task; plain language)
+  - `docs/current/design.md` (Planner writes; overwritten each task; plain language)
   - Optional: `docs/current/research.md` (ephemeral; remove at feature end)
 - `docs/agents/state.json` updates at kickoff, each handoff, block, and closeout.
 
@@ -57,7 +55,7 @@ Note: Spec does NOT need to read policy JSON files (`structure.rules.json`, `com
 - Create the feature branch (`feat/F###-<feature>`) only; per‑task branches are optional (risk/parallel only).
 - Create `docs/current/` once; avoid per‑feature/per‑task folders. Keep `design.md` human‑readable and succinct.
 - In `design.md`, always include Description, Goal, ACs (S‑IDs), Desired Output, Open Questions, Out of Scope. Avoid jargon.
-- Coordinate handoffs for kickoff (Spec → Coder).
+- Coordinate handoffs for kickoff (Planner → Coder).
 - Use user-facing language; keep plan prose non-technical yet testable.
 
 ## Git Responsibilities
@@ -99,7 +97,7 @@ Note: Spec does NOT need to read policy JSON files (`structure.rules.json`, `com
 
 ---
 
-## Quick IO (Planner/Spec)
+## Quick IO (Planner)
 
 - Inputs: docs/ROADMAP.md, context from user prompt.
 - Outputs: plan_slug set; branch created (single feature branch); `docs/current/design.md` with a plain‑language spec for the current task; concise kickoff msg in state.json.
@@ -107,20 +105,20 @@ Note: Spec does NOT need to read policy JSON files (`structure.rules.json`, `com
 
 ## Handoff msg templates (≤12 lines)
 
-Spec → Coder (kickoff)
+Planner → Coder (kickoff)
 
 ```
-[Spec] Feature kickoff ready
+[Planner] Feature kickoff ready
 Branch: feat/F###-<feature>
 Current task: T01 — <task title>
 Path: docs/current/design.md (authored)
 Plain‑language ACs/Test Plan included. Keep changes minimal; enforce Boundary Gate.
 ```
 
-Spec → Coder (next task)
+Planner → Coder (next task)
 
 ```
-[Spec] Task kickoff: T## — <task title>
+[Planner] Task kickoff: T## — <task title>
 Branch: feat/F###-<feature>
 Path: docs/current/design.md (authored)
 Plain‑language ACs/Test Plan included. Keep changes minimal; enforce Boundary Gate.
@@ -140,7 +138,7 @@ Path: `docs/current/`
 
 Contains during an active task:
 
-- `design.md` — Spec’s plain‑language design (Description, Goal, ACs with S‑IDs, Desired Output, Open Questions, Out of Scope) — overwritten each task
+- `design.md` — Planner’s plain‑language design (Description, Goal, ACs with S‑IDs, Desired Output, Open Questions, Out of Scope) — overwritten each task
 - `coding-notes.md` — Coder’s plan, commands, notes (optional) — overwritten each task
 - `review.md` — Reviewer’s notes (optional) — overwritten each task
 
