@@ -5,26 +5,30 @@
 Use Quick Mode when the user’s ask is a small, low‑risk change. If any Quick Mode gate fails, escalate to the normal Feature Mode (roles flow below).
 
 Signals that trigger Quick Mode
+
 - Explicit: prompt starts with "quick:" or contains "#quick".
 - Scope: user points to exact file(s) or mentions small copy/typo/UI tweak.
 - Policy: the change fits within `quick.config.json` limits.
 
 Quick Mode gates (must all pass)
+
 - Limits from `quick.config.json`: `maxFilesChanged`, `maxAddedLines`, `allowNewFiles`, `allowRenames`, `allowedPaths`, `escalateIf` (addsDependency, touchesMigrations, changesConfig, touchesPublicAPI).
 - Boundary rules from `structure.rules.json`: only allowed cross‑module imports; correct file placement.
 - Checks from `commands.json`: run `lint`, `typecheck`, `test` if defined.
 
 Quick Mode playbook (text‑only, agent steps)
-1) Restate the ask in one sentence and list target files. If ambiguous, ask one short question; else proceed.
-2) Propose a minimal unified diff (only necessary lines). Keep within `quick.config.json` limits.
-3) Validate boundaries against `structure.rules.json` (allowed imports and module placement). If violated → escalate.
-4) Run checks from `commands.json` (`lint`, `typecheck`, `test` when available). If checks fail → fix or escalate.
-5) Present the final diff and a one‑line commit message.
+
+1. Restate the ask in one sentence and list target files. If ambiguous, ask one short question; else proceed.
+2. Propose a minimal unified diff (only necessary lines). Keep within `quick.config.json` limits.
+3. Validate boundaries against `structure.rules.json` (allowed imports and module placement). If violated → escalate.
+4. Run checks from `commands.json` (`lint`, `typecheck`, `test` when available). If checks fail → fix or escalate.
+5. Present the final diff and a one‑line commit message.
    • Commit/PR convention: `<type>(<scope>): <change>`; e.g., `chore(web): update CTA copy`.
    • If the user explicitly approves (or the prompt includes "quick: approve"), apply the change and commit; otherwise open a PR/diff and hand off to Reviewer.
-6) On success, post a ≤12‑line summary with changed paths. Do not modify `docs/agents/state.json` unless asked.
+6. On success, post a ≤12‑line summary with changed paths. Do not modify `docs/agents/state.json` unless asked.
 
 Escalate to Feature Mode when
+
 - Any gate fails (limits, boundaries, dependency/migration/config changes), or tests require non‑trivial setup, or the scope expands beyond a small patch.
 - Use the normal roles flow beginning with Planner.
 
@@ -38,17 +42,10 @@ Escalate to Feature Mode when
 
 Assume the `current_role`. Read the relevant role guide found in `docs/agents/roles/<current_role>.md` to understand what your role entails.
 
-
 ## Conversation-First & Review (All Roles)
 
 - Before any changes: discuss the upcoming task in chat, ask clarifying questions, and propose your plan/approach. Wait for explicit user approval before creating/modifying files, branches, or `state.json`.
 - Quick Mode exception: if the prompt includes an explicit "quick: approve" and all gates/checks pass, you may commit a single small patch without a separate approval step. Otherwise, show the diff and wait for approval.
-
-## Planner Gate — No Open Questions (Feature Mode)
-
-Before handing off any task, the Planner MUST ensure the "Open Questions" section in `docs/current/design.md` is empty.
-
-- If any open question remains: do not proceed. Set `state = blocked`, `current_role = PLANNER`, and write the exact questions (≤12 lines) into `state.msg` for the human to answer. Only resume once every question is resolved and the spec updated.
 
 ## Autopilot (text-only policy)
 
@@ -70,19 +67,21 @@ If `autopilot` is absent, treat it as `off`.
 
 Applies to Quick Mode and Feature Mode before committing code.
 
-1) Map each changed file to a module by prefix match on `structure.rules.json.modules[*].root`.
-2) For each changed file, list internal imports (ESM `import ... from '...';` and CommonJS `require('...')`).
-3) Resolve each internal import to a module using the same root mapping (relative imports only; treat bare module specifiers and alias paths as external/ignored).
-4) Verify allowlist: `allow[fromModule]` must include `toModule`. If any violation is found → do not commit; fix placement/imports or escalate to Feature Mode.
-5) If import aliasing (e.g., tsconfig paths) prevents resolution, treat as unknown and escalate unless clearly safe.
+1. Map each changed file to a module by prefix match on `structure.rules.json.modules[*].root`.
+2. For each changed file, list internal imports (ESM `import ... from '...';` and CommonJS `require('...')`).
+3. Resolve each internal import to a module using the same root mapping (relative imports only; treat bare module specifiers and alias paths as external/ignored).
+4. Verify allowlist: `allow[fromModule]` must include `toModule`. If any violation is found → do not commit; fix placement/imports or escalate to Feature Mode.
+5. If import aliasing (e.g., tsconfig paths) prevents resolution, treat as unknown and escalate unless clearly safe.
 
 ## Dependency Changes Gate (All Changes)
 
 If dependency or platform files change (e.g., lockfiles, package descriptors, migrations, build/CI configs):
+
 - Quick Mode: escalate to Feature Mode.
 - Feature Mode: note the change, justify it briefly, and ensure Reviewer verifies tech policy (consult `tech_stack.json` when present).
 
 Examples of dependency/config files:
+
 - JavaScript/TypeScript: `package.json`, lockfiles, `tsconfig*.json`, build tool configs, `.github/workflows/*`.
 - Python: `pyproject.toml`, `requirements.txt`, `Pipfile*`.
 - Others: `Dockerfile`, infra manifests, migration directories.
@@ -90,17 +89,20 @@ Examples of dependency/config files:
 ## Commands Contract (All Agents)
 
 Preferred commands live in `commands.json` (keys: dev, test, lint, typecheck, build, diff, cov).
+
 - If `commands.json` is missing or incomplete, ask the human for the exact commands before proceeding.
 - Default fallbacks are not assumed to be safe; always confirm.
 
 ## Vendoring Path Note
 
 Policy files may live at repo root or under `docs/`. When reading paths, check both locations for:
+
 - `structure.rules.json`, `commands.json`, `quick.config.json`, `tech_stack.json`.
 
 ## CI Recipe (optional)
 
 Projects may run CI with the following minimal steps:
+
 - Install deps (stack‑specific).
 - Run `lint`, `typecheck`, `test` from `commands.json`.
 - Enforce Boundary Gate (fail CI on violations).
