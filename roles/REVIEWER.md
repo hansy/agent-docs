@@ -30,6 +30,15 @@ Final gate before merge. Focus on:
   - Task approved (more tasks remain): set `current_role=PLANNER`, `state=handoff`; in `msg`, include the next task title/slug and instruction to overwrite `docs/current/design.md` for the next task.
   - Feature complete (no tasks remain): perform final merges and roadmap update, delete `docs/current/`, then reset to defaults (see `STATE.md#Defaults`).
 
+## Git Responsibilities
+
+- Own merges and cleanup:
+  - Task branch (if used) → feature branch; delete merged task branches when clean.
+  - Feature branch → default on feature completion (fast‑forward/PR per repo norms).
+- Resolve merge conflicts in coordination with the Coder; Coder supplies fixes on the working branch.
+- Maintain hygiene: delete `docs/current/` on feature completion; update roadmap; reset state to defaults.
+- Avoid force‑push to shared branches; prefer small, reviewable diffs.
+
 ---
 
 ## Review Flow

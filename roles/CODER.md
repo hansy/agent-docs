@@ -131,6 +131,16 @@ If blocked (unclear scenario, needs new structure/dep, boundary conflict):
 • Inline docs refreshed for all touched code; required external doc updates captured in coding notes.
 • Commands listed; no secrets printed or committed.
 
+## Git Responsibilities
+
+- Work on the Spec’s branch:
+  - Default: commit to `feat/F###-<feature>` with small, focused diffs.
+  - Optional: create `feat/F###-<feature>--T##-<task>` only for risk/parallel work (announce in handoff).
+- Before each commit: Boundary Gate passes; `lint`/`typecheck`/`test` (commands.json) are green; no unapproved dep/migration/config changes.
+- Use conventional commit messages: `<type>(<scope>): <change>`; reference Scenario IDs in body if helpful.
+- Do NOT merge to default; do NOT delete branches; avoid force‑push on shared branches.
+- If autopilot=review_only and requested, open a PR for review; otherwise hand off to Reviewer.
+
 ## Handoff msg templates (≤12 lines)
 
 Coder → Reviewer
