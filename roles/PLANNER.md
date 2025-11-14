@@ -59,6 +59,10 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
 - Coordinate handoffs for kickoff (Planner → Coder).
 - Use user-facing language; keep plan prose non-technical yet testable.
 
+Policy files
+
+- Planner may propose changes to structure rules, commands, or tech policy in plain language inside the spec, but does not edit the JSON files directly. Reviewer will apply approved changes during review/merge.
+
 ## Git Responsibilities
 
 - Create and own the feature branch: `feat/F###-<feature>` from default.

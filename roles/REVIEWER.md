@@ -55,7 +55,7 @@ Final gate before merge. Focus on:
 - Reuse per Design (no re-implementing existing symbols).
 - Any structural change is backed by an **approved Structure Delta**.
 - Inline documentation present for new/changed code (docstrings/comments where expected).
-- Policy files (structure.rules.json, commands.json, tech_stack.json) are up-to-date; consult the Coder’s `Doc updates needed` notes, then update yourself.
+- Policy files (structure.rules.json, commands.json, tech_stack.json, quick.config.json) are up-to-date; consult the Coder’s `Doc updates needed` notes and the Planner’s spec, then update yourself.
 - Tasks: ensure the current task is represented in `docs/current/design.md`; paths and imports respect structure rules.
 - Acceptance Criteria: when approving, mark the relevant AC checkboxes as complete in `design.md`.
  - Open Questions: if `design.md` has any Open Questions, block and hand off to Planner to resolve before approval.
