@@ -14,9 +14,8 @@ Must-Read (in order)
 
 1. docs/agents/state.json — get `plan_slug` (Feature slug `F###-<feature>`), confirm role, and note `branch`.
 2. JSON twins (authoritative for agents): `structure.rules.json`, `commands.json`, `tech_stack.json` (if present).
-3. Tasks index: docs/features/F###-<feature>/tasks.md — task list
-4. Design: docs/features/F###-<feature>/tasks/T##-<task>/design.md — touchpoints, ACs, Test Plan, proposals.
-5. Package READMEs (if present) — optional human context.
+3. Current task design: `docs/current/design.md` — touchpoints, ACs, Test Plan, proposals.
+4. Package READMEs (if present) — optional human context.
 
 ### Hard Guardrails
 
@@ -38,7 +37,7 @@ Repo first-invoke (once per repo)
   - `README.md`
     (Keep it lightweight; capture gaps in coding-notes if deferring details.)
 
-1. Tasks index — ensure `docs/features/F###-<feature>/tasks.md` exists
+1. Current task — ensure `docs/current/design.md` exists (ask Architect to author if missing)
 
 2. Use the feature branch by default. Create a per‑task branch (`feat/F###-<feature>--T##-<task>`) only if risk dictates or parallel work is needed.
 
@@ -51,16 +50,16 @@ Repo first-invoke (once per repo)
 
 ## The Task Loop (repeat for each task, in order)
 
-For each unchecked task in `docs/features/F###-<feature>/tasks.md`:
+For the current task in `docs/current/design.md`:
 
 0. Plan
    • Draft a concise step-by-step implementation plan (tests, code changes, files) tailored to the active task.
    • Share the plan with the human (see AGENTS.md conversation-first policy).
-   • Record the final plan in `docs/features/F###-<feature>/tasks/T##-<task>/coding-notes.md` under a “Plan (approved)” section.
+   • Record the final plan in `docs/current/coding-notes.md` under a “Plan (approved)” section (optional).
    • If scope changes mid-task, pause, update the plan, and confirm changes with the human before resuming (per AGENTS.md).
 
 A) Mark in progress
-• Update `docs/features/F###-<feature>/tasks.md`: set the `[>]` marker for the active T##.
+• Keep `state.msg` updated via handoffs; no tasks index file is required.
 
 B) Failing tests first
 • Write or activate failing tests per the ACs and Test Plan in `design.md`.
@@ -104,7 +103,7 @@ If blocked (unclear scenario, needs new structure/dep, boundary conflict):
 1. Commands used
    • List exact commands (from `commands.json`).
 
-2. Coding notes — `docs/features/F###-<feature>/tasks/T##-<task>/coding-notes.md`
+2. Coding notes — `docs/current/coding-notes.md`
    • Use the template below and capture the approved plan before coding.
    • Summary, lessons, blockers, improvements.
 
@@ -144,7 +143,7 @@ Doc updates needed: <refs or “none”>. See tasks.md and task coding-notes for
 
 ## Coding Notes — Template
 
-Path: `docs/features/F###-<feature>/tasks/T##-<task>/coding-notes.md`
+Path: `docs/current/coding-notes.md`
 
 ```
 # Coding Notes — <F###-feature>

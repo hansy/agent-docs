@@ -10,33 +10,31 @@ Final gate before merge. Focus on:
 
 ## Must-Read (in order)
 
-1. Tasks index: `docs/features/F###-<feature>/tasks.md` — T## list and statuses
-2. JSON twins (authoritative for agents): `structure.rules.json`, `commands.json`, `tech_stack.json` (if present)
-3. Task docs (active):
-   - Design: `docs/features/F###-<feature>/tasks/T##-<task>/design.md`
-   - Coding notes: `docs/features/F###-<feature>/tasks/T##-<task>/coding-notes.md`
-4. Diffs (feature branch vs default) via commands in `commands.json`
-5. structure.rules.json (module allowlists/roots) and package READMEs (if present)
-6. tech_stack.json (if present), `.env.example` (if touched)
+1. JSON twins (authoritative for agents): `structure.rules.json`, `commands.json`, `tech_stack.json` (if present)
+2. Task docs (current only):
+   - Design: `docs/current/design.md`
+   - Coding notes (optional): `docs/current/coding-notes.md`
+3. Diffs (feature branch vs default) via commands in `commands.json`
+4. structure.rules.json (module allowlists/roots) and package READMEs (if present)
+5. tech_stack.json (if present), `.env.example` (if touched)
 
 ## Outputs (artifacts)
 
-- `docs/features/F###-<feature>/tasks/T##-<task>/review.md` — concise pass/fail with required fixes & paths (per task)
-- Doc-only diffs if needed (STRUCTURE/README/TECH_STACK/COMMANDS/.env.example)
-- Update tasks index: mark `T##` done in `docs/features/F###-<feature>/tasks.md` and add a one-line changed-paths note
+- `docs/current/review.md` — concise pass/fail with required fixes & paths (optional)
+- Doc-only diffs if needed (policy files or `.env.example`)
 - Merges (you own these after approvals):
   - Default: fast‑forward/merge changes into the single feature branch, then merge `feat/F###-<feature>` → default when the feature is complete.
   - Per‑task branches: only when risk/parallelization requires; merge task → feature, then proceed as above.
 - ROADMAP update (feature complete only): mark the feature as done in `docs/ROADMAP.md`.
 - State update in `docs/agents/state.json`:
-  - Task approved (more tasks remain): select next task by number order, bootstrap next task (branch + folder), then set `current_role=ARCHITECT`, `state=handoff`; include next `T##` and paths in `msg`.
-  - Feature complete (no tasks remain): perform final merges and roadmap update, then reset to defaults (see `STATE.md#Defaults`, which sets `current_role=PLANNER`).
+  - Task approved (more tasks remain): set `current_role=ARCHITECT`, `state=handoff`; in `msg`, include the next task title/slug and instruction to overwrite `docs/current/design.md` for the next task.
+  - Feature complete (no tasks remain): perform final merges and roadmap update, delete `docs/current/`, then reset to defaults (see `STATE.md#Defaults`).
 
 ---
 
 ## Review Flow
 
-1. **Prep** — read plan/design, open diffs, skim STRUCTURE rules.
+1. **Prep** — read design.md, open diffs, skim structure rules.
 2. **Code Review (pillar #1)**
    - Readability: small, cohesive changes; no dead code; clear names.
    - Safety: input validation, error handling, timeouts where relevant.
@@ -49,7 +47,7 @@ Final gate before merge. Focus on:
 - Any structural change is backed by an **approved Structure Delta**.
 - Inline documentation present for new/changed code (docstrings/comments where expected).
 - Policy files (structure.rules.json, commands.json, tech_stack.json) are up-to-date; consult the Coder’s `Doc updates needed` notes, then update yourself.
-- Tasks: confirm tasks T## exist as subfolders under `tasks/` and are tracked in `tasks.md`; paths and imports respect STRUCTURE rules.
+- Tasks: ensure the current task is represented in `docs/current/design.md`; paths and imports respect structure rules.
 - Acceptance Criteria: when approving, mark the relevant AC checkboxes as complete in `design.md`.
 
 4. **Tests vs Acceptance Criteria (pillar #3)**
@@ -57,15 +55,15 @@ Final gate before merge. Focus on:
    - Coverage includes **happy, boundary, and negative** cases where applicable.
    - Evidence that tests would fail without the code change (or clear rationale).
 5. **Decision** — Approve or fix inline.
-   - Task-level (more tasks remain): apply all required fixes (code/tests/deps/docs) directly on the task branch until green; update artifacts, mark `T##` done in `tasks.md` with a one-line changed-paths note, merge task → feature; select the next task by numeric order, create `docs/features/F###-<feature>/tasks/T##-<task>/` (if missing) and branch `feat/F###-<feature>--T##-<task>`, check out the new branch, then hand off to Architect (state=handoff) and commit.
-   - Feature-level (no tasks remain): finish any fixes, perform final merges to default, update `docs/ROADMAP.md`, reset `docs/agents/state.json` to defaults (current_role=PLANNER), then commit.
+   - Task-level (more tasks remain): apply all required fixes (code/tests/deps/docs) directly on the branch until green; merge into the feature branch; set handoff to Architect and instruct to overwrite `docs/current/design.md` for the next task in `state.msg` (include next task title/slug).
+   - Feature-level (no tasks remain): finish any fixes, merge feature branch to default, update `docs/ROADMAP.md`, delete `docs/current/`, reset `docs/agents/state.json` to defaults.
 
 ---
 
 ## Task vs Feature Approval
 
-- Approving an individual task (T##) marks that task done in `tasks.md` (include the one-line changed-paths note). You then merge the task branch into the feature branch, select the next task by number, bootstrap its branch/folder, and hand off to the Architect (state=handoff).
-- Approving the feature requires all tasks in `tasks.md` to be done; then you merge the feature branch into default, update `docs/ROADMAP.md`, and reset `docs/agents/state.json` to defaults (next role is Planner).
+- Approving an individual task (T##): merge changes as appropriate; set handoff to Architect with the next task title/slug and instruction to overwrite `docs/current/design.md`.
+- Approving the feature: merge the feature branch into default, update `docs/ROADMAP.md`, delete `docs/current/`, and reset `docs/agents/state.json` to defaults (next role is Planner).
 
 ---
 
@@ -117,26 +115,24 @@ Final gate before merge. Focus on:
 Reviewer → Architect (next task)
 
 ```
-[Reviewer] Next task ready: T## — <task title> (by number order).
-Branch: feat/F###-<feature>--T##-<task> (from feat/F###-<feature>)
-Paths:
-  - Feature tasks index: docs/features/F###-<feature>/tasks.md
-  - Design (to author): docs/features/F###-<feature>/tasks/T##-<task>/design.md
+[Reviewer] Next task ready: T## — <task title> (by numeric order)
+Branch: feat/F###-<feature>
+Path: docs/current/design.md (overwrite for next task)
 State: handoff → Architect.
-Notes: prior task merged; ACs covered per review; marked Tprev done in tasks.md with changed-paths note.
+Notes: prior task merged; ACs covered per review; include changed paths in commit body.
 ```
 
 Reviewer → (feature done)
 
 ```
-[Reviewer] Feature approved. All tasks done per tasks.md. ACs covered.
-Merged feat/F###-<feature> → main (deleted merged branches).
-Updated docs/ROADMAP.md. Reset docs/agents/state.json to defaults.
+[Reviewer] Feature approved. ACs covered.
+Merged feat/F###-<feature> → main.
+Updated docs/ROADMAP.md, deleted docs/current/, and reset docs/agents/state.json to defaults.
 ```
 
 ## Review — Template
 
-Path: `docs/features/F###-<feature>/tasks/T##-<task>/review.md`
+Path: `docs/current/review.md`
 
 ```md
 # Review — <F###-feature>

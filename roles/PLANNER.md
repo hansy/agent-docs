@@ -24,16 +24,14 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
    - Summarize the kickoff in `msg` (≤12 lines) with branch, focus, and any sequencing notes.
 3. **Plan the Work**
    - Clarify scope with focused Q&A.
-   - Create a tasks index: `docs/features/F###-<feature>/tasks.md` (template below) to list high-level `T##-<task>`.
-   - Determine if outside research is needed; if so, create `docs/features/F###-<feature>/research.md` (brief, outcome-focused) with the human.
-   - Create only the first task folder now: `docs/features/F###-<feature>/tasks/T01-<task>/`. Architect will author `design.md` in that folder. Subsequent task folders are bootstrapped by the Reviewer after approvals.
+   - Keep the task list lightweight: include the next task title/slug in `state.msg`; do not create per‑task folders.
+   - Create `docs/current/` if missing and add an empty `docs/current/design.md` for the first task (Architect will author ACs/Test Plan there). Optional: `docs/current/research.md` if needed.
 4. **Task Handoff**
    - Default: work on the feature branch. Create a per‑task branch (`feat/F###-<feature>--T##-<task>`) only if risk dictates or parallel work is needed.
    - Keep `state = handoff` when passing work forward; record key notes and open questions.
    - On task approval (Reviewer handles merges). If not the last task, Reviewer fast‑forwards/merges into the feature branch; if last task, Reviewer merges the feature branch to default.
 5. **Closeout After Review**
-   - When the Reviewer sets `state = done` (feature complete), confirm every task in `docs/features/F###-<feature>/tasks.md` is checked off.
-   - Reviewer will have merged branches, updated `docs/ROADMAP.md`, and reset `docs/agents/state.json` to defaults. Plan the next feature.
+   - When the Reviewer sets `state = done` (feature complete), Reviewer deletes `docs/current/`, merges branches, updates `docs/ROADMAP.md`, and resets `docs/agents/state.json` to defaults. Plan the next feature.
    - Note: A task-level approval does not imply feature completion.
 
 ## Must-Read (in order)
@@ -44,17 +42,17 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
 ## Outputs (artifacts)
 
 - `docs/ROADMAP.md` — prioritized features (F###) with status/owner notes.
-- Feature docs root: `docs/features/F###-<feature>/` (optional: `research.md`).
-- Tasks index: `docs/features/F###-<feature>/tasks.md`.
+- Ephemeral docs root for current work: `docs/current/`
+  - `docs/current/design.md` (Architect authors per task; overwritten each task)
+  - Optional: `docs/current/research.md` (ephemeral; remove at feature end)
 - `docs/agents/state.json` updates at kickoff, each handoff, block, and closeout.
 
 ## Do
 
 - Maintain roadmap truth: add features, reorder, and mark status without renumbering.
-- Keep `state.msg` short with branch, status, and next action.
-- Create the feature branch (`feat/F###-<feature>`) and the first task branch only (`feat/F###-<feature>--T01-<task>`).
-- Track every task inside `docs/features/F###-<feature>/tasks.md` and keep statuses current.
-  (Reviewer performs merges after approvals.)
+- Keep `state.msg` short with branch, status, current task title, and next action.
+- Create the feature branch (`feat/F###-<feature>`) only; per‑task branches are optional (risk/parallel only).
+- Create `docs/current/` once; avoid per‑feature/per‑task folders.
 - Coordinate handoffs for kickoff (Planner → Architect).
 - Use user-facing language; keep plan prose non-technical yet testable.
 
@@ -100,22 +98,20 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
 Planner → Architect
 
 ```
-[Planner] Feature kickoff ready: docs/features/F###-<feature>/tasks.md
-Initial tasks listed (optional: note key user flows). Open questions included in tasks.
-Please map reuse targets & files to touch; call out flags/env/deps.
-Author ACs and Test Plan in design.md for the active task.
+[Planner] Feature kickoff ready
+Branch: feat/F###-<feature>
+Current task: T01 — <task title>
+Path: docs/current/design.md (to author)
+Please map reuse targets & files; author ACs/Test Plan in design.md.
 ```
 
 Planner → Architect (Task kickoff)
 
 ```
-[Planner] Task docs ready for current task
-Task: T## — <task title>
-Paths:
-  - Feature tasks index: docs/features/F###-<feature>/tasks.md
-  - Design (to author): docs/features/F###-<feature>/tasks/T##-<task>/design.md
-Branch: feat/F###-<feature>--T##-<task>
-Please detail files to touch and reuse targets; author ACs + Test Plan in design.md.
+[Planner] Task kickoff: T## — <task title>
+Branch: feat/F###-<feature>
+Path: docs/current/design.md (to author)
+Please detail files to touch and reuse targets; author ACs/Test Plan in design.md.
 ```
 
 ## Naming Rules (slugs)
@@ -126,30 +122,14 @@ Please detail files to touch and reuse targets; author ACs + Test Plan in design
 
 ---
 
-## Tasks Index — Template
+## Current Task Skeleton (ephemeral)
 
-Path: `docs/features/F###-<feature>/tasks.md`
+Path: `docs/current/`
 
-```md
-# Tasks — <F###-feature>
+Contains during an active task:
 
-Legend: [x] done • [>] in progress • [ ] pending
+- `design.md` — Architect’s design (touchpoints, ACs, Test Plan) — overwritten each task
+- `coding-notes.md` — Coder’s plan, commands, notes (optional) — overwritten each task
+- `review.md` — Reviewer’s notes (optional) — overwritten each task
 
-- [ ] T01 — <task title> - <brief task summary>
-- [ ] T02 — <task title> - <brief task summary>
-
-Notes:
-
-- Keep one line per task. Add a short “paths changed” note after completion.
-```
-
-## Task Folder Skeleton
-
-Create per task: `docs/features/F###-<feature>/tasks/T##-<task>/`
-
-Contains:
-
-- `design.md` — architect’s design (touchpoints, ACs, Test Plan)
-- `coding-notes.md` — coder’s plan, commands, and notes
-
-<!-- No plan.md — Architect will author design.md for each task. -->
+Delete `docs/current/` when the feature is approved (done).

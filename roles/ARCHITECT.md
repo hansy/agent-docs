@@ -6,14 +6,14 @@ Turn the task into a concrete internal codebase map: what to reuse, where to wor
 
 ## Must-Read (in order)
 
-1. Tasks index entry: docs/features/F###-<feature>/tasks.md (active T##)
+1. Current task target: docs/current/design.md (active task)
 2. JSON twins (authoritative for agents): `structure.rules.json`, `commands.json`, `tech_stack.json` (if present)
 3. Workspace manifests: root & packages (package.json), pnpm-workspace.yaml, tsconfig*, turbo.json, env examples, migrations/
 4. Package READMEs (if present) — optional human context
 
 ## Outputs (artifacts)
 
-- `docs/features/F###-<feature>/tasks/T##-<task>/design.md` (template below; source of truth for ACs & Test Plan)
+- `docs/current/design.md` (template below; source of truth for ACs & Test Plan)
 - (Optional) Structure Delta Proposal section inside `design.md`
 - `docs/agents/state.json` updated (handoff to Coder, or to Reviewer if proposing)
 
@@ -43,7 +43,7 @@ Turn the task into a concrete internal codebase map: what to reuse, where to wor
 
 ## Design — Template
 
-Create/overwrite: `docs/features/F###-<feature>/tasks/T##-<task>/design.md`
+Create/overwrite: `docs/current/design.md`
 Use the template below.
 
 ```md
@@ -117,13 +117,8 @@ Test Plan
 - Performance, security, a11y, observability/telemetry
 
 ### 12) Open questions
-Quick IO (Architect)
-
-- Inputs: active task (design.md target), structure.rules.json (slice), commands.json (if needed), workspace manifests.
-- Outputs: design.md with ACs/Test Plan; list of files to touch; reuse targets; note any Structure Delta proposal.
-- Blockers: insufficient user story context; conflicting surfaces; unapproved dependency or structure change.
-- Should settlement write be idempotent (user_id+event_id)?
-- Confirm max stake applies.
+ - Should settlement write be idempotent (user_id+event_id)?
+ - Confirm max stake applies.
 
 ---
 
@@ -163,7 +158,7 @@ Quick IO (Architect)
 Architect → Coder
 
 ```
-[Architect] Design ready: docs/features/F###-<feature>/tasks/T##-<task>/design.md
+[Architect] Design ready: docs/current/design.md
 Reuse: packages/core/foo.ts#bar(), packages/api/validate.ts#...
 Files to touch (expected): …
 ACs + Test Plan included (S1,S2, boundary/negative noted).

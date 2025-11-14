@@ -67,6 +67,7 @@ Notes:
   - If more tasks remain: merge or fast‑forward as appropriate to the feature branch; select next task by number order; set `current_role = ARCHITECT`, `state = handoff`; include next `T##` and paths in `msg`. Create per‑task branch only if risk dictates.
   - If no tasks remain (feature complete): proceed to feature approval flow below.
 - On feature approval (all tasks done): Reviewer merges the feature branch into default, updates `docs/ROADMAP.md`, and resets `docs/agents/state.json` to the defaults below. After reset, `current_role = PLANNER` and `state = in_progress`.
+  - Cleanup: delete the ephemeral docs folder `docs/current/`.
 
 ## Autopilot semantics
 

@@ -98,6 +98,16 @@ Projects may run CI with the following minimal steps:
 - Run `lint`, `typecheck`, `test` from `commands.json`.
 - Enforce Boundary Gate (fail CI on violations).
 - Disallow Quick Mode merges on CI failures.
+
+## Ephemeral Docs (Feature Mode)
+
+- Only track the current feature/task under `docs/current/`.
+- Required files during an active task:
+  - `docs/current/design.md` — Architect’s ACs & Test Plan for the current task
+  - Optional: `docs/current/coding-notes.md` — Coder’s brief notes and commands
+  - Optional: `docs/current/review.md` — Reviewer’s decision and notes
+- When a task is approved and another task remains: overwrite `docs/current/design.md` for the next task (do not create new folders).
+- When the feature is approved (done): Reviewer must delete the entire `docs/current/` folder and reset `docs/agents/state.json` to defaults.
 - After you finish: present a concise summary of what changed (paths, rationale, test status). Wait for explicit approval before handing off and committing your work or updating state.
 
 ## Local AGENTS.md
