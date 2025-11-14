@@ -48,6 +48,12 @@ Role consolidation: Planner absorbs Architect responsibilities
 - Before any changes: discuss the upcoming task in chat, ask clarifying questions, and propose your plan/approach. Wait for explicit user approval before creating/modifying files, branches, or `state.json`.
 - Quick Mode exception: if the prompt includes an explicit "quick: approve" and all gates/checks pass, you may commit a single small patch without a separate approval step. Otherwise, show the diff and wait for approval.
 
+## Planner Gate — No Open Questions (Feature Mode)
+
+Before handing off any task, the Planner MUST ensure the "Open Questions" section in `docs/current/design.md` is empty.
+
+- If any open question remains: do not proceed. Set `state = blocked`, `current_role = PLANNER`, and write the exact questions (≤12 lines) into `state.msg` for the human to answer. Only resume once every question is resolved and the spec updated.
+
 ## Autopilot (text-only policy)
 
 Optional behavior knob in `docs/agents/state.json` → `autopilot`: `off | review_only | full`.

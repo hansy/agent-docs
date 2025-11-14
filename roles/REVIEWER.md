@@ -58,6 +58,7 @@ Final gate before merge. Focus on:
 - Policy files (structure.rules.json, commands.json, tech_stack.json) are up-to-date; consult the Coder’s `Doc updates needed` notes, then update yourself.
 - Tasks: ensure the current task is represented in `docs/current/design.md`; paths and imports respect structure rules.
 - Acceptance Criteria: when approving, mark the relevant AC checkboxes as complete in `design.md`.
+ - Open Questions: if `design.md` has any Open Questions, block and hand off to Planner to resolve before approval.
 
 4. **Tests vs Acceptance Criteria (pillar #3)**
    - Each AC in `design.md` maps to at least one passing test with a **Scenario ID (Sx)**.
@@ -110,6 +111,7 @@ Final gate before merge. Focus on:
 - Missing inline documentation or unsynced external docs when required
 - No demonstration tests would fail without the change
 - Secrets or unsafe patterns committed
+ - `docs/current/design.md` contains Open Questions (must be empty before approval)
 
 ---
 

@@ -26,6 +26,7 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
    - Clarify scope with focused Q&A. Ask skeptical, scope‑reducing questions (What’s the smallest version that solves the problem? What is explicitly out of scope for now?).
    - Write the task spec in `docs/current/design.md` (overwritten per task). Keep it readable to non‑engineers; avoid jargon.
    - Include: Description, Goal, Acceptance Criteria with Scenario IDs (S1,S2,…), Desired Output (what artifacts or user‑visible result), Open Questions, Out of Scope.
+   - No‑Open‑Questions Gate: Do not hand off while any item remains in Open Questions. If questions remain, set `state=blocked`, `current_role=PLANNER`, and place the exact questions (≤12 lines) in `state.msg`. Resume only after answers are incorporated and Open Questions is empty.
 4. **Task Handoff**
    - Default: work on the feature branch. Create a per‑task branch (`feat/F###-<feature>--T##-<task>`) only if risk dictates or parallel work is needed.
    - Keep `state = handoff` when passing work forward; record key notes and next task title in `msg`.
