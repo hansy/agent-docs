@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "limits": {
+    "maxFilesChanged": 3,
+    "maxAddedLines": 100,
+    "allowNewFiles": false,
+    "allowRenames": false
+  },
+  "allowedPaths": [
+    "apps/web",
+    "packages/core",
+    "packages/api",
+    "packages/db",
+    "packages/worker"
+  ],
+  "escalateIf": {
+    "touchesPublicAPI": true,
+    "addsDependency": true,
+    "touchesMigrations": true,
+    "changesConfig": true
+  }
+}
+

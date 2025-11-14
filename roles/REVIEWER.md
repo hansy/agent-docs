@@ -11,12 +11,13 @@ Final gate before merge. Focus on:
 ## Must-Read (in order)
 
 1. Tasks index: `docs/features/F###-<feature>/tasks.md` — T## list and statuses
-2. Task docs (active):
+2. JSON twins (authoritative for agents): `structure.rules.json`, `commands.json`, `tech_stack.json` (if present)
+3. Task docs (active):
    - Design: `docs/features/F###-<feature>/tasks/T##-<task>/design.md`
    - Coding notes: `docs/features/F###-<feature>/tasks/T##-<task>/coding-notes.md`
-3. Diffs (feature branch vs default) via commands in `docs/COMMANDS.md`
-4. `docs/STRUCTURE.md` (+ per-package STRUCTURE.md)
-5. `docs/TECH_STACK.md`, `docs/COMMANDS.md`, `.env.example` (if touched)
+4. Diffs (feature branch vs default) via commands in `commands.json`
+5. structure.rules.json (module allowlists/roots) and package READMEs (if present)
+6. tech_stack.json (if present), `.env.example` (if touched)
 
 ## Outputs (artifacts)
 
@@ -39,15 +40,15 @@ Final gate before merge. Focus on:
 2. **Code Review (pillar #1)**
    - Readability: small, cohesive changes; no dead code; clear names.
    - Safety: input validation, error handling, timeouts where relevant.
-   - Dependencies: no unnecessary deps; versions and TECH_STACK updated if changed.
+   - Dependencies: no unnecessary deps; versions and tech_stack.json updated if changed.
    - Secrets: none committed; `.env.example` placeholders only.
 3. **Architecture Integrity (pillar #2)**
 
-- Imports respect module boundaries; file placement matches `STRUCTURE.md`.
+- Imports respect module boundaries; file placement matches structure.rules.json.
 - Reuse per Design (no re-implementing existing symbols).
 - Any structural change is backed by an **approved Structure Delta**.
 - Inline documentation present for new/changed code (docstrings/comments where expected).
-- External docs (package `STRUCTURE.md`, README.md, `docs/TECH_STACK.md`, `docs/COMMANDS.md`) are synced; consult the Coder’s `Doc updates needed` notes, then update yourself.
+- Policy files (structure.rules.json, commands.json, tech_stack.json) are up-to-date; consult the Coder’s `Doc updates needed` notes, then update yourself.
 - Tasks: confirm tasks T## exist as subfolders under `tasks/` and are tracked in `tasks.md`; paths and imports respect STRUCTURE rules.
 - Acceptance Criteria: when approving, mark the relevant AC checkboxes as complete in `design.md`.
 
@@ -75,15 +76,15 @@ Final gate before merge. Focus on:
 - [ ] Minimal, readable diffs; no stray files
 - [ ] Reasonable validation/error handling; no silent failures
 - [ ] No secrets/credentials; `.env.example` updated if needed
-- [ ] New/changed deps justified + `TECH_STACK.md`/`COMMANDS.md` updated
+- [ ] New/changed deps justified + tech_stack.json/commands.json updated (if applicable)
 
 ### B) Architecture Integrity
 
-- [ ] Imports & placement follow `docs/STRUCTURE.md`
+- [ ] Imports & placement follow structure.rules.json
 - [ ] Reuse targets from Design honored (no duplication)
 - [ ] Structural changes match an approved Structure Delta
 - [ ] Inline documentation added for new/changed code
-- [ ] External docs (`STRUCTURE.md`/`README.md`/`TECH_STACK.md`/`COMMANDS.md`) updated
+- [ ] Policy files and any touched package README updated (as needed)
 
 ### C) Tests vs Acceptance Criteria
 

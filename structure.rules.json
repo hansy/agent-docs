@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "modules": [
+    { "name": "web", "root": "apps/web", "purpose": "UI only; no business logic" },
+    { "name": "api", "root": "packages/api", "purpose": "HTTP/API orchestration; validation/auth" },
+    { "name": "core", "root": "packages/core", "purpose": "Pure domain logic; framework-free" },
+    { "name": "worker", "root": "packages/worker", "purpose": "Background jobs using core+db" },
+    { "name": "db", "root": "packages/db", "purpose": "Schema/migrations/data-access helpers" }
+  ],
+  "allow": {
+    "core": [],
+    "api": ["core", "db"],
+    "web": ["core"],
+    "worker": ["core", "db"],
+    "db": []
+  },
+  "patterns": {
+    "webPages": "apps/web/**/page.{ts,tsx}",
+    "apiRoutes": "packages/api/**/route.{ts,tsx}",
+    "migrations": "packages/db/**/migrations/*.sql",
+    "tests": "**/*.{test,spec}.{ts,tsx,js}",
+    "configs": "**/{package.json,tsconfig*.json}"
+  }
+}
+

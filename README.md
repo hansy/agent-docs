@@ -4,10 +4,21 @@ Role-driven documentation you can vendor into any repo under `docs/agents` using
 
 ## What’s Included
 
-- `docs/COMMANDS.md`, `docs/TECH_STACK.md`, `docs/STRUCTURE.md`, `docs/ROADMAP.md`, `docs/PRD.md`
+- `docs/ROADMAP.md`, `docs/PRD.md`
 - `docs/agents/AGENTS.md`, `docs/agents/STATE.md`, `docs/agents/state.json`
 - `docs/agents/roles/` — guides for Planner, Architect, Coder, Reviewer
 - `docs/agents/scripts/move-agent-docs.sh` — moves templates into `docs/`
+
+Machine-readable twins (for agents; live at repo root here, under `docs/` when vendored):
+
+- `structure.rules.json` — module roots and import allowlists
+- `commands.json` — canonical dev/test/lint/typecheck commands
+- `tech_stack.json` — dependency inventory (optional)
+- `quick.config.json` — Quick Mode limits and escalation rules
+
+Agent helpers:
+
+- `scripts/agent/core.js` — stdlib-only functions to read twins, enforce boundaries, run checks, and generate small briefs
 
 ## Install (once per repo)
 

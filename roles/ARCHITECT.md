@@ -7,9 +7,9 @@ Turn the task into a concrete internal codebase map: what to reuse, where to wor
 ## Must-Read (in order)
 
 1. Tasks index entry: docs/features/F###-<feature>/tasks.md (active T##)
-2. docs/STRUCTURE.md + per-package STRUCTURE.md
-3. docs/TECH_STACK.md, docs/COMMANDS.md
-4. Workspace manifests: root & packages (package.json), pnpm-workspace.yaml, tsconfig\*, turbo.json, env examples, migrations/
+2. JSON twins (authoritative for agents): `structure.rules.json`, `commands.json`, `tech_stack.json` (if present)
+3. Workspace manifests: root & packages (package.json), pnpm-workspace.yaml, tsconfig*, turbo.json, env examples, migrations/
+4. Package READMEs (if present) — optional human context
 
 ## Outputs (artifacts)
 
@@ -131,7 +131,7 @@ Chosen: <A|B|C> — justify in 2–3 lines
 
 New paths:
 
-- packages/<new-module>/{README.md,STRUCTURE.md,index.ts}
+- packages/<new-module>/{README.md,index.ts}
 
 Public surface (outline):
 
@@ -139,14 +139,16 @@ Public surface (outline):
 
 Docs to update:
 
-- docs/STRUCTURE.md → add module & import rules
+- structure.rules.json → add module & import rules
 
 Impact & risk:
 
-- Ownership: <team/area> • Rollback: delete module, revert docs
+- Ownership: <team/area> • Rollback: delete module, revert rules
 ```
 
 ##
+
+Note: Prefer generating a small brief via `scripts/agent/core.js#generateBrief()` scoped to the modules/files you plan to touch.
 
 ## Handoff msg templates (≤12 lines)
 
@@ -158,13 +160,13 @@ Reuse: packages/core/foo.ts#bar(), packages/api/validate.ts#...
 Files to touch (expected): …
 ACs + Test Plan included (S1,S2, boundary/negative noted).
 No new deps/structure proposed.
-Boundaries per docs/STRUCTURE.md.
+Boundaries per structure.rules.json.
 ```
 
 Architect → Reviewer (proposal)
 
 ```
 [Architect] PROPOSAL: Structure Delta (see Design §Proposal)
-Reason: <2–3 lines>. Update docs/STRUCTURE.md if approved.
+Reason: <2–3 lines>. Update structure.rules.json if approved.
 Please approve before coding.
 ```

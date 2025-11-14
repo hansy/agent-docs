@@ -10,7 +10,7 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
 
 ### Initialization Task
 
-- Partner with the human to seed `docs/COMMANDS.md`, `docs/TECH_STACK.md`, `docs/STRUCTURE.md`, and `docs/ROADMAP.md`.
+- Partner with the human to seed `commands.json`, `tech_stack.json` (optional), `structure.rules.json`, and `docs/ROADMAP.md`.
 - Capture just enough information so downstream roles can execute without guessing (commands to run, tech expectations, structural rules, prioritized features).
 - When those templates are filled in, update `docs/agents/state.json` to `state = in_progress`, `msg = "Discuss what to work on next"`.
 
@@ -39,7 +39,8 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
 
 ## Must-Read (in order)
 
-1. docs/ROADMAP.md
+1. JSON twins (authoritative for agents): `structure.rules.json`, `commands.json`, `tech_stack.json` (if present)
+2. docs/ROADMAP.md
 
 ## Outputs (artifacts)
 

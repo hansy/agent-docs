@@ -13,10 +13,10 @@ Planner → Architect → Coder → Reviewer
 Must-Read (in order)
 
 1. docs/agents/state.json — get `plan_slug` (Feature slug `F###-<feature>`), confirm role, and note `branch`.
-2. Tasks index: docs/features/F###-<feature>/tasks.md — task list
-3. Design: docs/features/F###-<feature>/tasks/T##-<task>/design.md — touchpoints, ACs, Test Plan, proposals.
-4. docs/STRUCTURE.md (+ target package/app README.md / STRUCTURE.md).
-5. docs/TECH_STACK.md, docs/COMMANDS.md.
+2. JSON twins (authoritative for agents): `structure.rules.json`, `commands.json`, `tech_stack.json` (if present).
+3. Tasks index: docs/features/F###-<feature>/tasks.md — task list
+4. Design: docs/features/F###-<feature>/tasks/T##-<task>/design.md — touchpoints, ACs, Test Plan, proposals.
+5. Package READMEs (if present) — optional human context.
 
 ### Hard Guardrails
 
@@ -32,10 +32,10 @@ Must-Read (in order)
 Repo first-invoke (once per repo)
 
 - If any of these are missing or obviously incomplete, engage the human to initialize/finish them before starting T##:
-  - `docs/COMMANDS.md`
-  - `docs/STRUCTURE.md`
-  - `docs/TECH_STACK.md`
-  - `docs/README.md`
+  - `commands.json`
+  - `structure.rules.json`
+  - `tech_stack.json` (optional)
+  - `README.md`
     (Keep it lightweight; capture gaps in coding-notes if deferring details.)
 
 1. Tasks index — ensure `docs/features/F###-<feature>/tasks.md` exists
@@ -43,9 +43,9 @@ Repo first-invoke (once per repo)
 2. Use the active task branch (`feat/F###-<feature>--T##-<task>`).
 
 3. Verify local commands (by reference)
-   • You can run: dev, test, lint, typecheck (see `docs/COMMANDS.md`).
+   • Use `commands.json` for dev, test, lint, typecheck.
 4. Confirm import rules
-   • Skim `docs/STRUCTURE.md` and package boundaries.
+   • Use `structure.rules.json` allowlists and module roots.
 
 ⸻
 
@@ -73,7 +73,7 @@ C) Implement the smallest change
 • Avoid new dependencies unless already proposed/approved; otherwise request approval.
 
 D) Verify locally
-• Run tests, lints, and types (commands from `docs/COMMANDS.md`).
+• Run tests, lints, and types (commands from `commands.json`).
 • Tests MUST pass before every commit. Fix until green; do not commit red.
 • Prefer running the narrowest relevant tests first, then the package suite before committing.
 
@@ -89,7 +89,7 @@ If blocked (unclear scenario, needs new structure/dep, boundary conflict):
 ## Documentation Standards (what to update)
 
 • Inline docs: add or refresh docstrings/comments for every new or modified function, class, and complex block — exported and internal. Capture intent, side effects, and scenario IDs when useful.
-• External docs: do not edit STRUCTURE/TECH_STACK/COMMANDS/READMEs unless explicitly asked; instead, list required changes under **Doc updates needed** in coding notes so the Reviewer can sync them.
+• Policy files: do not edit structure.rules.json/tech_stack.json/commands.json unless explicitly asked; instead, list required changes under **Doc updates needed** in coding notes so the Reviewer can sync them.
 • Environment files: if new env vars are introduced, add masked entries to `.env.example` or flag them in coding notes when unsure.
 
 ⸻
@@ -97,7 +97,7 @@ If blocked (unclear scenario, needs new structure/dep, boundary conflict):
 ## Handoff Kit (required outputs)
 
 1. Commands used
-   • List exact commands (from `docs/COMMANDS.md`).
+   • List exact commands (from `commands.json`).
 
 2. Coding notes — `docs/features/F###-<feature>/tasks/T##-<task>/coding-notes.md`
    • Use the template below and capture the approved plan before coding.
@@ -122,6 +122,7 @@ If blocked (unclear scenario, needs new structure/dep, boundary conflict):
 
 • Each task followed: failing tests → code → green.
 • Scenario IDs in test names and commit message.
+• Prefer generating a small brief via `scripts/agent/core.js#generateBrief()` to limit context.
 • No forbidden imports or stray files; no unapproved new structure.
 • Inline docs refreshed for all touched code; required external doc updates captured in coding notes.
 • Commands listed; no secrets printed or committed.
@@ -156,7 +157,7 @@ Date: YYYY-MM-DD • Coder: <name>
 
 ## Doc updates needed
 
-- STRUCTURE.md — <reason> (write “none” if not needed)
+- structure.rules.json — <reason> (write “none” if not needed)
 
 ## Commands used
 

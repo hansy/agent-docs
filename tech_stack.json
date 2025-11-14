@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "deps": [
+    {
+      "name": "zod",
+      "version": "^3",
+      "scopes": ["shared"],
+      "usage": "runtime validation",
+      "risk": "low",
+      "status": "approved",
+      "ssr": true
+    },
+    {
+      "name": "prisma",
+      "version": "^5",
+      "scopes": ["api"],
+      "usage": "SQL data access",
+      "risk": "medium",
+      "status": "approved"
+    },
+    {
+      "name": "stripe",
+      "version": "^12",
+      "scopes": ["api"],
+      "usage": "payments integration",
+      "risk": "medium",
+      "status": "proposed"
+    }
+  ]
+}
+

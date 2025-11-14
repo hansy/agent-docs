@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "commands": {
+    "dev": "pnpm dev",
+    "test": "pnpm test",
+    "lint": "pnpm lint",
+    "typecheck": "pnpm typecheck",
+    "build": "pnpm build",
+    "diff": "git diff origin/main...HEAD",
+    "cov": "pnpm test -- --coverage"
+  }
+}
+

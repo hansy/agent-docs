@@ -39,6 +39,19 @@ Purpose: Single source of truth for who acts next, lifecycle state, and the shor
 }
 ```
 
+## Optional fields (backwards-compatible)
+
+- autopilot: "off" | "review_only" | "full" — controls how much automation is allowed (no change if omitted)
+- run_id: opaque identifier for an automation run (useful for logs/correlation)
+- last_agent: which role or agent acted last (e.g., "CODER")
+- ci_status: "unknown" | "green" | "red" — summarizes last checks
+- tests_passed: boolean — last test run result
+- artifacts: array of paths to run outputs (e.g., brief files, logs)
+
+Notes:
+- These fields are optional; agents default to conservative behavior when absent.
+- Human-readable state fields above remain the source of truth for lifecycle.
+
 ## Switch Rules
 
 - On init (first run): current_role MUST be PLANNER; perform the initialization task (seed COMMANDS/TECH_STACK/STRUCTURE/ROADMAP). After initialization is complete, `init` should never be used again.
