@@ -16,10 +16,6 @@ Machine-readable twins (for agents; live at repo root here, under `docs/` when v
 - `tech_stack.json` — dependency inventory (optional)
 - `quick.config.json` — Quick Mode limits and escalation rules
 
-Agent helpers:
-
-- `scripts/agent/core.js` — stdlib-only functions to read twins, enforce boundaries, run checks, and generate small briefs
-
 ## Install (once per repo)
 
 1. Start from a clean working tree (commit or stash changes).

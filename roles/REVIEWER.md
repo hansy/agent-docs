@@ -80,7 +80,7 @@ Final gate before merge. Focus on:
 
 ### B) Architecture Integrity
 
-- [ ] Imports & placement follow structure.rules.json
+- [ ] Imports & placement follow structure.rules.json (Boundary Gate passed)
 - [ ] Reuse targets from Design honored (no duplication)
 - [ ] Structural changes match an approved Structure Delta
 - [ ] Inline documentation added for new/changed code

@@ -148,7 +148,7 @@ Impact & risk:
 
 ##
 
-Note: Prefer generating a small brief via `scripts/agent/core.js#generateBrief()` scoped to the modules/files you plan to touch.
+Note: Keep agent context small — reference only the relevant modules from structure.rules.json and the specific files to touch.
 
 ## Handoff msg templates (≤12 lines)
 

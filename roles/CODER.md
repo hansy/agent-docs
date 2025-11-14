@@ -72,12 +72,17 @@ C) Implement the smallest change
 • Reuse mapped symbols from Design. If ambiguity arises → BLOCK with a precise question.
 • Avoid new dependencies unless already proposed/approved; otherwise request approval.
 
-D) Verify locally
+D) Boundary gate (must pass before commit)
+• For each changed file: map file → module using `structure.rules.json` roots.
+• Resolve internal imports to modules (relative paths only); verify `allow[from]` includes `to`.
+• If any violation occurs or imports can’t be resolved confidently, fix the placement/imports or escalate.
+
+E) Verify locally
 • Run tests, lints, and types (commands from `commands.json`).
 • Tests MUST pass before every commit. Fix until green; do not commit red.
 • Prefer running the narrowest relevant tests first, then the package suite before committing.
 
-E) Commit (after each task, small, conventional)
+F) Commit (after each task, small, conventional)
 • Only commit when tests pass.
 • Example: feat/F###-<feature>: implement T01 — S1,S2 green
 
@@ -122,7 +127,7 @@ If blocked (unclear scenario, needs new structure/dep, boundary conflict):
 
 • Each task followed: failing tests → code → green.
 • Scenario IDs in test names and commit message.
-• Prefer generating a small brief via `scripts/agent/core.js#generateBrief()` to limit context.
+• Keep context small: include only ACs/Test Plan and relevant slices from structure.rules.json and commands.json.
 • No forbidden imports or stray files; no unapproved new structure.
 • Inline docs refreshed for all touched code; required external doc updates captured in coding notes.
 • Commands listed; no secrets printed or committed.
