@@ -10,7 +10,7 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
 
 ### Initialization Task
 
-- Partner with the human to seed `commands.json`, `tech_stack.json` (optional), `structure.rules.json`, and `docs/ROADMAP.md`.
+- Partner with the human to seed `commands.json`, `structure.rules.json`, `tech_stack.json` (optional), and `docs/ROADMAP.md`.
 - Capture just enough information so downstream roles can execute without guessing (commands to run, tech expectations, structural rules, prioritized features).
 - When those templates are filled in, update `docs/agents/state.json` to `state = in_progress`, `msg = "Discuss what to work on next"`.
 
@@ -20,18 +20,17 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
    - Capture new feature requests, assign the next `F###` identifier, and update `docs/ROADMAP.md`. Never renumber existing IDs.
    - Keep `plan_slug` null until you are ready to kick off a feature.
 2. **Kickoff & Branching**
-   - When a feature is selected, set `plan_slug = F###-<feature>`, create/check out `feat/F###-<feature>` from default, and note it in `state.json` (`current_role = Planner`, `state = in_progress`, `branch = feat/F###-<feature>`).
+   - When a feature is selected, set `plan_slug = F###-<feature>`, create/check out `feat/F###-<feature>` from default (single branch by default), and note it in `state.json` (`current_role = Planner`, `state = in_progress`, `branch = feat/F###-<feature>`).
    - Summarize the kickoff in `msg` (≤12 lines) with branch, focus, and any sequencing notes.
 3. **Plan the Work**
    - Clarify scope with focused Q&A.
    - Create a tasks index: `docs/features/F###-<feature>/tasks.md` (template below) to list high-level `T##-<task>`.
    - Determine if outside research is needed; if so, create `docs/features/F###-<feature>/research.md` (brief, outcome-focused) with the human.
    - Create only the first task folder now: `docs/features/F###-<feature>/tasks/T01-<task>/`. Architect will author `design.md` in that folder. Subsequent task folders are bootstrapped by the Reviewer after approvals.
-4. **Task Branch & Handoff**
-   - Create the first task branch `feat/F###-<feature>--T01-<task>` from the feature branch, set it in `state.json`, and hand off to the Architect with a concise msg.
+4. **Task Handoff**
+   - Default: work on the feature branch. Create a per‑task branch (`feat/F###-<feature>--T##-<task>`) only if risk dictates or parallel work is needed.
    - Keep `state = handoff` when passing work forward; record key notes and open questions.
-   - Subsequent task selection/bootstrapping (branch + folder) is owned by the Reviewer after each approval.
-   - On task approval (Reviewer will handle merges). If not the last task, the Reviewer merges `feat/F###-<feature>--T##-<task>` → `feat/F###-<feature>` and may delete the task branch. If last task, the Reviewer also merges the feature branch to default.
+   - On task approval (Reviewer handles merges). If not the last task, Reviewer fast‑forwards/merges into the feature branch; if last task, Reviewer merges the feature branch to default.
 5. **Closeout After Review**
    - When the Reviewer sets `state = done` (feature complete), confirm every task in `docs/features/F###-<feature>/tasks.md` is checked off.
    - Reviewer will have merged branches, updated `docs/ROADMAP.md`, and reset `docs/agents/state.json` to defaults. Plan the next feature.
@@ -90,7 +89,11 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
 
 ---
 
-##
+## Quick IO (Planner)
+
+- Inputs: docs/ROADMAP.md, context from user prompt, any existing feature docs.
+- Outputs: plan_slug set; branch created (single feature branch); concise kickoff msg in state.json.
+- Blockers: missing goals/outcome, unclear acceptance criteria, conflicting requirements.
 
 ## Handoff msg templates (≤12 lines)
 

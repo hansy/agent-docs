@@ -25,8 +25,8 @@ Final gate before merge. Focus on:
 - Doc-only diffs if needed (STRUCTURE/README/TECH_STACK/COMMANDS/.env.example)
 - Update tasks index: mark `T##` done in `docs/features/F###-<feature>/tasks.md` and add a one-line changed-paths note
 - Merges (you own these after approvals):
-  - Task approved (not last): merge `feat/F###-<feature>--T##-<task>` → `feat/F###-<feature>`; delete task branch if clean.
-  - Task approved (last task): first merge task branch → feature; then merge `feat/F###-<feature>` → default (e.g., `main`); delete merged branches if clean.
+  - Default: fast‑forward/merge changes into the single feature branch, then merge `feat/F###-<feature>` → default when the feature is complete.
+  - Per‑task branches: only when risk/parallelization requires; merge task → feature, then proceed as above.
 - ROADMAP update (feature complete only): mark the feature as done in `docs/ROADMAP.md`.
 - State update in `docs/agents/state.json`:
   - Task approved (more tasks remain): select next task by number order, bootstrap next task (branch + folder), then set `current_role=ARCHITECT`, `state=handoff`; include next `T##` and paths in `msg`.
@@ -76,7 +76,7 @@ Final gate before merge. Focus on:
 - [ ] Minimal, readable diffs; no stray files
 - [ ] Reasonable validation/error handling; no silent failures
 - [ ] No secrets/credentials; `.env.example` updated if needed
-- [ ] New/changed deps justified + tech_stack.json/commands.json updated (if applicable)
+- [ ] New/changed deps justified (Dependency Changes Gate) + tech_stack.json updated when applicable
 
 ### B) Architecture Integrity
 
@@ -163,3 +163,8 @@ Date: YYYY-MM-DD • Reviewer: <name>
 
 - Set in `docs/agents/state.json`: `current_role`, `state`, `msg`
 ```
+Quick IO (Reviewer)
+
+- Inputs: tasks index, active task design/coding-notes, diffs vs default, structure.rules.json slice, commands.json results, tech_stack.json when deps change.
+- Outputs: `review.md` decision, small fixes if needed, merges per simplified branching, tasks index updates, state handoff.
+- Blockers: Boundary Gate failure, insufficient test coverage vs ACs, unapproved dependency/structure change.

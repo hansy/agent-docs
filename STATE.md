@@ -35,6 +35,7 @@ Purpose: Single source of truth for who acts next, lifecycle state, and the shor
   "state": "in_progress",
   "branch": null,
   "msg": "Determine which feature/task should be worked on next",
+  "autopilot": "off",
   "last_updated": "<NOW>"
 }
 ```
@@ -54,16 +55,25 @@ Notes:
 
 ## Switch Rules
 
-- On init (first run): current_role MUST be PLANNER; perform the initialization task (seed COMMANDS/TECH_STACK/STRUCTURE/ROADMAP). After initialization is complete, `init` should never be used again.
+- On init (first run): current_role MUST be PLANNER; perform the initialization task (seed roadmap and policy files). After initialization is complete, `init` should never be used again.
 - On start: keep current_role as yourself; set state = in_progress.
-- Planner owns the feature branch and the first task branch; Reviewer bootstraps subsequent tasks:
-  - Feature branch: `(feat|chore|etc)/F###-<feature>` created at kickoff from default.
-  - First task branch: `feat/F###-<feature>--T01-<task>` created from the feature branch at kickoff.
-  - Subsequent task branches: `feat/F###-<feature>--T##-<task>` created by the Reviewer from the feature branch.
-  - Git note: avoid nested refs that conflict with the feature branch path.
+- Branching defaults: use a single feature branch by default; per‑task branches are optional and reserved for risky or parallel work.
+  - Feature branch: `(feat|chore|etc)/F###-<feature>` from default.
+  - Per‑task branches: `feat/F###-<feature>--T##-<task>` only when risk dictates or parallelization is needed.
+  - Keep diffs small; prefer stacked commits on the feature branch for routine tasks.
 - On handoff: set current_role = <next role>, state = handoff, write msg.
 - On blocked: set current_role = <role that will unblock you>; set state = blocked; write precise questions in msg.
 - On task approval (Reviewer):
-  - If more tasks remain: merge the task branch into the feature branch; select next task by number order; create the next task branch and folder; set `current_role = ARCHITECT`, `state = handoff`; include next `T##` and paths in `msg`.
+  - If more tasks remain: merge or fast‑forward as appropriate to the feature branch; select next task by number order; set `current_role = ARCHITECT`, `state = handoff`; include next `T##` and paths in `msg`. Create per‑task branch only if risk dictates.
   - If no tasks remain (feature complete): proceed to feature approval flow below.
 - On feature approval (all tasks done): Reviewer merges the feature branch into default, updates `docs/ROADMAP.md`, and resets `docs/agents/state.json` to the defaults below. After reset, `current_role = PLANNER` and `state = in_progress`.
+
+## Autopilot semantics
+
+`autopilot` controls how much automation is allowed:
+
+- off (default): agents always request human approval before committing or merging.
+- review_only: agents may open PRs automatically when checks pass; merging requires human approval.
+- full: agents may commit/merge when checks and gates pass; agents must still post a concise summary (≤12 lines).
+
+If `autopilot` is absent, treat it as `off`.

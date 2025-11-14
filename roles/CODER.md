@@ -40,10 +40,10 @@ Repo first-invoke (once per repo)
 
 1. Tasks index — ensure `docs/features/F###-<feature>/tasks.md` exists
 
-2. Use the active task branch (`feat/F###-<feature>--T##-<task>`).
+2. Use the feature branch by default. Create a per‑task branch (`feat/F###-<feature>--T##-<task>`) only if risk dictates or parallel work is needed.
 
 3. Verify local commands (by reference)
-   • Use `commands.json` for dev, test, lint, typecheck.
+   • Use `commands.json` for dev, test, lint, typecheck. If missing, ask for exact commands.
 4. Confirm import rules
    • Use `structure.rules.json` allowlists and module roots.
 
@@ -70,7 +70,7 @@ B) Failing tests first
 
 C) Implement the smallest change
 • Reuse mapped symbols from Design. If ambiguity arises → BLOCK with a precise question.
-• Avoid new dependencies unless already proposed/approved; otherwise request approval.
+• Avoid new dependencies unless already proposed/approved; otherwise request approval (Dependency Changes Gate).
 
 D) Boundary gate (must pass before commit)
 • For each changed file: map file → module using `structure.rules.json` roots.
@@ -78,7 +78,7 @@ D) Boundary gate (must pass before commit)
 • If any violation occurs or imports can’t be resolved confidently, fix the placement/imports or escalate.
 
 E) Verify locally
-• Run tests, lints, and types (commands from `commands.json`).
+• Run tests, lints, and types (commands from `commands.json`; if unknown, ask first).
 • Tests MUST pass before every commit. Fix until green; do not commit red.
 • Prefer running the narrowest relevant tests first, then the package suite before committing.
 
@@ -179,3 +179,8 @@ Date: YYYY-MM-DD • Coder: <name>
 
 - I1: …
 ```
+Quick IO (Coder)
+
+- Inputs: docs/agents/state.json (role/branch), tasks index, active task design.md, structure.rules.json (slice), commands.json.
+- Outputs: small, scoped diffs; passing tests; concise handoff message when needed.
+- Blockers: unclear ACs/Test Plan; boundary violations; dependency/migration/config changes (escalate).

@@ -117,7 +117,11 @@ Test Plan
 - Performance, security, a11y, observability/telemetry
 
 ### 12) Open questions
+Quick IO (Architect)
 
+- Inputs: active task (design.md target), structure.rules.json (slice), commands.json (if needed), workspace manifests.
+- Outputs: design.md with ACs/Test Plan; list of files to touch; reuse targets; note any Structure Delta proposal.
+- Blockers: insufficient user story context; conflicting surfaces; unapproved dependency or structure change.
 - Should settlement write be idempotent (user_id+event_id)?
 - Confirm max stake applies.
 
@@ -139,7 +143,7 @@ Public surface (outline):
 
 Docs to update:
 
-- structure.rules.json → add module & import rules
+- structure.rules.json → add/adjust module roots and allowlists
 
 Impact & risk:
 
@@ -148,7 +152,11 @@ Impact & risk:
 
 ##
 
-Note: Keep agent context small — reference only the relevant modules from structure.rules.json and the specific files to touch.
+Quick IO (Architect)
+
+- Inputs: active task (design.md target), structure.rules.json (slice), commands.json (if needed), workspace manifests.
+- Outputs: design.md with ACs/Test Plan; list of files to touch; reuse targets; note any Structure Delta proposal.
+- Blockers: insufficient user story context; conflicting surfaces; unapproved dependency or structure change.
 
 ## Handoff msg templates (≤12 lines)
 
