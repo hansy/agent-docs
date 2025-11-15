@@ -25,8 +25,8 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
 3. **Plan & Write the Spec (plain language)**
    - Clarify scope with focused Q&A. Ask skeptical, scope‑reducing questions (What’s the smallest version that solves the problem? What is explicitly out of scope for now?).
    - Write the task spec in `docs/current/F###-<feature>/design.md` (one file per feature, overwritten per task). Keep it readable to non‑engineers; avoid jargon.
-   - Include: Description, Goal, Acceptance Criteria with Scenario IDs (S1,S2,…), Desired Output (what artifacts or user‑visible result), Open Questions, Out of Scope.
-   - No‑Open‑Questions Gate: Do not hand off while any item remains in Open Questions. If questions remain, set `state=blocked`, `current_role=PLANNER`, and place the exact questions (≤12 lines) in `state.msg`. Resume only after answers are incorporated and Open Questions is empty.
+   - Include: Description, Goal, Tasks & Acceptance Criteria (T## with Scenario IDs S1,S2,…), Desired Output (what artifacts or user‑visible result).
+   - No‑Open‑Questions Gate: Do not hand off while you still have unresolved questions about the scope or behavior. Raise open questions in conversation with the human; if you are blocked, set `state=blocked`, `current_role=PLANNER`, and place the exact questions (≤12 lines) in `state.msg`. Resume only after answers are incorporated and the spec is clear.
 4. **Task Handoff**
    - Default: work on the feature branch. Create a per‑task branch (`feat/F###-<feature>--T##-<task>`) only if risk dictates or parallel work is needed.
    - Keep `state = handoff` when passing work forward; record key notes and next task title in `msg`.
@@ -55,7 +55,7 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
 - Keep `state.msg` short with branch, status, current task title, and next action.
 - Create the feature branch (`feat/F###-<feature>`) only; per‑task branches are optional (risk/parallel only).
 - Create per‑feature folders under `docs/current/`. Keep `design.md` human‑readable and succinct.
-- In `design.md`, always include Description, Goal, ACs (S‑IDs), Desired Output, Open Questions, Out of Scope. Avoid jargon.
+- In `design.md`, always include Description, Goal, Tasks & ACs (T## and S‑IDs), Desired Output. Avoid jargon.
 - Coordinate handoffs for kickoff (Planner → Coder).
 - Use user-facing language; keep plan prose non-technical yet testable.
 
@@ -108,6 +108,29 @@ Policy files
 - Outputs: plan_slug set; branch created (single feature branch); `docs/current/F###-<feature>/design.md` with a plain‑language spec for the current task; concise kickoff msg in state.json.
 - Blockers: missing goals/outcome, unclear acceptance criteria, conflicting requirements, inability to define ACs.
 
+### design.md Template (structure)
+
+Each `design.md` should follow this visual structure:
+
+1. Title & date
+   - `# Planner — F### <feature name>`
+   - `Date: YYYY-MM-DD • Planner`
+2. Sections (hierarchical)
+   - `## Description` — short, user-facing description of the change.
+   - `## Goal` — the smallest outcome that solves the problem.
+   - `## Task Status Legend` — explain status markers:
+     - `[ ] Not started`
+     - `[~] In progress`
+     - `[x] Done`
+   - `## Tasks & Acceptance Criteria (T## with Scenario IDs)` — one subsection per task:
+     - `### T## — <task title>`
+       - `Status: [ ] Not started | [~] In progress | [x] Done`
+       - `- Acceptance Criteria`
+         - `- [ ] S# — <scenario>` (with any clarifying bullets)
+       - `- Desired Output (optional)`
+         - Brief description of the tangible artifact/result for this task (may be left blank).
+   - `## Optional Notes` — freeform notes or follow-ups (optional; can be empty).
+
 ## Handoff msg templates (≤12 lines)
 
 Planner → Coder (kickoff)
@@ -143,7 +166,7 @@ Path: `docs/current/F###-<feature>/`
 
 Contains during an active task:
 
-- `design.md` — Planner’s plain‑language design (Description, Goal, ACs with S‑IDs, Desired Output, Open Questions, Out of Scope) — overwritten each task
+- `design.md` — Planner’s plain‑language design (Description, Goal, Tasks & ACs with T## and S‑IDs, Desired Output) — overwritten each task
 - `coding-notes.md` — Coder’s plan, commands, notes (optional) — overwritten each task
 - `review.md` — Reviewer’s notes (optional) — overwritten each task
 
