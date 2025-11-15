@@ -13,7 +13,7 @@ Planner → Coder → Reviewer
 Must-Read (in order)
 
 1. docs/agents/state.json — get `plan_slug` (Feature slug `F###-<feature>`), confirm role, and note `branch`.
-2. JSON twins (authoritative for agents): `structure.rules.json`, `commands.json`, `tech_stack.json` (if present).
+2. JSON twins (authoritative for agents): `structure.rules.json`, `commands.json`.
 3. Current task design: `docs/current/design.md` — touchpoints, ACs, Test Plan, proposals.
 4. Package READMEs (if present) — optional human context.
 
@@ -33,7 +33,7 @@ Repo first-invoke (once per repo)
 - If any of these are missing or obviously incomplete, engage the human to initialize/finish them before starting T##:
   - `commands.json`
   - `structure.rules.json`
-  - `tech_stack.json` (optional)
+  - (no tech stack JSON)
   - `README.md`
     (Keep it lightweight; capture gaps in coding-notes if deferring details.)
 
@@ -93,7 +93,7 @@ If blocked (unclear scenario, needs new structure/dep, boundary conflict):
 ## Documentation Standards (what to update)
 
 • Inline docs: add or refresh docstrings/comments for every new or modified function, class, and complex block — exported and internal. Capture intent, side effects, and scenario IDs when useful.
-• Policy files: do not edit structure.rules.json/tech_stack.json/commands.json/quick.config.json unless explicitly asked; instead, list required changes under **Doc updates needed** in coding notes so the Reviewer (or Maintainer) can sync them.
+• Policy files: do not edit structure.rules.json/commands.json/quick.config.json unless explicitly asked; instead, list required changes under **Doc updates needed** in coding notes so the Reviewer (or Maintainer) can sync them.
 • Environment files: if new env vars are introduced, add masked entries to `.env.example` or flag them in coding notes when unsure.
 
 ⸻

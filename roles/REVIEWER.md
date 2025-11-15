@@ -10,13 +10,13 @@ Final gate before merge. Focus on:
 
 ## Must-Read (in order)
 
-1. JSON twins (authoritative for agents): `structure.rules.json`, `commands.json`, `tech_stack.json` (if present)
+1. JSON twins (authoritative for agents): `structure.rules.json`, `commands.json`
 2. Task docs (current only):
    - Design: `docs/current/design.md`
    - Coding notes (optional): `docs/current/coding-notes.md`
 3. Diffs (feature branch vs default) via commands in `commands.json`
 4. structure.rules.json (module allowlists/roots) and package READMEs (if present)
-5. tech_stack.json (if present), `.env.example` (if touched)
+5. `.env.example` (if touched)
 
 ## Outputs (artifacts)
 
@@ -47,7 +47,7 @@ Final gate before merge. Focus on:
 2. **Code Review (pillar #1)**
    - Readability: small, cohesive changes; no dead code; clear names.
    - Safety: input validation, error handling, timeouts where relevant.
-   - Dependencies: no unnecessary deps; versions and tech_stack.json updated if changed.
+   - Dependencies: no unnecessary deps; any dependency changes are justified in the PR/spec.
    - Secrets: none committed; `.env.example` placeholders only.
 3. **Architecture Integrity (pillar #2)**
 
@@ -55,7 +55,7 @@ Final gate before merge. Focus on:
 - Reuse per Design (no re-implementing existing symbols).
 - Any structural change is backed by an **approved Structure Delta**.
 - Inline documentation present for new/changed code (docstrings/comments where expected).
-- Policy files (structure.rules.json, commands.json, tech_stack.json, quick.config.json) are up-to-date; consult the Coder’s `Doc updates needed` notes and the Planner’s spec, then update yourself.
+- Policy files (structure.rules.json, commands.json, quick.config.json) are up-to-date; consult the Coder’s `Doc updates needed` notes and the Planner’s spec, then update yourself.
 - Tasks: ensure the current task is represented in `docs/current/design.md`; paths and imports respect structure rules.
 - Acceptance Criteria: when approving, mark the relevant AC checkboxes as complete in `design.md`.
  - Open Questions: if `design.md` has any Open Questions, block and hand off to Planner to resolve before approval.
@@ -84,7 +84,7 @@ Final gate before merge. Focus on:
 - [ ] Minimal, readable diffs; no stray files
 - [ ] Reasonable validation/error handling; no silent failures
 - [ ] No secrets/credentials; `.env.example` updated if needed
-- [ ] New/changed deps justified (Dependency Changes Gate) + tech_stack.json updated when applicable
+- [ ] New/changed deps justified (Dependency Changes Gate); justification captured in PR/spec
 
 ### B) Architecture Integrity
 
@@ -172,6 +172,6 @@ Date: YYYY-MM-DD • Reviewer: <name>
 ```
 Quick IO (Reviewer)
 
-- Inputs: tasks index, active task design/coding-notes, diffs vs default, structure.rules.json slice, commands.json results, tech_stack.json when deps change.
+- Inputs: current design/coding-notes, diffs vs default, structure.rules.json slice, commands.json results.
 - Outputs: `review.md` decision, small fixes if needed, merges per simplified branching, tasks index updates, state handoff.
 - Blockers: Boundary Gate failure, insufficient test coverage vs ACs, unapproved dependency/structure change.

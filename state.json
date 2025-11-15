@@ -3,6 +3,6 @@
   "current_role": "PLANNER",
   "state": "init",
   "branch": null,
-  "msg": "Planner: initialize project policy files (commands.json, structure.rules.json, tech_stack.json) and docs/ROADMAP.md.",
+  "msg": "Planner: initialize project policy files (commands.json, structure.rules.json) and docs/ROADMAP.md.",
   "last_updated": "<NOW>"
 }
