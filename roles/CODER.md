@@ -14,7 +14,7 @@ Must-Read (in order)
 
 1. docs/agents/state.json — get `plan_slug` (Feature slug `F###-<feature>`), confirm role, and note `branch`.
 2. JSON twins (authoritative for agents): `structure.rules.json`, `commands.json`.
-3. Current task design: `docs/current/design.md` — touchpoints, ACs, Test Plan, proposals.
+3. Current task design: `docs/current/F###-<feature>/design.md` — touchpoints, ACs, Test Plan, proposals.
 4. Package READMEs (if present) — optional human context.
 
 ### Hard Guardrails
@@ -37,7 +37,7 @@ Repo first-invoke (once per repo)
   - `README.md`
     (Keep it lightweight; capture gaps in coding-notes if deferring details.)
 
-1. Current task — ensure `docs/current/design.md` exists (ask Planner to author if missing)
+1. Current task — ensure `docs/current/F###-<feature>/design.md` exists (ask Planner to author if missing)
 
 2. Use the feature branch by default. Create a per‑task branch (`feat/F###-<feature>--T##-<task>`) only if risk dictates or parallel work is needed.
 
@@ -50,12 +50,12 @@ Repo first-invoke (once per repo)
 
 ## The Task Loop (repeat for each task, in order)
 
-For the current task in `docs/current/design.md`:
+For the current task in `docs/current/F###-<feature>/design.md`:
 
 0. Plan
    • Draft a concise step-by-step implementation plan (tests, code changes, files) tailored to the active task.
    • Share the plan with the human (see AGENTS.md conversation-first policy).
-   • Record the final plan in `docs/current/coding-notes.md` under a “Plan (approved)” section (optional).
+   • Record the final plan in `docs/current/F###-<feature>/coding-notes.md` under a “Plan (approved)” section (optional).
    • If scope changes mid-task, pause, update the plan, and confirm changes with the human before resuming (per AGENTS.md).
 
 A) Mark in progress
@@ -103,7 +103,7 @@ If blocked (unclear scenario, needs new structure/dep, boundary conflict):
 1. Commands used
    • List exact commands (from `commands.json`).
 
-2. Coding notes — `docs/current/coding-notes.md`
+2. Coding notes — `docs/current/F###-<feature>/coding-notes.md`
    • Use the template below and capture the approved plan before coding.
    • Summary, lessons, blockers, improvements.
 

@@ -20,7 +20,7 @@ Final gate before merge. Focus on:
 
 ## Outputs (artifacts)
 
-- `docs/current/review.md` — concise pass/fail with required fixes & paths (optional)
+- `docs/current/F###-<feature>/review.md` — concise pass/fail with required fixes & paths (optional)
 - Doc-only diffs if needed (policy files or `.env.example`)
 - Merges (you own these after approvals):
   - Default: fast‑forward/merge changes into the single feature branch, then merge `feat/F###-<feature>` → default when the feature is complete.
@@ -36,7 +36,7 @@ Final gate before merge. Focus on:
   - Task branch (if used) → feature branch; delete merged task branches when clean.
   - Feature branch → default on feature completion (fast‑forward/PR per repo norms).
 - Resolve merge conflicts in coordination with the Coder; Coder supplies fixes on the working branch.
-- Maintain hygiene: delete `docs/current/` on feature completion; update roadmap; reset state to defaults.
+- Maintain hygiene: delete `docs/current/F###-<feature>/` on feature completion; update roadmap; reset state to defaults.
 - Avoid force‑push to shared branches; prefer small, reviewable diffs.
 
 ---
@@ -111,7 +111,7 @@ Final gate before merge. Focus on:
 - Missing inline documentation or unsynced external docs when required
 - No demonstration tests would fail without the change
 - Secrets or unsafe patterns committed
- - `docs/current/design.md` contains Open Questions (must be empty before approval)
+ - `docs/current/F###-<feature>/design.md` contains Open Questions (must be empty before approval)
 
 ---
 
@@ -138,7 +138,7 @@ Reviewer → (feature done)
 ```
 [Reviewer] Feature approved. ACs covered.
 Merged feat/F###-<feature> → main.
-Updated docs/ROADMAP.md, deleted docs/current/, and reset docs/agents/state.json to defaults.
+Updated docs/ROADMAP.md, deleted docs/current/F###-<feature>/, and reset docs/agents/state.json to defaults.
 ```
 
 ## Review — Template

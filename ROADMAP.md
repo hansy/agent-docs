@@ -5,7 +5,7 @@
 - Feature IDs: `F###` (e.g., F001).
 - Slugs: kebab‑case. Feature slug: `F###-<feature>`.
 - Branches: default `feat/F###-<feature>`; task branches live under the feature branch as defined in `tasks.md`.
-- Feature docs: ephemeral under `docs/current/` while active (see AGENTS.md). Do not create per‑feature folders; overwrite `docs/current/design.md` per task.
+- Feature docs: live under `docs/current/F###-<feature>/` while active (see AGENTS.md). Overwrite that feature’s `design.md` per task.
 - Status values: planned | in_progress | blocked | handoff | done.
 
 --
@@ -28,4 +28,4 @@ v1 candidates
 Notes
 
 - Check the box at the feature line when the Reviewer marks it done.
-- Keep this file feature-level; task details live temporarily in `docs/current/design.md` during active work.
+- Keep this file feature-level; task details live in `docs/current/F###-<feature>/design.md` during active work.
