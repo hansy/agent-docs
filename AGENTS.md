@@ -114,15 +114,14 @@ Projects may run CI with the following minimal steps:
 - commands.json — Maintainers (or Planner for the repo) own the canonical commands. If commands change, Coder notes it under “Doc updates needed”; Reviewer syncs the file as part of the PR.
 - quick.config.json — Maintainer-owned repo policy (limits/paths/escalations). Do not change per feature without explicit human approval. Reviewer enforces; Coder does not edit.
 
-## Ephemeral Docs (Feature Mode)
+## Feature Docs (parallel features supported)
 
-- Only track the current feature/task under `docs/current/`.
-- Required files during an active task:
-- `docs/current/design.md` — Planner’s plain‑language task spec (Description, Goal, ACs with S‑IDs, Desired Output, Open Questions, Out of Scope)
-  - Optional: `docs/current/coding-notes.md` — Coder’s brief notes and commands
-  - Optional: `docs/current/review.md` — Reviewer’s decision and notes
-- When a task is approved and another task remains: overwrite `docs/current/design.md` for the next task (do not create new folders).
-- When the feature is approved (done): Reviewer must delete the entire `docs/current/` folder and reset `docs/agents/state.json` to defaults.
+- Track each feature under `docs/current/F###-<feature>/`.
+- Required files during an active task (per feature):
+  - `docs/current/F###-<feature>/design.md` — Planner’s plain‑language task spec (Description, Goal, ACs with S‑IDs, Desired Output, Open Questions, Out of Scope)
+  - Optional: `docs/current/F###-<feature>/coding-notes.md` — Coder’s brief notes and commands
+  - Optional: `docs/current/F###-<feature>/review.md` — Reviewer’s decision and notes
+- Multiple features may proceed in parallel (separate folders/branches). On feature approval, delete only that feature’s folder under `docs/current/` and reset state for that feature.
 - After you finish: present a concise summary of what changed (paths, rationale, test status). Wait for explicit approval before handing off and committing your work or updating state.
 
 ## Local AGENTS.md
