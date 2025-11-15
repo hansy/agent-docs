@@ -116,8 +116,7 @@ If blocked (unclear scenario, needs new structure/dep, boundary conflict):
 ## When to BLOCK (and ask)
 
 • A Structure Delta or new dependency is required but not approved.
-• Scenario ambiguity or missing acceptance criteria.
-• `docs/current/F###-<feature>/design.md` contains any Open Questions — escalate back to Planner to resolve before coding.
+• Scenario ambiguity or missing acceptance criteria — ask Planner to clarify before coding.
 • Completing the task would violate boundaries.
 • Unable to produce failing tests first without fabricating behavior.
 

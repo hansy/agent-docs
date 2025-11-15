@@ -23,16 +23,17 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
    - When a feature is selected, set `plan_slug = F###-<feature>`, create/check out `feat/F###-<feature>` from default (single branch by default), and note it in `state.json` (`current_role = Planner`, `state = in_progress`, `branch = feat/F###-<feature>`).
    - Summarize the kickoff in `msg` (≤12 lines) with branch, focus, and any sequencing notes.
 3. **Plan & Write the Spec (plain language)**
-   - Clarify scope with focused Q&A. Ask skeptical, scope‑reducing questions (What’s the smallest version that solves the problem? What is explicitly out of scope for now?).
-   - Write the task spec in `docs/current/F###-<feature>/design.md` (one file per feature, overwritten per task). Keep it readable to non‑engineers; avoid jargon.
-   - Include: Description, Goal, Acceptance Criteria with Scenario IDs (S1,S2,…), Desired Output (what artifacts or user‑visible result), Open Questions, Out of Scope.
-   - No‑Open‑Questions Gate: Do not hand off while any item remains in Open Questions. If questions remain, set `state=blocked`, `current_role=PLANNER`, and place the exact questions (≤12 lines) in `state.msg`. Resume only after answers are incorporated and Open Questions is empty.
+   - Clarify scope with focused Q&A. Ask skeptical, scope‑reducing questions (What’s the smallest version that solves the problem?). If anything is unclear, ask and resolve before handoff.
+   - Author `docs/current/F###-<feature>/design.md` as the feature‑level spec. Include:
+     • Feature Description (plain language)
+     • Feature Goal (one sentence)
+     • Tasks — for each T##, include Acceptance Criteria (with S‑IDs) and any Desired Output. Keep tasks concise and testable.
 4. **Task Handoff**
    - Default: work on the feature branch. Create a per‑task branch (`feat/F###-<feature>--T##-<task>`) only if risk dictates or parallel work is needed.
    - Keep `state = handoff` when passing work forward; record key notes and next task title in `msg`.
    - On task approval (Reviewer handles merges). If not the last task, Reviewer hands back to Planner with instructions to overwrite `docs/current/F###-<feature>/design.md` for the next task; if last task, Reviewer merges the feature branch to default.
 5. **Closeout After Review**
-   - When the Reviewer sets `state = done` (feature complete), Reviewer deletes `docs/current/`, merges branches, updates `docs/ROADMAP.md`, and resets `docs/agents/state.json` to defaults. Plan the next feature.
+   - When the Reviewer sets `state = done` (feature complete), Reviewer deletes `docs/current/F###-<feature>/`, merges branches, updates `docs/ROADMAP.md`, and resets `docs/agents/state.json` to defaults. Plan the next feature.
    - Note: A task-level approval does not imply feature completion.
 
 ## Must-Read (in order)
@@ -55,7 +56,7 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
 - Keep `state.msg` short with branch, status, current task title, and next action.
 - Create the feature branch (`feat/F###-<feature>`) only; per‑task branches are optional (risk/parallel only).
 - Create per‑feature folders under `docs/current/`. Keep `design.md` human‑readable and succinct.
-- In `design.md`, always include Description, Goal, ACs (S‑IDs), Desired Output, Open Questions, Out of Scope. Avoid jargon.
+- In `design.md`, always include Feature Description, Feature Goal, and the task list with ACs (S‑IDs) and Desired Output per task. Avoid jargon.
 - Coordinate handoffs for kickoff (Planner → Coder).
 - Use user-facing language; keep plan prose non-technical yet testable.
 

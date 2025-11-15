@@ -118,7 +118,7 @@ Projects may run CI with the following minimal steps:
 
 - Track each feature under `docs/current/F###-<feature>/`.
 - Required files during an active task (per feature):
-  - `docs/current/F###-<feature>/design.md` — Planner’s plain‑language task spec (Description, Goal, ACs with S‑IDs, Desired Output, Open Questions, Out of Scope)
+  - `docs/current/F###-<feature>/design.md` — Planner’s plain‑language feature spec (Feature Description, Feature Goal) and the task list. Each task includes its own Acceptance Criteria (S‑IDs) and Desired Output.
   - Optional: `docs/current/F###-<feature>/coding-notes.md` — Coder’s brief notes and commands
   - Optional: `docs/current/F###-<feature>/review.md` — Reviewer’s decision and notes
 - Multiple features may proceed in parallel (separate folders/branches). On feature approval, delete only that feature’s folder under `docs/current/` and reset state for that feature.
