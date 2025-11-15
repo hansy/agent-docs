@@ -26,7 +26,7 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
    - Clarify scope with focused Q&A. Ask skeptical, scope‑reducing questions (What’s the smallest version that solves the problem? What is explicitly out of scope for now?).
    - Write the task spec in `docs/current/F###-<feature>/design.md` (one file per feature, overwritten per task). Keep it readable to non‑engineers; avoid jargon.
    - Include: Description, Goal, Tasks & Acceptance Criteria (T## with Scenario IDs S1,S2,…), Desired Output (what artifacts or user‑visible result).
-   - No‑Open‑Questions Gate: Do not hand off while you still have unresolved questions about the scope or behavior. Raise open questions in conversation with the human; if you are blocked, set `state=blocked`, `current_role=PLANNER`, and place the exact questions (≤12 lines) in `state.msg`. Resume only after answers are incorporated and the spec is clear.
+   - No‑Open‑Questions Gate: Do not hand off while you still have unresolved questions about the scope or behavior. Raise open questions in conversation with the human; if you are blocked, set `state=blocked`, `current_role=PLANNER`, and place the exact questions (≤12 lines) in `state.msg`. Resume only after answers are incorporated and the spec is clear, and capture the answers as explicit decisions under the relevant task(s) or in Optional Notes.
 4. **Task Handoff**
    - Default: work on the feature branch. Create a per‑task branch (`feat/F###-<feature>--T##-<task>`) only if risk dictates or parallel work is needed.
    - Keep `state = handoff` when passing work forward; record key notes and next task title in `msg`.
@@ -128,8 +128,8 @@ Each `design.md` should follow this visual structure:
        - `- Acceptance Criteria`
          - `- [ ] S# — <scenario>` (with any clarifying bullets)
        - `- Desired Output (optional)`
-         - Brief description of the tangible artifact/result for this task (may be left blank).
-   - `## Optional Notes` — freeform notes or follow-ups (optional; can be empty).
+         - Brief description of the tangible artifact/result for this task (may be left blank). Use this or the bullets above to record answers to previously open questions and key decisions that downstream roles must know.
+   - `## Optional Notes` — freeform notes or follow-ups (optional; can be empty). Use this for extra context or decisions that don’t fit neatly under a single task.
 
 ## Handoff msg templates (≤12 lines)
 
