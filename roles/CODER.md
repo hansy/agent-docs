@@ -90,6 +90,13 @@ If blocked (unclear scenario, needs new structure/dep, boundary conflict):
 
 ⸻
 
+G) Update design.md status (keep in sync)
+• In `docs/current/F###-<feature>/design.md`, keep the current task’s Status up to date: `[~] In progress` while coding; switch to `[x] Done` once tests are green and the change is committed.
+• Check off any Acceptance Criteria (S‑IDs) that are implemented and covered by passing tests; leave unchecked if not fully covered. The Reviewer will verify and may adjust on approval.
+• Ensure the "Open Questions" section is empty; if new questions arise, pause and escalate per Blocking criteria.
+
+⸻
+
 ## Documentation Standards (what to update)
 
 • Inline docs: add or refresh docstrings/comments for every new or modified function, class, and complex block — exported and internal. Capture intent, side effects, and scenario IDs when useful.
