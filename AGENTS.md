@@ -2,26 +2,19 @@
 
 ## Quick Mode Router (read this first)
 
-Use Quick Mode when the user’s ask is a small, low‑risk change. If any Quick Mode gate fails, escalate to the normal Feature Mode (roles flow below).
+Use Quick Mode when the user’s ask is a small, low‑risk change that can be handled as a single focused patch. If the scope grows or the change feels risky, escalate to the normal Feature Mode (roles flow below).
 
 Signals that trigger Quick Mode
 
 - Explicit: prompt starts with "quick:" or contains "#quick".
 - Scope: user points to exact file(s) or mentions small copy/typo/UI tweak.
-- Policy: the change fits within `quick.config.json` limits.
-
-Quick Mode gates (must all pass)
-
-- Limits from `quick.config.json`: `maxFilesChanged`, `maxAddedLines`, `allowNewFiles`, `allowRenames`, `allowedPaths`, `escalateIf` (addsDependency, touchesMigrations, changesConfig, touchesPublicAPI).
-- Boundary rules from `structure.rules.json`: only allowed cross‑module imports; correct file placement.
-- Checks from `commands.json`: run `lint`, `typecheck`, `test` if defined.
 
 Quick Mode playbook (text‑only, agent steps)
 
 1. Restate the ask in one sentence and list target files. If ambiguous, ask one short question; else proceed.
-2. Propose a minimal unified diff (only necessary lines). Keep within `quick.config.json` limits.
-3. Validate boundaries against `structure.rules.json` (allowed imports and module placement). If violated → escalate.
-4. Run checks from `commands.json` (`lint`, `typecheck`, `test` when available). If checks fail → fix or escalate.
+2. Propose a minimal unified diff (only necessary lines) scoped to the small change.
+3. Sanity‑check boundaries and risk (imports, placement, and obvious side effects). If anything feels non‑trivial, switch to Feature Mode.
+4. Optionally run the most relevant checks (e.g., lint/test/typecheck from `commands.json`) when they are fast and well‑defined; otherwise, describe risk in the summary.
 5. Present the final diff and a one‑line commit message.
    • Commit/PR convention: `<type>(<scope>): <change>`; e.g., `chore(web): update CTA copy`.
    • If the user explicitly approves (or the prompt includes "quick: approve"), apply the change and commit; otherwise open a PR/diff and hand off to Reviewer.
@@ -45,7 +38,7 @@ Assume the `current_role`. Read the relevant role guide found in `docs/agents/ro
 ## Conversation-First & Review (All Roles)
 
 - Before any changes: discuss the upcoming task in chat, ask clarifying questions, and propose your plan/approach. Wait for explicit user approval before creating/modifying files, branches, or `state.json`.
-- Quick Mode exception: if the prompt includes an explicit "quick: approve" and all gates/checks pass, you may commit a single small patch without a separate approval step. Otherwise, show the diff and wait for approval.
+- Quick Mode exception: if the prompt includes an explicit "quick: approve" and the change is clearly small and low‑risk, you may commit a single small patch without a separate approval step. Otherwise, show the diff and wait for approval.
 
 ## Autopilot (text-only policy)
 
@@ -55,10 +48,10 @@ Optional behavior knob in `docs/agents/state.json` → `autopilot`: `off | revie
   - Quick Mode: propose diff → wait for approval (unless prompt has "quick: approve"). Commit only after approval.
   - Feature Mode: normal roles flow; Reviewer’s approval is required.
 - review_only:
-  - Quick Mode: if all gates/checks pass, open a PR with the diff and concise summary. Human approval merges.
+  - Quick Mode: for small, low‑risk changes, open a PR with the diff and concise summary. Human approval merges.
   - Feature Mode: proceed through roles, batching approvals at Reviewer per feature.
 - full:
-  - Quick Mode: if gates/checks pass, commit directly; post summary and changed paths.
+  - Quick Mode: for clearly small, low‑risk changes, commit directly; post summary and changed paths.
   - Feature Mode: proceed through roles and auto‑merge when Reviewer checks are satisfied; still post a summary for human visibility.
 
 If `autopilot` is absent, treat it as `off`.
@@ -77,8 +70,8 @@ Applies to Quick Mode and Feature Mode before committing code.
 
 If dependency or platform files change (e.g., lockfiles, package descriptors, migrations, build/CI configs):
 
-- Quick Mode: escalate to Feature Mode.
-- Feature Mode: note the change, justify it briefly, and ensure Reviewer verifies the dependency change rationale as part of review.
+- Always treat these as Feature Mode work rather than a small Quick Mode patch.
+- Note the change, justify it briefly, and ensure Reviewer verifies the dependency change rationale as part of review.
 
 Examples of dependency/config files:
 

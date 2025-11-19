@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Final gate before merge. Focus on:
+Final review and coordination before merge. Focus on:
 
 1. **Code review** (clarity, safety, minimal diffs)
 2. **Architecture integrity** (aligns with established boundaries & practices)
@@ -27,8 +27,8 @@ Final gate before merge. Focus on:
   - Per‑task branches: only when risk/parallelization requires; merge task → feature, then proceed as above.
 - ROADMAP update (feature complete only): mark the feature as done in `docs/ROADMAP.md`.
 - State update in `docs/agents/state.json`:
-  - Task approved (more tasks remain): set `current_role=PLANNER`, `state=handoff`; in `msg`, include the next task title/slug and instruction to overwrite `docs/current/F###-<feature>/design.md` for the next task.
-  - Feature complete (no tasks remain): perform final merges and roadmap update, delete `docs/current/F###-<feature>/`, then reset to defaults (see `STATE.md#Defaults`).
+  - Task approved (more tasks remain): set `current_role=CODER`, `state=handoff`; in `msg`, include the next task identifier, changed paths, and any required fixes or follow‑ups for the Coder.
+  - Feature complete (no tasks remain): perform final merges and roadmap update, delete `docs/current/F###-<feature>/`, then reset to defaults (see `STATE.md#Defaults`) and set up the next handoff to Planner as needed.
 
 ## Git Responsibilities
 
@@ -65,16 +65,16 @@ Final gate before merge. Focus on:
    - Each AC in `design.md` maps to at least one passing test with a **Scenario ID (Sx)**.
    - Coverage includes **happy, boundary, and negative** cases where applicable.
    - Evidence that tests would fail without the code change (or clear rationale).
-5. **Decision** — Approve or fix inline.
-   - Task-level (more tasks remain): apply all required fixes (code/tests/deps/docs) directly on the branch until green; merge into the feature branch; set handoff to Planner and instruct to overwrite `docs/current/F###-<feature>/design.md` for the next task in `state.msg` (include next task title/slug).
-   - Feature-level (no tasks remain): finish any fixes, merge feature branch to default, update `docs/ROADMAP.md`, delete `docs/current/F###-<feature>/`, reset `docs/agents/state.json` to defaults.
+5. **Decision** — Approve or request changes.
+   - Task-level (more tasks remain): capture required fixes (code/tests/deps/docs) and any next-task notes; merge when appropriate; set handoff to Coder in `docs/agents/state.json` with clear instructions in `state.msg`.
+   - Feature-level (no tasks remain): finish any small fixes, merge feature branch to default, update `docs/ROADMAP.md`, delete `docs/current/F###-<feature>/`, reset `docs/agents/state.json` to defaults, and prepare a final handoff to Planner if a new feature is needed.
 
 ---
 
 ## Task vs Feature Approval
 
-- Approving an individual task (T##): merge changes as appropriate; set handoff to Planner with the next task title/slug and instruction to overwrite `docs/current/F###-<feature>/design.md`.
-- Approving the feature: merge the feature branch into default, update `docs/ROADMAP.md`, delete `docs/current/F###-<feature>/`, and reset `docs/agents/state.json` to defaults (next role is Planner).
+- Approving an individual task (T##): merge changes as appropriate; set handoff to Coder with required fixes (if any), next task identifier, and changed paths so they can continue the implementation loop.
+- Approving the feature: merge the feature branch into default, update `docs/ROADMAP.md`, delete `docs/current/F###-<feature>/`, and reset `docs/agents/state.json` to defaults (next role is Planner for future planning).
 
 ---
 
@@ -118,13 +118,25 @@ Final gate before merge. Focus on:
 
 ## Fix policy
 
-- Reviewer applies all necessary fixes (code, tests, dependencies, documentation) directly on the task branch; do not hand off to Coder.
+- Reviewer may apply small, mechanical fixes (formatting, typo, obvious refactors) directly on the task branch.
+- Substantive changes (new code paths, non-trivial refactors, new tests, dependency changes) should be captured as required fixes and handed off to Coder.
 
 ---
 
 ## Handoff message templates
 
-Reviewer → Planner (next task)
+Reviewer → Coder (more work or next task)
+
+```
+[Reviewer] Changes reviewed; handoff to Coder.
+Branch: feat/F###-<feature> (or task branch).
+Tasks: T## in progress; next up: T## — <task title>.
+Required fixes: <short list or “none”> — include paths.
+Notes: see docs/current/F###-<feature>/review.md and design.md for ACs/status.
+State: handoff → Coder.
+```
+
+Reviewer → Planner (feature done or next feature)
 
 ```
 [Reviewer] Next task ready: T## — <task title> (by numeric order)
@@ -140,6 +152,7 @@ Reviewer → (feature done)
 [Reviewer] Feature approved. ACs covered.
 Merged feat/F###-<feature> → main.
 Updated docs/ROADMAP.md, deleted docs/current/F###-<feature>/, and reset docs/agents/state.json to defaults.
+State: handoff → Planner for next feature selection/planning.
 ```
 
 ## Review — Template
