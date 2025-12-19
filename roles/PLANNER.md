@@ -24,9 +24,11 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
    - Summarize the kickoff in `msg` (≤12 lines) with branch, focus, and any sequencing notes.
 3. **Plan & Write the Spec (plain language)**
    - Clarify scope with focused Q&A. Ask skeptical, scope‑reducing questions (What’s the smallest version that solves the problem? What is explicitly out of scope for now?).
+   - In `design.md`, capture a detailed bullet summary of the human conversation under the task(s) it applies to (requirements, constraints, examples, edge cases, explicit decisions). Avoid dumping context into a single “notes” blob.
    - Write the task spec in `docs/current/F###-<feature>/design.md` (one file per feature, overwritten per task). Keep it readable to non‑engineers; avoid jargon.
    - Include: Description, Goal, Tasks & Acceptance Criteria (T## with Scenario IDs S1,S2,…), Desired Output (what artifacts or user‑visible result).
    - No‑Open‑Questions Gate: Do not hand off while you still have unresolved questions about the scope or behavior. Raise open questions in conversation with the human; if you are blocked, set `state=blocked`, `current_role=PLANNER`, and place the exact questions (≤12 lines) in `state.msg`. Resume only after answers are incorporated and the spec is clear, and capture the answers as explicit decisions under the relevant task(s) or in Optional Notes.
+   - When questions are answered, record the answer under the relevant task (and scenario if applicable) so downstream roles can see why the requirement exists and what “done” means.
 4. **Task Handoff**
    - Default: work on the feature branch. Create a per‑task branch (`feat/F###-<feature>--T##-<task>`) only if risk dictates or parallel work is needed.
    - Keep `state = handoff` when passing work forward; record key notes and next task title in `msg`.
@@ -127,9 +129,11 @@ Each `design.md` should follow this visual structure:
        - `Status: [ ] Not started | [~] In progress | [x] Done`
        - `- Acceptance Criteria`
          - `- [ ] S# — <scenario>` (with any clarifying bullets)
+       - `- Conversation Summary (required)`
+         - Detailed bullets of what the human said that materially affects this task (decisions, constraints, examples, definitions, non-goals). Put each item under the task (and scenario) it impacts; duplicate across tasks if needed.
        - `- Desired Output (optional)`
          - Brief description of the tangible artifact/result for this task (may be left blank). Use this or the bullets above to record answers to previously open questions and key decisions that downstream roles must know.
-   - `## Optional Notes` — freeform notes or follow-ups (optional; can be empty). Use this for extra context or decisions that don’t fit neatly under a single task.
+   - `## Optional Notes` — freeform notes or follow-ups (optional; can be empty). Use this only for context that genuinely doesn’t map to a specific task.
 
 ## Handoff msg templates (≤12 lines)
 
