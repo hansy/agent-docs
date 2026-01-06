@@ -13,7 +13,6 @@ Machine-readable twins (for agents; live at repo root here, under `docs/` when v
 
 - `structure.rules.json` — module roots and import allowlists
 - `commands.json` — canonical dev/test/lint/typecheck commands
-- `quick.config.json` — Quick Mode limits and escalation rules
 
 ## Install (once per repo)
 

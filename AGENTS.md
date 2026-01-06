@@ -90,7 +90,7 @@ Preferred commands live in `commands.json` (keys: dev, test, lint, typecheck, bu
 
 Policy files may live at repo root or under `docs/`. When reading paths, check both locations for:
 
-- `structure.rules.json`, `commands.json`, `quick.config.json`.
+- `structure.rules.json`, `commands.json`.
 
 ## CI Recipe (optional)
 
@@ -105,7 +105,6 @@ Projects may run CI with the following minimal steps:
 
 - structure.rules.json — Reviewer updates when module roots/allowlists change in an approved PR. Planner may propose changes in plain language in the spec; Coder must not edit. Treat changes as part of the code review and merge.
 - commands.json — Maintainers (or Planner for the repo) own the canonical commands. If commands change, Coder notes it under “Doc updates needed”; Reviewer syncs the file as part of the PR.
-- quick.config.json — Maintainer-owned repo policy (limits/paths/escalations). Do not change per feature without explicit human approval. Reviewer enforces; Coder does not edit.
 
 ## Feature Docs (parallel features supported)
 

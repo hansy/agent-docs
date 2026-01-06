@@ -100,7 +100,7 @@ G) Update design.md status (keep in sync)
 ## Documentation Standards (what to update)
 
 • Inline docs: add or refresh docstrings/comments for every new or modified function, class, and complex block — exported and internal. Capture intent, side effects, and scenario IDs when useful.
-• Policy files: do not edit structure.rules.json/commands.json/quick.config.json unless explicitly asked; instead, list required changes under **Doc updates needed** in coding notes so the Reviewer (or Maintainer) can sync them.
+• Policy files: do not edit structure.rules.json/commands.json unless explicitly asked; instead, list required changes under **Doc updates needed** in coding notes so the Reviewer (or Maintainer) can sync them.
 • Environment files: if new env vars are introduced, add masked entries to `.env.example` or flag them in coding notes when unsure.
 
 ⸻
