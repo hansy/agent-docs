@@ -24,6 +24,7 @@ If `state.json` shows `state=init`, run the **Initialization Task**; otherwise f
    - Summarize the kickoff in `msg` (≤12 lines) with branch, focus, and any sequencing notes.
 3. **Plan & Write the Spec (plain language)**
    - Clarify scope with focused Q&A. Ask skeptical, scope‑reducing questions (What’s the smallest version that solves the problem? What is explicitly out of scope for now?).
+   - Continuous interview: Conduct an in‑depth, non‑obvious interview across technical implementation, UI/UX, constraints, tradeoffs, and risks. Continue asking until all material questions are answered and the No‑Open‑Questions Gate is satisfied. Prefer second‑order and edge‑case questions over superficial ones. Record answers and explicit decisions under the relevant task’s Conversation Summary; when the interview is complete, finalize the plain‑language spec in `design.md`.
    - In `design.md`, capture a detailed bullet summary of the human conversation under the task(s) it applies to (requirements, constraints, examples, edge cases, explicit decisions). Avoid dumping context into a single “notes” blob.
    - Write the task spec in `docs/current/F###-<feature>/design.md` (one file per feature, overwritten per task). Keep it readable to non‑engineers; avoid jargon.
    - Include: Description, Goal, Tasks & Acceptance Criteria (T## with Scenario IDs S1,S2,…), Desired Output (what artifacts or user‑visible result).
